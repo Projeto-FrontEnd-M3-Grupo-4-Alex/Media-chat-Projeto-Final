@@ -1,4 +1,5 @@
 import { ToastContainer } from "react-toastify";
+import { LoginForm } from "./components/Form/LoginForm";
 import { Router } from "./routes";
 
 function App() {
