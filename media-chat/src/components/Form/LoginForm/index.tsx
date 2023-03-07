@@ -31,12 +31,14 @@ export function LoginForm() {
         errorMessage={errors.name}
         register={register("name")}
         placeholder={"Digite seu nome"}
+        required
       />
       <InputPassword
         label="Senha"
         errorMessage={errors.password}
         register={register("password")}
         placeholder="Digite sua senha"
+        required
       />
       <button type="submit">Enviar</button>
     </form>
