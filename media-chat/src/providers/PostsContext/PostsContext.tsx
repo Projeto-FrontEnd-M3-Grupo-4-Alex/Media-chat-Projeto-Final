@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
-import { api } from "../../services/Api";
+import { api } from "../../services/api";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
 import {
   IPost,
