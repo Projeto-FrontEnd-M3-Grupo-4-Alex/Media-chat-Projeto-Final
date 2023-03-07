@@ -26,7 +26,7 @@ export function InputPassword({
   }
 
   return (
-    <fieldset>
+    <div>
       <div>
         <TextField
           label={label}
@@ -45,6 +45,6 @@ export function InputPassword({
       </div>
 
       {errorMessage ? <p>{errorMessage.message}</p> : null}
-    </fieldset>
+    </div>
   );
 }
