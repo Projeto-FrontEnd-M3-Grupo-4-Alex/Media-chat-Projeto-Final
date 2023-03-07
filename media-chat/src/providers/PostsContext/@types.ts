@@ -19,6 +19,11 @@ export interface IPostFormValues {
   rating?: string;
 }
 
+export interface ISubmitHandler {
+  search: string;
+}
+
+
 export interface IResponsePost {
   post: IPost;
 }
@@ -34,4 +39,6 @@ export interface IPostsContext {
   PostCreate: (formData: IPostFormValues) => Promise<void>;
   PostUpdate: (postId: number, formData: IPostFormValues) => Promise<void>;
   PostDelete: (postId: number) => Promise<void>;
+  search:string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
