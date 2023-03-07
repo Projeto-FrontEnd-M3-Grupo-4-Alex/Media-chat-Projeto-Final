@@ -16,6 +16,7 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [search, setSearch] = useState("");
 
   const PostsRead = async () => {
     try {
@@ -77,7 +78,7 @@ const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   return (
     <PostsContext.Provider
-      value={{ PostsRead, PostCreate, PostUpdate, PostDelete, post, posts }}
+      value={{ PostsRead, PostCreate, PostUpdate, PostDelete, post, posts, search, setSearch }}
     >
       {children}
     </PostsContext.Provider>

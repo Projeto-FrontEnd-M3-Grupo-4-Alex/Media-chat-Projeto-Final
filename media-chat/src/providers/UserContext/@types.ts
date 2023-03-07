@@ -46,6 +46,8 @@ export interface IDefaultError {
 }
 
 export interface IUserContext {
+  loading:boolean;
+ setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser | null;
   users: IUser[] | null;
   userRegister: (formData: IRegisterFormValues) => Promise<void>;
