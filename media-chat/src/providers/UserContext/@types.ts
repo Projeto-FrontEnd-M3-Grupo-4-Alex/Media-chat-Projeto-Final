@@ -15,8 +15,8 @@ export interface IUser {
 export interface IRegisterFormValues {
   email: string;
   name: string;
-  bio: string;
-  avatar_url: string;
+  bio?: string;
+  avatar_url?: string;
   password: string;
   confirmPassword: string;
 }

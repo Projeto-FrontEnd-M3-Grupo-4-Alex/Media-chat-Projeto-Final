@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { api } from "../../services/Api";
+import { api } from "../../services/api";
 import {
   IDefaultError,
   IDefaultProviderProps,
@@ -18,7 +18,9 @@ import {
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 const UserProvider = ({ children }: IDefaultProviderProps) => {
-  const [loading, setLoading] = useState(false);
+ 
+export const UserProvider = ({ children }: IDefaultProviderProps) => {
+ const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[] | null>([]);
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const UserProvider = ({ children }: IDefaultProviderProps) => {
       setUser(response.data.user);
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@USERID", response.data.user.id);
-      toast.success("cadastro realizado com sucesso!");
+      toast.success("login realizado com sucesso!");
       navigate("/dashboard");
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;

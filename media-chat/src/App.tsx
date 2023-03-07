@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
-import { LoginForm } from "./components/Form/LoginForm";
 import { Router } from "./routes";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
