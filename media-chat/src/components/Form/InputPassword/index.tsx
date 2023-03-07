@@ -21,25 +21,17 @@ export function InputPassword({
 }: iInputProps) {
   const [viewPassword, setViewPassword] = useState(false);
 
-  function changeView() {
-    viewPassword ? setViewPassword(false) : setViewPassword(true);
-  }
-
   return (
     <div>
       <div>
         <TextField
           label={label}
-          InputProps={{
-            type: viewPassword ? "text" : "password",
-          }}
+          type={viewPassword ? "text" : "password"}
           placeholder={placeholder}
           {...register}
           {...rest}
-          multiline
-          maxRows={4}
         />
-        <button type="button" onClick={changeView}>
+        <button type="button" onClick={() => setViewPassword(!viewPassword)}>
           <GrView />
         </button>
       </div>

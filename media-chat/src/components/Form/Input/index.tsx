@@ -27,8 +27,6 @@ export function Input({
         placeholder={placeholder}
         {...register}
         {...rest}
-        multiline
-        maxRows={4}
       />
       {errorMessage ? <p>{errorMessage.message}</p> : null}
     </div>
