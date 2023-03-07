@@ -20,7 +20,7 @@ export function Input({
   ...rest
 }: iInputProps) {
   return (
-    <fieldset>
+    <div>
       <TextField
         label={label}
         type={type}
@@ -31,6 +31,6 @@ export function Input({
         maxRows={4}
       />
       {errorMessage ? <p>{errorMessage.message}</p> : null}
-    </fieldset>
+    </div>
   );
 }
