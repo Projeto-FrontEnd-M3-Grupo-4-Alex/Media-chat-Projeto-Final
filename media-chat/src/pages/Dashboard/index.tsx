@@ -1,3 +1,14 @@
+import { useContext } from "react";
+import { PostEditModal } from "../../components/PostEditModal";
+import { PostsList } from "../../components/PostsList";
+import { PostsContext } from "../../providers/PostsContext/PostsContext";
+
 export function Dashboard() {
-  return <div></div>;
+  const { isOpened } = useContext(PostsContext);
+  return (
+    <>
+      {isOpened && <PostEditModal />}
+      <PostsList />
+    </>
+  );
 }

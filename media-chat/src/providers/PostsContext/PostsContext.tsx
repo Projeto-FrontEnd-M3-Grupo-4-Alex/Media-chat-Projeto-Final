@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
@@ -16,18 +17,28 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [isOpened, setIsOpened] = useState(false);
+  const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const PostsRead = async () => {
-    try {
-      const response = await api.get<IResponsePosts>("posts");
-      setPosts(response.data.posts);
-    } catch (error) {
-      const currentError = error as AxiosError<IDefaultError>;
-      toast.error(currentError.response?.data.error);
-    }
-  };
+  useEffect(() => {
+    const PostsRead = async () => {
+      try {
+        const response = await api.get<IResponsePosts>(
+          "posts?_expand=user&_embed=comments"
+        );
+        setPosts(response.data);
+        navigate("/dashboard");
+      } catch (error) {
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    };
+    PostsRead();
+  }, []);
 
   const PostCreate = async (formData: IPostFormValues) => {
     const token = localStorage.getItem("@TOKEN");
@@ -77,6 +88,18 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const commentsRead = async (postId: number) => {
+    try {
+      const response = await api.get<IResponsePosts>(
+        `posts/${postId}/comments?_expand=user`
+      );
+      setComments([response.data]);
+    } catch (error) {
+      const currentError = error as AxiosError<IDefaultError>;
+      toast.error(currentError.response?.data.error);
+    }
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -85,10 +108,15 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         PostUpdate,
         PostDelete,
         post,
-        setPost,
         posts,
         search,
         setSearch,
+        commentsRead,
+        isOpened,
+        setIsOpened,
+        isOpenedComments,
+        setIsOpenedComments,
+        setPost,
         showCreateModal,
         setShowCreateModal,
       }}
