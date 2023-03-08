@@ -18,6 +18,7 @@ export interface IComment {
   content: string;
   user: IUser;
   postId: number;
+  id: number;
 }
 
 export interface IPostFormValues {
@@ -29,6 +30,12 @@ export interface IPostFormValues {
   where: string;
   rating?: string;
   category: string;
+}
+
+export interface ICommentsFormValues {
+  userId: number;
+  content: string;
+  postId: number;
 }
 
 export interface ISubmitHandler {
@@ -51,4 +58,9 @@ export interface IPostsContext {
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
+  editComments: (commentId: number, formData: IComment) => Promise<void>;
+  deleteComment: (commentId: number) => Promise<void>;
+  comment: IComment | null;
+  setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
+  createComments: (formData: ICommentsFormValues) => Promise<void>;
 }
