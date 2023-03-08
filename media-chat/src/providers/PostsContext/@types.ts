@@ -3,9 +3,10 @@ export interface IPost {
   thumbnail: string;
   title: string;
   content: string;
-  tags?: [];
+  tags?: string;
   where: string;
   rating?: string;
+  category: string;
   id: number;
 }
 
@@ -18,6 +19,10 @@ export interface IPostFormValues {
   where: string;
   rating?: string;
   category: string;
+}
+
+export interface ISubmitHandler {
+  search: string;
 }
 
 export interface IResponsePost {
@@ -35,4 +40,9 @@ export interface IPostsContext {
   PostCreate: (formData: IPostFormValues) => Promise<void>;
   PostUpdate: (postId: number, formData: IPostFormValues) => Promise<void>;
   PostDelete: (postId: number) => Promise<void>;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  showCreateModal: boolean;
+  setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
 }

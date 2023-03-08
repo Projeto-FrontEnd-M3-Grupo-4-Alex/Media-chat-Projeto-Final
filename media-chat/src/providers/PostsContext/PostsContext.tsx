@@ -16,6 +16,8 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [search, setSearch] = useState("");
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const PostsRead = async () => {
     try {
@@ -77,7 +79,19 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   return (
     <PostsContext.Provider
-      value={{ PostsRead, PostCreate, PostUpdate, PostDelete, post, posts }}
+      value={{
+        PostsRead,
+        PostCreate,
+        PostUpdate,
+        PostDelete,
+        post,
+        setPost,
+        posts,
+        search,
+        setSearch,
+        showCreateModal,
+        setShowCreateModal,
+      }}
     >
       {children}
     </PostsContext.Provider>
