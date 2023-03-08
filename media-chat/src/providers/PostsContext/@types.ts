@@ -11,12 +11,13 @@ export interface IPost {
 
 export interface IPostFormValues {
   userId: number;
-  thumbnail: string;
+  thumbnail?: string;
   title: string;
   content: string;
-  tags?: [];
+  tags?: string;
   where: string;
   rating?: string;
+  category: string;
 }
 
 export interface IResponsePost {

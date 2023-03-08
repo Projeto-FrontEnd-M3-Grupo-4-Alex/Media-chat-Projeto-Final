@@ -13,7 +13,7 @@ import {
 
 export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 
-const PostsProvider = ({ children }: IDefaultProviderProps) => {
+export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
 
