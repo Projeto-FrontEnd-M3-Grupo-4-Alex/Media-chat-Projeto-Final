@@ -3,6 +3,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
+import { useContext } from "react";
+import { UserContext } from "../../../providers/UserContext/UserContext";
 
 interface iUserRegisterData {
   name: string;
@@ -10,7 +12,7 @@ interface iUserRegisterData {
   password: string;
   confirmPassword: string;
   bio?: string;
-  urlProfile?: string;
+  avatar_url?: string;
 }
 
 const schema = yup.object({
@@ -28,10 +30,11 @@ const schema = yup.object({
     .required("Confirmação de senha obrigatória")
     .oneOf([yup.ref("password")], "As senhas devem ser idênticas"),
   bio: yup.string(),
-  urlProfile: yup.string().url("Url inválida"),
+  avatar_url: yup.string().url("Url inválida"),
 });
 
 export function RegisterForm() {
+  const { userRegister } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -40,15 +43,18 @@ export function RegisterForm() {
     resolver: yupResolver(schema),
   });
 
+  async function onSubmitForm(data: iUserRegisterData) {
+    userRegister(data);
+  }
+
   return (
-    <form action="">
+    <form action="" onSubmit={handleSubmit(onSubmitForm)}>
       <Input
         label="Nome"
         type="text"
         errorMessage={errors.name}
         register={register("name")}
         placeholder={"Digite seu nome"}
-        required
       />
       <Input
         label="Email"
@@ -56,21 +62,18 @@ export function RegisterForm() {
         errorMessage={errors.email}
         register={register("email")}
         placeholder={"Digite seu email"}
-        required
       />
       <InputPassword
         label="Senha"
         errorMessage={errors.password}
         register={register("password")}
         placeholder="Digite sua senha"
-        required
       />
       <InputPassword
         label="Confirmar senha"
         errorMessage={errors.confirmPassword}
         register={register("confirmPassword")}
         placeholder="Digite novamente sua senha"
-        required
       />
       <Input
         label="Bio"
@@ -82,8 +85,8 @@ export function RegisterForm() {
       <Input
         label="Foto de perfil"
         type="text"
-        errorMessage={errors.urlProfile}
-        register={register("urlProfile")}
+        errorMessage={errors.avatar_url}
+        register={register("avatar_url")}
         placeholder={"Cole aqui o link para a sua foto de perfil"}
       />
       <button type="submit">Enviar</button>

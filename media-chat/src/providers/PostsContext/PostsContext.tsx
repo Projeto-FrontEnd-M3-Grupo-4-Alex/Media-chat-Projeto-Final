@@ -17,7 +17,11 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const [isOpened, setIsOpened] = useState(false);
+  const [isOpenedComments, setIsOpenedComments] = useState(false);
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -83,9 +87,34 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const commentsRead = async (postId: number) => {
+    try {
+      const response = await api.get<IResponsePosts>(
+        `posts/${postId}/comments?_expand=user`
+      );
+      setComments([response.data]);
+    } catch (error) {
+      const currentError = error as AxiosError<IDefaultError>;
+      toast.error(currentError.response?.data.error);
+    }
+  };
+
   return (
     <PostsContext.Provider
-      value={{ PostCreate, PostUpdate, PostDelete, post, posts }}
+      value={{
+        PostCreate,
+        PostUpdate,
+        PostDelete,
+        post,
+        posts,
+        search,
+        setSearch,
+        commentsRead,
+        isOpened,
+        setIsOpened,
+        isOpenedComments,
+        setIsOpenedComments,
+      }}
     >
       {children}
     </PostsContext.Provider>

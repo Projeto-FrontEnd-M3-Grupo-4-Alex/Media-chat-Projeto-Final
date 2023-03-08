@@ -15,6 +15,7 @@ export interface IPost {
 
 export interface IComments {
   content: string;
+  user: IUser;
 }
 
 export interface IPostFormValues {
@@ -25,6 +26,10 @@ export interface IPostFormValues {
   tags?: [];
   where: string;
   rating?: string;
+}
+
+export interface ISubmitHandler {
+  search: string;
 }
 
 export interface IResponsePost {
@@ -43,4 +48,11 @@ export interface IPostsContext {
   PostCreate: (formData: IPostFormValues) => Promise<void>;
   PostUpdate: (postId: number, formData: IPostFormValues) => Promise<void>;
   PostDelete: (postId: number) => Promise<void>;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  commentsRead: (postId: number) => Promise<void>;
+  isOpened: boolean;
+  setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenedComments: boolean;
+  setIsOpenedComments: React.Dispatch<React.SetStateAction<boolean>>;
 }
