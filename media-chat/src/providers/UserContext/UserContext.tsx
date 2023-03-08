@@ -17,10 +17,8 @@ import {
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
-const UserProvider = ({ children }: IDefaultProviderProps) => {
- 
 export const UserProvider = ({ children }: IDefaultProviderProps) => {
- const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[] | null>([]);
   const navigate = useNavigate();
@@ -51,7 +49,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;
       toast.error(currentError.response?.data.error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -128,7 +126,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   return (
     <UserContext.Provider
       value={{
-        loading, 
+        loading,
         setLoading,
         userRegister,
         userLogin,
