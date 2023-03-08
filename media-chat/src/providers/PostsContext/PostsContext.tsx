@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
 import {
+  IComment,
   IPost,
   IPostFormValues,
   IPostsContext,
@@ -17,7 +18,7 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<IComment[]>([]);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [isOpened, setIsOpened] = useState(false);
@@ -93,7 +94,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       const response = await api.get<IResponsePosts>(
         `posts/${postId}/comments?_expand=user`
       );
-      setComments([response.data]);
+      setComments(response.data);
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;
       toast.error(currentError.response?.data.error);
@@ -103,7 +104,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   return (
     <PostsContext.Provider
       value={{
-        PostsRead,
         PostCreate,
         PostUpdate,
         PostDelete,
@@ -119,6 +119,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setPost,
         showCreateModal,
         setShowCreateModal,
+        comments,
       }}
     >
       {children}

@@ -11,7 +11,7 @@ interface IPostCardProps {
 }
 
 export const PostCard = ({ post }: IPostCardProps) => {
-  const { setIsOpened, isOpenedComments, setIsOpenedComments } =
+  const { setIsOpened, isOpenedComments, setIsOpenedComments, commentsRead } =
     useContext(PostsContext);
   return (
     <li>
@@ -40,6 +40,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
         </button>
         <button
           onClick={() => {
+            commentsRead(post.id);
             setIsOpenedComments(true);
           }}
         >

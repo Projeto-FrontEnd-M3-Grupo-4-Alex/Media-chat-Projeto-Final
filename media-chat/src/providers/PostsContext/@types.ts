@@ -11,11 +11,12 @@ export interface IPost {
   category: string;
   id: number;
   user: IUser;
-  comments: IComments[];
+  comments: IComment[];
 }
 
-export interface IComments {
+export interface IComment {
   content: string;
+  id: number;
   user: IUser;
 }
 
@@ -41,7 +42,7 @@ export interface IResponsePost {
 export interface IResponsePosts {
   posts: IPost[];
   user: IUser;
-  comments: IComments[];
+  comments: IComment[];
 }
 
 export interface IPostsContext {
@@ -60,4 +61,5 @@ export interface IPostsContext {
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
+  comments: IComment[];
 }
