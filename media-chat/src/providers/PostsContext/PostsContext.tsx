@@ -103,6 +103,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   return (
     <PostsContext.Provider
       value={{
+        PostsRead,
         PostCreate,
         PostUpdate,
         PostDelete,
