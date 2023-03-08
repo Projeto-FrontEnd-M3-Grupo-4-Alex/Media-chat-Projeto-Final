@@ -5,9 +5,10 @@ export interface IPost {
   thumbnail: string;
   title: string;
   content: string;
-  tags?: [];
+  tags?: string;
   where: string;
   rating?: string;
+  category: string;
   id: number;
   user: IUser;
   comments: IComments[];
@@ -20,12 +21,13 @@ export interface IComments {
 
 export interface IPostFormValues {
   userId: number;
-  thumbnail: string;
+  thumbnail?: string;
   title: string;
   content: string;
-  tags?: [];
+  tags?: string;
   where: string;
   rating?: string;
+  category: string;
 }
 
 export interface ISubmitHandler {
@@ -55,4 +57,7 @@ export interface IPostsContext {
   setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
   isOpenedComments: boolean;
   setIsOpenedComments: React.Dispatch<React.SetStateAction<boolean>>;
+  showCreateModal: boolean;
+  setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
 }

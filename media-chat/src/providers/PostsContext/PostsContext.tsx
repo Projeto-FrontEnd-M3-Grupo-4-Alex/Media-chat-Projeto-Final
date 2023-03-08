@@ -22,6 +22,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [search, setSearch] = useState("");
   const [isOpened, setIsOpened] = useState(false);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -102,6 +103,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   return (
     <PostsContext.Provider
       value={{
+        PostsRead,
         PostCreate,
         PostUpdate,
         PostDelete,
@@ -114,6 +116,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setIsOpened,
         isOpenedComments,
         setIsOpenedComments,
+        setPost,
+        showCreateModal,
+        setShowCreateModal,
       }}
     >
       {children}
