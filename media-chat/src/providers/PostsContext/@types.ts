@@ -11,12 +11,13 @@ export interface IPost {
   category: string;
   id: number;
   user: IUser;
-  comments: IComments[];
+  comments?: IComment[];
 }
 
-export interface IComments {
+export interface IComment {
   content: string;
   user: IUser;
+  postId: number;
 }
 
 export interface IPostFormValues {
@@ -32,16 +33,6 @@ export interface IPostFormValues {
 
 export interface ISubmitHandler {
   search: string;
-}
-
-export interface IResponsePost {
-  post: IPost;
-}
-
-export interface IResponsePosts {
-  posts: IPost[];
-  user: IUser;
-  comments: IComments[];
 }
 
 export interface IPostsContext {
