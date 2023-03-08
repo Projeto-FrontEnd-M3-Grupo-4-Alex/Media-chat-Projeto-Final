@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { api } from "../../services/Api";
+import { api } from "../../services/api";
 import {
   IDefaultError,
   IDefaultProviderProps,
@@ -17,7 +17,7 @@ import {
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
-const UserProvider = ({ children }: IDefaultProviderProps) => {
+export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[] | null>([]);
   const navigate = useNavigate();

@@ -1,3 +1,5 @@
+import { IUser } from "../UserContext/@types";
+
 export interface IPost {
   userId: number;
   thumbnail: string;
@@ -7,6 +9,12 @@ export interface IPost {
   where: string;
   rating?: string;
   id: number;
+  user: IUser;
+  comments: IComments[];
+}
+
+export interface IComments {
+  content: string;
 }
 
 export interface IPostFormValues {
@@ -25,12 +33,13 @@ export interface IResponsePost {
 
 export interface IResponsePosts {
   posts: IPost[];
+  user: IUser;
+  comments: IComments[];
 }
 
 export interface IPostsContext {
   post: IPost | null;
   posts: IPost[] | null;
-  PostsRead: () => Promise<void>;
   PostCreate: (formData: IPostFormValues) => Promise<void>;
   PostUpdate: (postId: number, formData: IPostFormValues) => Promise<void>;
   PostDelete: (postId: number) => Promise<void>;

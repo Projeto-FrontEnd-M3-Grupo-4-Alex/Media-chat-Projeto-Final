@@ -1,3 +1,5 @@
+import { PostsList } from "../../components/PostsList";
+
 export function Dashboard() {
-  return <div></div>;
+  return <PostsList />;
 }

@@ -1,7 +1,8 @@
 import { AxiosError } from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { api } from "../../services/Api";
+import { api } from "../../services/api";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
 import {
   IPost,
@@ -13,19 +14,26 @@ import {
 
 export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 
-const PostsProvider = ({ children }: IDefaultProviderProps) => {
+export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const navigate = useNavigate();
 
-  const PostsRead = async () => {
-    try {
-      const response = await api.get<IResponsePosts>("posts");
-      setPosts(response.data.posts);
-    } catch (error) {
-      const currentError = error as AxiosError<IDefaultError>;
-      toast.error(currentError.response?.data.error);
-    }
-  };
+  useEffect(() => {
+    const PostsRead = async () => {
+      try {
+        const response = await api.get<IResponsePosts>(
+          "posts?_expand=user&_embed=comments"
+        );
+        setPosts(response.data);
+        navigate("/dashboard");
+      } catch (error) {
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    };
+    PostsRead();
+  }, []);
 
   const PostCreate = async (formData: IPostFormValues) => {
     const token = localStorage.getItem("@TOKEN");
@@ -77,7 +85,7 @@ const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   return (
     <PostsContext.Provider
-      value={{ PostsRead, PostCreate, PostUpdate, PostDelete, post, posts }}
+      value={{ PostCreate, PostUpdate, PostDelete, post, posts }}
     >
       {children}
     </PostsContext.Provider>
