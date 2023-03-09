@@ -4,9 +4,11 @@ import { useContext } from "react";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { UserModal } from "../../components/UserModal";
 import { StyledUserDiv } from "./style";
+import { PostsList } from "../../components/PostsList";
+import { PostEditModal } from "../../components/PostEditModal";
 
 export function Dashboard() {
-  const { profileOpenModal, setProfileOpenModal} = useContext(PostsContext)
+  const { profileOpenModal, setProfileOpenModal, isOpened} = useContext(PostsContext)
   return (
     <>
 <StyledUserDiv>
@@ -19,10 +21,14 @@ export function Dashboard() {
   
   { profileOpenModal ? <UserModal/> : null}
 
-
+  {isOpened && <PostEditModal />}
+      <PostsList />
+      
 </>
-
-  );
+  )
 }
-  
-  
+
+
+
+
+
