@@ -5,6 +5,7 @@ import { TextArea } from "../TextArea";
 import { Input } from "../Input";
 import { Select } from "../Select";
 import { Rating, Typography } from "@mui/material";
+import { StyledEditPostForm } from "./style";
 
 interface iEditPostFormData {
   thumbnail?: string;
@@ -18,7 +19,7 @@ interface iEditPostFormData {
   userId: number;
 }
 
-export function CreateFormPost() {
+export function EditPostForm() {
   const { PostUpdate, post, setPost } = useContext(PostsContext);
   const [ratingValue, setRatingValue] = useState<number | null>(
     Number(post?.rating)
@@ -32,6 +33,7 @@ export function CreateFormPost() {
       category: post?.category,
       where: post?.where,
       rating: post?.rating,
+      title: post?.title,
     },
   });
 
@@ -39,59 +41,62 @@ export function CreateFormPost() {
     if (post) {
       const newData = { ...data, rating: String(ratingValue) };
       PostUpdate(post.id, newData);
+      setPost(null);
     }
   }
 
   return (
-    <div role={"dialog"}>
-      <button onClick={() => setPost(null)}>X</button>
-      <h2>Edite a sua postagem</h2>
-      <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-        <TextArea
-          label="Conte sobre o que você está assistindo"
-          register={register("content")}
-          placeholder={"Digite o conteúdo do seu post aqui"}
-        />
-        <Input
-          label="Título do post"
-          type="text"
-          register={register("title")}
-          placeholder={"Digite o título do seu post"}
-        />
-        <Input
-          label="Imagem do post"
-          type="text"
-          register={register("thumbnail")}
-          placeholder={"Cole a url de uma imagem para ser adicionada no post"}
-        />
-        <Input
-          label="Está disponível em alguma plataforma ? Conte para seus amigos"
-          type="text"
-          register={register("where")}
-          placeholder={
-            "Informe as plataformas em que essa mídia está disponível"
-          }
-        />
-        <Select
-          label="Selecione a categoria da mídia"
-          register={register("category")}
-        />
-        <Input
-          label="Adicione tags à esse post"
-          type="text"
-          register={register("tags")}
-          placeholder={"Ex: #naruto, #ninja, #drama, #comédia"}
-        />
-        <Typography component="legend">Quer adicionar uma nota ?</Typography>
-        <Rating
-          name="simple-controlled"
-          value={ratingValue}
-          onChange={(event, newValue) => {
-            setRatingValue(newValue);
-          }}
-        />
-        <button type="submit">Editar</button>
-      </form>
-    </div>
+    <StyledEditPostForm role={"dialog"}>
+      <div>
+        <button onClick={() => setPost(null)}>X</button>
+        <h2>Edite a sua postagem</h2>
+        <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+          <TextArea
+            label="Conte sobre o que você está assistindo"
+            register={register("content")}
+            placeholder={"Digite o conteúdo do seu post aqui"}
+          />
+          <Input
+            label="Título do post"
+            type="text"
+            register={register("title")}
+            placeholder={"Digite o título do seu post"}
+          />
+          <Input
+            label="Imagem do post"
+            type="text"
+            register={register("thumbnail")}
+            placeholder={"Cole a url de uma imagem para ser adicionada no post"}
+          />
+          <Input
+            label="Está disponível em alguma plataforma ? Conte para seus amigos"
+            type="text"
+            register={register("where")}
+            placeholder={
+              "Informe as plataformas em que essa mídia está disponível"
+            }
+          />
+          <Select
+            label="Selecione a categoria da mídia"
+            register={register("category")}
+          />
+          <Input
+            label="Adicione tags à esse post"
+            type="text"
+            register={register("tags")}
+            placeholder={"Ex: #naruto, #ninja, #drama, #comédia"}
+          />
+          <Typography component="legend">Quer adicionar uma nota ?</Typography>
+          <Rating
+            name="simple-controlled"
+            value={ratingValue}
+            onChange={(event, newValue) => {
+              setRatingValue(newValue);
+            }}
+          />
+          <button type="submit">Editar</button>
+        </form>
+      </div>
+    </StyledEditPostForm>
   );
 }

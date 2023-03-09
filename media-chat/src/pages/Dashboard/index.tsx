@@ -2,13 +2,13 @@ import { SearchForm } from "../../components/SearchForm";
 import userImage from "../../assets/userImage.svg";
 import { useContext } from "react";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
-import { PostEditModal } from "../../components/PostEditModal";
 import { PostsList } from "../../components/PostsList";
 import { UserModal } from "../../components/UserModal";
 import { StyledUserDiv } from "./style";
+import { EditPostForm } from "../../components/Form/EditPostForm";
 
 export function Dashboard() {
-  const { profileOpenModal, setProfileOpenModal, isOpened } =
+  const { profileOpenModal, setProfileOpenModal, post } =
     useContext(PostsContext);
   return (
     <>
@@ -26,7 +26,7 @@ export function Dashboard() {
 
       {profileOpenModal ? <UserModal /> : null}
 
-      {isOpened && <PostEditModal />}
+      {post && <EditPostForm />}
       <PostsList />
     </>
   );
