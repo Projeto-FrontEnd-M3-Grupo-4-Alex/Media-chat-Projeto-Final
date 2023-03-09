@@ -3,11 +3,10 @@ import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { PostCard } from "./PostCard";
 
 export function PostsList() {
-  const { posts } = useContext(PostsContext);
-  console.log(posts);
+  const { newPostList } = useContext(PostsContext);
   return (
     <ul>
-      {posts?.map((post) => (
+      {newPostList.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
     </ul>

@@ -17,6 +17,7 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
   const [comments, setComments] = useState<IComment[]>([]);
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [isOpened, setIsOpened] = useState(false);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const newPostList = filteredPost.length === 0 ? posts : filteredPost;
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -164,6 +166,15 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const filterPosts = (category: string) => {
+    if (category !== "Home") {
+      const filterPost = posts.filter((post) => post.category === category);
+      setFilteredPost(filterPost);
+    } else {
+      setFilteredPost([]);
+    }
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -187,6 +198,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
+        filterPosts,
+        newPostList,
       }}
     >
       {children}
