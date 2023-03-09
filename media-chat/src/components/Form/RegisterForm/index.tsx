@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
+import { FormInputStyle } from "../../../styles/FormInputStyle";
 import { useContext } from "react";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 
@@ -48,7 +49,7 @@ export function RegisterForm() {
   }
 
   return (
-    <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+    <FormInputStyle action="" onSubmit={handleSubmit(onSubmitForm)}>
       <Input
         label="Nome"
         type="text"
@@ -89,7 +90,7 @@ export function RegisterForm() {
         register={register("avatar_url")}
         placeholder={"Cole aqui o link para a sua foto de perfil"}
       />
-      <button type="submit">Enviar</button>
-    </form>
+      <button id="bttn_submit" type="submit">Enviar</button>
+    </FormInputStyle>
   );
 }
