@@ -18,6 +18,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [post, setPost] = useState<IPost | null>(null);
   const [search, setSearch] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
 
   const PostsRead = async () => {
     try {
@@ -91,6 +92,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setSearch,
         showCreateModal,
         setShowCreateModal,
+        profileOpenModal,
+        setProfileOpenModal,
       }}
     >
       {children}

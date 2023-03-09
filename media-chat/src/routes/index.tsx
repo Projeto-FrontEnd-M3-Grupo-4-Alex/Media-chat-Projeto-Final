@@ -3,6 +3,7 @@ import { About } from "../pages/About";
 import { Dashboard } from "../pages/Dashboard";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/Login";
+import { ProfilePage } from "../pages/ProfilePage";
 import { ResgisterPage } from "../pages/Register";
 import { PostsProvider } from "../providers/PostsContext/PostsContext";
 
@@ -21,6 +22,7 @@ export function Router() {
           </PostsProvider>
         }
       />
+      <Route path = "/profile" element = {<ProfilePage />}/>
     </Routes>
   );
 }
