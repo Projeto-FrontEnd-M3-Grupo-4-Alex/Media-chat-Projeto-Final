@@ -31,7 +31,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   useEffect(() => {
     const PostsRead = async () => {
       try {
-        const response = await api.get<IPost[]>("posts?_expand=user");
+        const response = await api.get<IPost[]>("posts", {
+          params: { _expand: "user" },
+        });
         setPosts(response.data);
         navigate("/dashboard");
       } catch (error) {
@@ -99,9 +101,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   const commentsRead = async (postId: number) => {
     try {
-      const response = await api.get<IComment[]>(
-        `posts/${postId}/comments?_expand=user`
-      );
+      const response = await api.get<IComment[]>(`comments`, {
+        params: { postId, _expand: "user" },
+      });
       setComments(response.data);
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;
@@ -197,7 +199,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
-
       }}
     >
       {children}
