@@ -4,6 +4,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/Login";
 import { ProtectedRouters } from "../pages/ProtectedRouters";
+import { ProfilePage } from "../pages/ProfilePage";
 import { ResgisterPage } from "../pages/Register";
 import { PostsProvider } from "../providers/PostsContext/PostsContext";
 
@@ -24,6 +25,7 @@ export function Router() {
           }
         />
       </Route>
+      <Route path = "/profile" element = {<ProfilePage />}/>
     </Routes>
   );
 }
