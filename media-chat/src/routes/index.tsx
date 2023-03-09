@@ -3,6 +3,7 @@ import { About } from "../pages/About";
 import { Dashboard } from "../pages/Dashboard";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/Login";
+import { ProtectedRouters } from "../pages/ProtectedRouters";
 import { ProfilePage } from "../pages/ProfilePage";
 import { ResgisterPage } from "../pages/Register";
 import { PostsProvider } from "../providers/PostsContext/PostsContext";
@@ -14,14 +15,16 @@ export function Router() {
       <Route path="/about" element={<About />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<ResgisterPage />} />
-      <Route
-        path="/dashboard"
-        element={
-          <PostsProvider>
-            <Dashboard />
-          </PostsProvider>
-        }
-      />
+      <Route path="/dashboard" element={<ProtectedRouters />}>
+        <Route
+          index
+          element={
+            <PostsProvider>
+              <Dashboard />
+            </PostsProvider>
+          }
+        />
+      </Route>
       <Route path = "/profile" element = {<ProfilePage />}/>
     </Routes>
   );

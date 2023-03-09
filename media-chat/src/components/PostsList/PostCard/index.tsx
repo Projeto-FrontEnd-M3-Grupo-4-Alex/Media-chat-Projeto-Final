@@ -11,7 +11,7 @@ interface IPostCardProps {
 }
 
 export const PostCard = ({ post }: IPostCardProps) => {
-  const { setIsOpened, isOpenedComments, setIsOpenedComments } =
+  const { setIsOpened, isOpenedComments, setIsOpenedComments, commentsRead } =
     useContext(PostsContext);
   return (
     <li>
@@ -40,6 +40,8 @@ export const PostCard = ({ post }: IPostCardProps) => {
         </button>
         <button
           onClick={() => {
+            console.log();
+            commentsRead(post.id);
             setIsOpenedComments(true);
           }}
         >
@@ -49,7 +51,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
           <BsBookmark />
         </button>
       </div>
-      {isOpenedComments && <PostComments />}
+      {isOpenedComments && <PostComments post={post} />}
     </li>
   );
 };

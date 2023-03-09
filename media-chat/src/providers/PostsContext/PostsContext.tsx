@@ -1,9 +1,10 @@
 import { AxiosError } from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
+import { UserContext } from "../UserContext/UserContext";
 import {
   IComment,
   ICommentsFormValues,
@@ -24,12 +25,15 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [isOpened, setIsOpened] = useState(false);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
 
   useEffect(() => {
     const PostsRead = async () => {
       try {
-        const response = await api.get<IPost[]>("posts?_expand=user");
+        const response = await api.get<IPost[]>("posts", {
+          params: { _expand: "user" },
+        });
         setPosts(response.data);
         navigate("/dashboard");
       } catch (error) {
@@ -97,9 +101,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   const commentsRead = async (postId: number) => {
     try {
-      const response = await api.get<IComment[]>(
-        `posts/${postId}/comments?_expand=user`
-      );
+      const response = await api.get<IComment[]>(`comments`, {
+        params: { postId, _expand: "user" },
+      });
       setComments(response.data);
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;
@@ -114,7 +118,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         const response = await api.post<IComment>("comments", formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setComments([...comments, response.data]);
+        const newComment = {
+          ...response.data,
+          user,
+        };
+        setComments([...comments, newComment]);
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -183,6 +191,10 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setPost,
         showCreateModal,
         setShowCreateModal,
+<<<<<<< HEAD
+=======
+        comments,
+>>>>>>> 57fa598a5780dfe92a01cab5bbcc8cd51612b3ce
         profileOpenModal,
         setProfileOpenModal,
         editComments,
