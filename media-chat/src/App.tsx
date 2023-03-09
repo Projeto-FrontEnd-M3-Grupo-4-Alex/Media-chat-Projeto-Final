@@ -1,10 +1,14 @@
+
 import { ToastContainer } from "react-toastify";
 import { LoginForm } from "./components/Form/LoginForm";
 import { Router } from "./routes";
+import { GlobalStyles } from "./styles/Global";
 
 function App() {
   return (
-    <div className="App">
+<>
+<GlobalStyles/>
+<div className="App">
       <ToastContainer
         position="top-center"
         autoClose={2000}
@@ -19,6 +23,7 @@ function App() {
       />
       <Router />
     </div>
+</>
   );
 }
 
