@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { ISubmitHandler } from "../../providers/PostsContext/@types";
+import { StyledForm } from "./style";
 
 export const SearchForm = () => {
   const { setSearch } = useContext(PostsContext);
@@ -13,13 +14,13 @@ export const SearchForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <StyledForm onSubmit={handleSubmit(submit)}>
       <input
         type="text"
         placeholder="Search something"
         {...register("search")}
       />
       <button type="submit"><MdSearch /></button>
-    </form>
+    </StyledForm>
   );
 };
