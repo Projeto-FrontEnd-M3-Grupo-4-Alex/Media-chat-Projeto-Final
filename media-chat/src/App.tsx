@@ -1,12 +1,17 @@
+
 import { ToastContainer } from "react-toastify";
 import { PostsProvider } from "./providers/PostsContext/PostsContext";
 import { UserProvider } from "./providers/UserContext/UserContext";
 import { Router } from "./routes";
+import { GlobalStyles } from "./styles/Global";
 import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   return (
-    <div className="App">
+<>
+<GlobalStyles/>
+<div className="App">
       <ToastContainer
         position="top-center"
         autoClose={2000}
@@ -25,6 +30,7 @@ function App() {
         </PostsProvider>
       </UserProvider>
     </div>
+</>
   );
 }
 
