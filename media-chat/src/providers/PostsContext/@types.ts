@@ -11,13 +11,14 @@ export interface IPost {
   category: string;
   id: number;
   user: IUser;
-  comments: IComment[];
+  comments?: IComment[];
 }
 
 export interface IComment {
   content: string;
-  id: number;
   user: IUser;
+  postId: number;
+  id: number;
 }
 
 export interface IPostFormValues {
@@ -31,18 +32,14 @@ export interface IPostFormValues {
   category: string;
 }
 
+export interface ICommentsFormValues {
+  userId: number;
+  content: string;
+  postId: number;
+}
+
 export interface ISubmitHandler {
   search: string;
-}
-
-export interface IResponsePost {
-  post: IPost;
-}
-
-export interface IResponsePosts {
-  posts: IPost[];
-  user: IUser;
-  comments: IComment[];
 }
 
 export interface IPostsContext {
@@ -62,4 +59,9 @@ export interface IPostsContext {
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
   comments: IComment[];
+  editComments: (commentId: number, formData: IComment) => Promise<void>;
+  deleteComment: (commentId: number) => Promise<void>;
+  comment: IComment | null;
+  setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
+  createComments: (formData: ICommentsFormValues) => Promise<void>;
 }

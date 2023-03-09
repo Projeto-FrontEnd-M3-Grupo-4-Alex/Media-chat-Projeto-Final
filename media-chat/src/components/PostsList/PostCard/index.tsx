@@ -40,6 +40,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
         </button>
         <button
           onClick={() => {
+            console.log();
             commentsRead(post.id);
             setIsOpenedComments(true);
           }}
@@ -50,7 +51,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
           <BsBookmark />
         </button>
       </div>
-      {isOpenedComments && <PostComments />}
+      {isOpenedComments && <PostComments post={post} />}
     </li>
   );
 };

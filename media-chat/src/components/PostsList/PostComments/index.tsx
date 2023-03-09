@@ -1,13 +1,15 @@
 import { useContext } from "react";
+import { IPost } from "../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
+import { CommentForm } from "./CommentForm";
 
-export function PostComments() {
+interface ICommentPostProps {
+  post: IPost;
+}
+
+export function PostComments({ post }: ICommentPostProps) {
   const { setIsOpenedComments, comments } = useContext(PostsContext);
-  console.log(comments);
 
-  const submit = () => {
-    console.log("clicou");
-  };
   return (
     <div>
       <button
@@ -17,12 +19,7 @@ export function PostComments() {
       >
         X
       </button>
-      <form onSubmit={submit}>
-        <fieldset>
-          <input placeholder="comentário..." />
-          <button type="submit">comentar</button>
-        </fieldset>
-      </form>
+      <CommentForm post={post} />
       <ul>
         {comments.map((comment) => (
           <li key={comment.id}>
