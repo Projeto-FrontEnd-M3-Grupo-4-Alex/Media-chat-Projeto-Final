@@ -26,6 +26,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -189,6 +190,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         showCreateModal,
         setShowCreateModal,
         comments,
+        profileOpenModal,
+        setProfileOpenModal,
         editComments,
         deleteComment,
         comment,
