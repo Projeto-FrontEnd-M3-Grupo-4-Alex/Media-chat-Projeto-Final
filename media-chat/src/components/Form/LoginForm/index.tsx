@@ -4,18 +4,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../Input";
 import { InputPassword } from "../InputPassword";
 import { FormInputStyle } from "../../../styles/FormInputStyle";
+import { useContext } from "react";
+import { UserContext } from "../../../providers/UserContext/UserContext";
 
 interface iUserLoginData {
-  name: string;
+  email: string;
   password: string;
 }
 
 const schema = yup.object({
-  name: yup.string().required("Nome obrigatório"),
+  email: yup.string().required("Email obrigatório"),
   password: yup.string().required("Senha obrigatória"),
 });
 
 export function LoginForm() {
+  const { userLogin } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -24,22 +27,24 @@ export function LoginForm() {
     resolver: yupResolver(schema),
   });
 
+  async function onSubmitForm(data: iUserLoginData) {
+    userLogin(data);
+  }
+
   return (
-    <FormInputStyle action="">
+    <FormInputStyle action="" onSubmit={handleSubmit(onSubmitForm)}>
       <Input
-        label="Nome"
+        label="Email"
         type="text"
-        errorMessage={errors.name}
-        register={register("name")}
-        placeholder={"Digite seu nome"}
-        required
+        errorMessage={errors.email}
+        register={register("email")}
+        placeholder={"Digite seu email"}
       />
       <InputPassword
         label="Senha"
         errorMessage={errors.password}
         register={register("password")}
         placeholder="Digite sua senha"
-        required
       />
       <button id="bttn_submit" type="submit">Enviar</button>
     </FormInputStyle>

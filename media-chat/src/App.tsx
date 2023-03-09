@@ -1,8 +1,11 @@
 
 import { ToastContainer } from "react-toastify";
-import { LoginForm } from "./components/Form/LoginForm";
+import { PostsProvider } from "./providers/PostsContext/PostsContext";
+import { UserProvider } from "./providers/UserContext/UserContext";
 import { Router } from "./routes";
 import { GlobalStyles } from "./styles/Global";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   return (
@@ -21,7 +24,11 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      <Router />
+      <UserProvider>
+        <PostsProvider>
+          <Router />
+        </PostsProvider>
+      </UserProvider>
     </div>
 </>
   );
