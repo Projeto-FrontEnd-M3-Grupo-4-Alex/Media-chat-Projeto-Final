@@ -31,7 +31,7 @@ export function Dashboard() {
 
       {post && <EditPostForm />}
       <PostsList />
-      {/* <Aside /> */}
+      <Aside />
     </>
   );
 }

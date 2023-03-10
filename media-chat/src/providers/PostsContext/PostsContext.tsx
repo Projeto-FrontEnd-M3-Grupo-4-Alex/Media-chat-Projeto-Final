@@ -25,23 +25,25 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [search, setSearch] = useState("");
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-<<<<<<< HEAD
-  const newPostList = filteredPost.length > 0 ? filteredPost : posts;
-=======
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
-  const [ postList, setPostList] = useState<IPost[]>([])
+  const [postList, setPostList] = useState<IPost[]>([]);
+  const newPostList = filteredPost.length > 0 ? filteredPost : posts;
 
-
-  const searchPosts = posts.filter((post) =>
-    search === ''
-      ? true
-      : post.category.toLowerCase().includes(search.toLowerCase()) ||
-        post.title.toLowerCase().includes(search.toLowerCase()) ||
-        post.tags?.toLowerCase().includes(search.toLowerCase())
-  );
-
->>>>>>> be59923a74cb071550a257a8be0c09491fdab363
+  const filterPostsByInput = () => {
+    if (search !== "") {
+      const searchPosts = posts.filter(
+        (post) =>
+          post?.category.toLowerCase().includes(search.toLowerCase()) ||
+          post?.title.toLowerCase().includes(search.toLowerCase()) ||
+          post?.tags?.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredPost(searchPosts);
+      setSearch("");
+    } else {
+      setFilteredPost([]);
+    }
+  };
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -137,7 +139,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-       /*  setComments([...comments, newComment]); */
+        /*  setComments([...comments, newComment]); */
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -223,14 +225,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
-<<<<<<< HEAD
         filterPosts,
         newPostList,
-=======
         postList,
         setPostList,
-        searchPosts
->>>>>>> be59923a74cb071550a257a8be0c09491fdab363
+        filterPostsByInput,
       }}
     >
       {children}

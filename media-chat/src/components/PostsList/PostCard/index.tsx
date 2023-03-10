@@ -43,7 +43,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
       </div>
       <div className="ContainerButtonsPost">
         <span>
-          {post.likes.length}
+          {/* {post.likes.length} */}
           <button>
             <IoMdHeartEmpty />
           </button>
