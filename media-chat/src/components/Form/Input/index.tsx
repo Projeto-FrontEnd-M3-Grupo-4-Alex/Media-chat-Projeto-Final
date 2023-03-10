@@ -3,7 +3,7 @@ import { TextFieldProps } from "@mui/material";
 import { FieldError } from "react-hook-form";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-type iInputProps = {
+type IInputProps = {
   label: string;
   errorMessage?: FieldError;
   type: string;
@@ -18,7 +18,7 @@ export function Input({
   register,
   placeholder,
   ...rest
-}: iInputProps) {
+}: IInputProps) {
   return (
     <div>
       <TextField
