@@ -3,7 +3,7 @@ import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { PostCard } from "./PostCard";
 
 export function PostsList() {
-  const { posts } = useContext(PostsContext);
+  const { posts} = useContext(PostsContext);
   return (
     <ul>
       {posts?.map((post) => (

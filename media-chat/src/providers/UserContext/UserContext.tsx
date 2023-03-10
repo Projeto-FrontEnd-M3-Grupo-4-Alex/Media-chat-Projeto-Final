@@ -21,6 +21,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[] | null>([]);
+
   const navigate = useNavigate();
 
   const userRegister = async (formData: IRegisterFormValues) => {
@@ -96,11 +97,17 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     const userId = localStorage.getItem("@USERID");
     if (token) {
       try {
-        const response = await api.patch<IResponseUser>(`users/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data.user);
+        const response = await api.patch<IResponseUser>(
+          `users/${userId}`,
+          formData,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        console.log(response);
+        toast.success("User atualizada com sucesso", { autoClose: 2000 });
       } catch (error) {
+        console.log(error);
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
       }

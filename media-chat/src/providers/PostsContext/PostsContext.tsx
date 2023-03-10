@@ -27,6 +27,17 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
+  const [ postList, setPostList] = useState<IPost[]>([])
+
+
+  const searchPostList = postList.filter((post) =>
+    search === ''
+      ? true
+      : post.category.toLowerCase().includes(search.toLowerCase()) ||
+        post.title.toLowerCase().includes(search.toLowerCase()) ||
+        post.tags?.toLowerCase().includes(search.toLowerCase())
+  );
+
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -199,6 +210,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
+        postList,
+        setPostList,
+        searchPostList
       }}
     >
       {children}

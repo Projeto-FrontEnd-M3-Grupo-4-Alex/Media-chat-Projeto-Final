@@ -28,7 +28,8 @@ export interface ILoginFormValues {
 
 export interface IUpdateUserFormValues {
   name: string;
-  bio: string;
+  email: string;
+  password: string;
   avatar_url: string;
 }
 
@@ -46,8 +47,8 @@ export interface IDefaultError {
 }
 
 export interface IUserContext {
-  loading:boolean;
- setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser | null;
   users: IUser[] | null;
   userRegister: (formData: IRegisterFormValues) => Promise<void>;

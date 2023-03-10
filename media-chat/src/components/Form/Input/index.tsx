@@ -3,6 +3,7 @@ import { FieldError } from "react-hook-form"
 import { UseFormRegisterReturn } from "react-hook-form"
 import { CustomTextField, InputStyle } from "./style"
 
+
 type iInputProps = {
   label: string
   errorMessage?: FieldError
@@ -11,6 +12,7 @@ type iInputProps = {
   placeholder: string
 } & TextFieldProps
 
+
 export function Input({
   label,
   type,
@@ -18,7 +20,7 @@ export function Input({
   register,
   placeholder,
   ...rest
-}: iInputProps) {
+}: IInputProps) {
   return (
     <InputStyle>
       <CustomTextField
