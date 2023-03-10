@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { SuggestUserCard } from "./SuggestUserCard";
+import { StyledSuggestUsers } from "./SuggestUserCard/style";
 
 export function SuggestUsersList() {
   const { sugestionsList, user } = useContext(UserContext);
 
   return (
-    <div>
+    <StyledSuggestUsers>
       <h2>Sugestões para seguir</h2>
       <ul>
         {sugestionsList.map((user) => (
@@ -18,6 +19,6 @@ export function SuggestUsersList() {
           />
         ))}
       </ul>
-    </div>
+    </StyledSuggestUsers>
   );
 }

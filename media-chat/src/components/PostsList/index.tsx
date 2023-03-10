@@ -4,17 +4,10 @@ import { PostCard } from "./PostCard";
 import { StyledPostList } from "./style";
 
 export function PostsList() {
-<<<<<<< HEAD
   const { newPostList } = useContext(PostsContext);
   return (
-    <ul>
-      {newPostList.map((post) => (
-=======
-  const { searchPosts} = useContext(PostsContext);
-  return (
     <StyledPostList>
-      {searchPosts?.map((post) => (
->>>>>>> be59923a74cb071550a257a8be0c09491fdab363
+      {newPostList.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
     </StyledPostList>
