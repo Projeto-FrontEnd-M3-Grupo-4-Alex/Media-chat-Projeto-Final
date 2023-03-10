@@ -1,16 +1,17 @@
-import { TextField } from "@mui/material";
-import { TextFieldProps } from "@mui/material";
-import { useState } from "react";
-import { FieldError } from "react-hook-form";
-import { UseFormRegisterReturn } from "react-hook-form";
-import { GrView } from "react-icons/gr";
+import { TextField } from "@mui/material"
+import { TextFieldProps } from "@mui/material"
+import { useState } from "react"
+import { FieldError } from "react-hook-form"
+import { UseFormRegisterReturn } from "react-hook-form"
+import { GrView } from "react-icons/gr"
+import { InputPasswordStyle } from "./style"
 
 type iInputProps = {
-  label: string;
-  errorMessage?: FieldError;
-  register: UseFormRegisterReturn<string>;
-  placeholder: string;
-} & TextFieldProps;
+  label: string
+  errorMessage?: FieldError
+  register: UseFormRegisterReturn<string>
+  placeholder: string
+} & TextFieldProps
 
 export function InputPassword({
   label,
@@ -19,11 +20,11 @@ export function InputPassword({
   placeholder,
   ...rest
 }: iInputProps) {
-  const [viewPassword, setViewPassword] = useState(false);
+  const [viewPassword, setViewPassword] = useState(false)
 
   return (
-    <div>
-      <div>
+    <InputPasswordStyle>
+      <div className="inputContainer">
         <TextField
           label={label}
           type={viewPassword ? "text" : "password"}
@@ -37,6 +38,6 @@ export function InputPassword({
       </div>
 
       {errorMessage ? <p>{errorMessage.message}</p> : null}
-    </div>
-  );
+    </InputPasswordStyle>
+  )
 }
