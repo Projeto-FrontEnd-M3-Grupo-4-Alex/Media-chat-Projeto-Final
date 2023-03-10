@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { IoMdClose } from "react-icons/io";
+import { SuggestUsersList } from "./SuggestUsers";
 import { TopPartIcons } from "./TopPartIcons";
 
 export function Aside() {
@@ -16,6 +17,7 @@ export function Aside() {
         </div>
       ) : null}
       <TopPartIcons />
+      <SuggestUsersList />
     </div>
   );
 }

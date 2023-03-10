@@ -20,9 +20,7 @@ function App() {
         theme="dark"
       />
       <UserProvider>
-        <PostsProvider>
-          <Router />
-        </PostsProvider>
+        <Router />
       </UserProvider>
     </div>
   );

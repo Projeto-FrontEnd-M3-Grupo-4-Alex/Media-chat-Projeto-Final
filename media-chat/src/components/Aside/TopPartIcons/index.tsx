@@ -6,12 +6,13 @@ import { MdLocalMovies } from "react-icons/md";
 import { BsPlayBtn } from "react-icons/bs";
 import { GiPiercingSword } from "react-icons/gi";
 import { GrCircleInformation } from "react-icons/gr";
-import logo from "../../assets/logo.svg";
+import logo from "../../../assets/logo.svg";
+import { StyledTopAside } from "./style";
 
 export function TopPartIcons() {
   const { filterPosts } = useContext(PostsContext);
   return (
-    <div className="aside__topPart">
+    <StyledTopAside className="aside__topPart">
       <img src={logo} alt="Logo da Media Chat" />
       <div className="home" onClick={() => filterPosts("Home")}>
         <AiFillHome />
@@ -33,6 +34,6 @@ export function TopPartIcons() {
         <GrCircleInformation />
         <h3>Sobre nós</h3>
       </Link>
-    </div>
+    </StyledTopAside>
   );
 }

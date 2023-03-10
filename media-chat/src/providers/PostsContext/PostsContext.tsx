@@ -25,7 +25,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [isOpened, setIsOpened] = useState(false);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const newPostList = filteredPost.length === 0 ? posts : filteredPost;
+  const newPostList = filteredPost.length > 0 ? filteredPost : posts;
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -168,7 +168,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   const filterPosts = (category: string) => {
     if (category !== "Home") {
-      const filterPost = posts.filter((post) => post.category === category);
+      const filterPost = posts.filter(
+        (post) => post.category == category.toLowerCase()
+      );
       setFilteredPost(filterPost);
     } else {
       setFilteredPost([]);
