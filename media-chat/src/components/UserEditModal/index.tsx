@@ -62,7 +62,7 @@ export const UserEditModal = ({setProfileEditModal}:IuserEditModalProps) => {
         <button type = "submit">Salvar</button>
         <button type = "button" onClick={async () => {
                 await userDelete();
-                setProfileEditModal(false);
+                setProfileEditModal(false); 
               }}>Excluir perfil</button>
       </form>
     </StyledUserEditDiv>

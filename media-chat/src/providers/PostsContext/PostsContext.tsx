@@ -29,7 +29,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [ postList, setPostList] = useState<IPost[]>([])
 
 
-  const searchPostList = postList.filter((post) =>
+  const searchPosts = posts.filter((post) =>
     search === ''
       ? true
       : post.category.toLowerCase().includes(search.toLowerCase()) ||
@@ -132,7 +132,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-        setComments([...comments, newComment]);
+       /*  setComments([...comments, newComment]); */
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -209,7 +209,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         createComments,
         postList,
         setPostList,
-        searchPostList
+        searchPosts
       }}
     >
       {children}
