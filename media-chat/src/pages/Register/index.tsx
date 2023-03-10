@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 import logo from "../../assets/logo.svg";
 import { RegisterForm } from "../../components/Form/RegisterForm";
 import { Link } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext/UserContext";
+=======
+import logo from "../../assets/logo.svg"
+import { RegisterForm } from "../../components/Form/RegisterForm"
+import { Link } from "react-router-dom"
+import { FormStyle } from "../../styles/FormStyle"
+>>>>>>> a49619cc65b38e9305f106fd0e48afe34e6a647a
 
 export function ResgisterPage() {
   const { loading} = useContext(UserContext)
   return (
+<<<<<<< HEAD
     <div>
       {loading ? (
         <Loading />
@@ -22,4 +30,16 @@ export function ResgisterPage() {
       )}
     </div>
   );
+=======
+    <FormStyle>
+      <div className="registerContainer">
+        <img src={logo} alt="Logo Media Chat" />
+        <h2>Cadastro</h2>
+        <RegisterForm />
+        <p>Já está cadastrado ?</p>
+        <Link to={"/login"}>Ir para a página de login</Link>
+      </div>
+    </FormStyle>
+  )
+>>>>>>> a49619cc65b38e9305f106fd0e48afe34e6a647a
 }

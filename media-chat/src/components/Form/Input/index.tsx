@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import { TextFieldProps } from "@mui/material";
 import { FieldError } from "react-hook-form";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { InputStyle } from "./style";
 
 type IInputProps = {
   label: string;
@@ -20,7 +21,7 @@ export function Input({
   ...rest
 }: IInputProps) {
   return (
-    <div>
+    <InputStyle>
       <TextField
         label={label}
         type={type}
@@ -29,6 +30,6 @@ export function Input({
         {...rest}
       />
       {errorMessage ? <p>{errorMessage.message}</p> : null}
-    </div>
+    </InputStyle>
   );
 }
