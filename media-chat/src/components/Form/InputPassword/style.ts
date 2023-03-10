@@ -17,7 +17,7 @@ export const InputPasswordStyle = styled.div`
 
   label {
     color: var(--text-inputs-color);
-    font-size: var(--font-size-16);
+    font-size: var(--font-size-14);
     font-weight: var(--font-weight-400);
   }
 

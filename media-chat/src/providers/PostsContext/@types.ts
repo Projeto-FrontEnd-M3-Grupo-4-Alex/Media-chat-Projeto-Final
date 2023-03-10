@@ -66,4 +66,7 @@ export interface IPostsContext {
   comment: IComment | null;
   setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
   createComments: (formData: ICommentsFormValues) => Promise<void>;
+  postList: IPost[];
+  setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
+  searchPostList:IPost[];
 }

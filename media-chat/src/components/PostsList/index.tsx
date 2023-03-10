@@ -4,7 +4,7 @@ import { PostCard } from "./PostCard";
 import { StyledPostList } from "./style";
 
 export function PostsList() {
-  const { posts } = useContext(PostsContext);
+  const { posts} = useContext(PostsContext);
   return (
     <StyledPostList>
       {posts?.map((post) => (
