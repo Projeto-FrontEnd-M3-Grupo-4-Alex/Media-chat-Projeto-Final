@@ -18,12 +18,16 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
   const [comments, setComments] = useState<IComment[]>([]);
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+<<<<<<< HEAD
+  const newPostList = filteredPost.length > 0 ? filteredPost : posts;
+=======
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [ postList, setPostList] = useState<IPost[]>([])
@@ -37,6 +41,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         post.tags?.toLowerCase().includes(search.toLowerCase())
   );
 
+>>>>>>> be59923a74cb071550a257a8be0c09491fdab363
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -183,6 +188,17 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const filterPosts = (category: string) => {
+    if (category !== "Home") {
+      const filterPost = posts.filter(
+        (post) => post.category == category.toLowerCase()
+      );
+      setFilteredPost(filterPost);
+    } else {
+      setFilteredPost([]);
+    }
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -207,9 +223,14 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
+<<<<<<< HEAD
+        filterPosts,
+        newPostList,
+=======
         postList,
         setPostList,
         searchPosts
+>>>>>>> be59923a74cb071550a257a8be0c09491fdab363
       }}
     >
       {children}
