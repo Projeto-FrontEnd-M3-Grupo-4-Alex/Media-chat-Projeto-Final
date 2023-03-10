@@ -1,9 +1,9 @@
-import { TextField } from "@mui/material"
 import { TextFieldProps } from "@mui/material"
 import { useState } from "react"
 import { FieldError } from "react-hook-form"
 import { UseFormRegisterReturn } from "react-hook-form"
-import { GrView } from "react-icons/gr"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { CustomTextField } from "../Input/style"
 import { InputPasswordStyle } from "./style"
 
 type iInputProps = {
@@ -25,16 +25,17 @@ export function InputPassword({
   return (
     <InputPasswordStyle>
       <div className="inputContainer">
-        <TextField
+        <CustomTextField size="small"
           label={label}
           type={viewPassword ? "text" : "password"}
           placeholder={placeholder}
+          sx={{ input: { color: "white" }, "label": {color: "white"} }}
           {...register}
           {...rest}
         />
         <button type="button" onClick={() => setViewPassword(!viewPassword)}>
-          <GrView />
-        </button>
+         { viewPassword ? <AiOutlineEye color="white" size='20'/> : <AiOutlineEyeInvisible color="white" size='20'/>}
+        </button>                                                                                   
       </div>
 
       {errorMessage ? <p>{errorMessage.message}</p> : null}
