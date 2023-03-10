@@ -6,6 +6,7 @@ import { InputPassword } from "../InputPassword";
 import { FormInputStyle } from "../../../styles/FormInputStyle";
 import { useContext } from "react";
 import { UserContext } from "../../../providers/UserContext/UserContext";
+import { IPost } from "../../../providers/PostsContext/@types";
 
 interface iUserRegisterData {
   name: string;
@@ -14,6 +15,8 @@ interface iUserRegisterData {
   confirmPassword: string;
   bio?: string;
   avatar_url?: string;
+  followUsers: number[];
+  favorites: IPost[];
 }
 
 const schema = yup.object({
@@ -45,7 +48,8 @@ export function RegisterForm() {
   });
 
   async function onSubmitForm(data: iUserRegisterData) {
-    userRegister(data);
+    const newData = { ...data, followUsers: [], favorites: [] };
+    userRegister(newData);
   }
 
   return (
@@ -90,7 +94,9 @@ export function RegisterForm() {
         register={register("avatar_url")}
         placeholder={"Cole aqui o link para a sua foto de perfil"}
       />
-      <button id="bttn_submit" type="submit">Enviar</button>
+      <button id="bttn_submit" type="submit">
+        Enviar
+      </button>
     </FormInputStyle>
   );
 }
