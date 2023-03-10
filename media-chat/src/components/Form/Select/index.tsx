@@ -15,15 +15,15 @@ const currencies = [
     label: "Selecionar Categoria",
   },
   {
-    value: "Filme",
+    value: "filme",
     label: "Filme",
   },
   {
-    value: "Série",
+    value: "série",
     label: "Série",
   },
   {
-    value: "Anime",
+    value: "anime",
     label: "Anime",
   },
 ];
