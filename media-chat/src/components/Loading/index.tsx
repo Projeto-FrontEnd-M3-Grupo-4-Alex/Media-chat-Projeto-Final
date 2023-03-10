@@ -1,8 +1,9 @@
 import loadingImage from "../../assets/loadingImage.svg"
+import { StyledLoadingDiv } from "./style";
 
 export const Loading = () => (
-    <div>
+    <StyledLoadingDiv>
       <img src={loadingImage} alt='loadingImage' />
-    </div>
+    </StyledLoadingDiv>
   );
   

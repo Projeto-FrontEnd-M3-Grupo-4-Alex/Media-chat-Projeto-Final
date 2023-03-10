@@ -1,9 +1,10 @@
 import { AxiosError } from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
+import { UserContext } from "../UserContext/UserContext";
 import {
   IComment,
   ICommentsFormValues,
@@ -22,15 +23,32 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpened, setIsOpened] = useState(false);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+<<<<<<< HEAD
   const newPostList = filteredPost.length > 0 ? filteredPost : posts;
+=======
+  const { user } = useContext(UserContext);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
+  const [ postList, setPostList] = useState<IPost[]>([])
+
+
+  const searchPosts = posts.filter((post) =>
+    search === ''
+      ? true
+      : post.category.toLowerCase().includes(search.toLowerCase()) ||
+        post.title.toLowerCase().includes(search.toLowerCase()) ||
+        post.tags?.toLowerCase().includes(search.toLowerCase())
+  );
+
+>>>>>>> be59923a74cb071550a257a8be0c09491fdab363
 
   useEffect(() => {
     const PostsRead = async () => {
       try {
-        const response = await api.get<IPost[]>("posts?_expand=user");
+        const response = await api.get<IPost[]>("posts", {
+          params: { _expand: "user" },
+        });
         setPosts(response.data);
         navigate("/dashboard");
       } catch (error) {
@@ -98,9 +116,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   const commentsRead = async (postId: number) => {
     try {
-      const response = await api.get<IComment[]>(
-        `posts/${postId}/comments?_expand=user`
-      );
+      const response = await api.get<IComment[]>(`comments`, {
+        params: { postId, _expand: "user" },
+      });
       setComments(response.data);
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;
@@ -115,7 +133,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         const response = await api.post<IComment>("comments", formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setComments([...comments, response.data]);
+        const newComment = {
+          ...response.data,
+          user,
+        };
+       /*  setComments([...comments, newComment]); */
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -188,20 +210,27 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         search,
         setSearch,
         commentsRead,
-        isOpened,
-        setIsOpened,
         isOpenedComments,
         setIsOpenedComments,
         setPost,
         showCreateModal,
         setShowCreateModal,
+        comments,
+        profileOpenModal,
+        setProfileOpenModal,
         editComments,
         deleteComment,
         comment,
         setComment,
         createComments,
+<<<<<<< HEAD
         filterPosts,
         newPostList,
+=======
+        postList,
+        setPostList,
+        searchPosts
+>>>>>>> be59923a74cb071550a257a8be0c09491fdab363
       }}
     >
       {children}

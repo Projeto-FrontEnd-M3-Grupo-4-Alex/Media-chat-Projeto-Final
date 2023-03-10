@@ -27,7 +27,8 @@ export interface ILoginFormValues {
 
 export interface IUpdateUserFormValues {
   name: string;
-  bio: string;
+  email: string;
+  password: string;
   avatar_url: string;
 }
 

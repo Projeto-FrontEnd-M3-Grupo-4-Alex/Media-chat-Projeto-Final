@@ -25,6 +25,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users;
 
   const userRegister = async (formData: IRegisterFormValues) => {
+    setLoading(true);
     try {
       const response = await api.post<IResponseUser>("register", formData);
       setUser(response.data.user);
@@ -35,6 +36,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>;
       toast.error(currentError.response?.data.error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,8 +111,11 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
+        toast.success("User atualizada com sucesso", { autoClose: 2000 });
+
         setUser(response.data.user);
       } catch (error) {
+        console.log(error);
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
       }
@@ -124,7 +130,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         const response = await api.delete(`users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data);
+        setUser(null);
+        navigate("/");
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
