@@ -22,7 +22,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpened, setIsOpened] = useState(false);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
@@ -133,7 +132,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-        setComments([...comments, newComment]);
+       /*  setComments([...comments, newComment]); */
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -195,8 +194,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         search,
         setSearch,
         commentsRead,
-        isOpened,
-        setIsOpened,
         isOpenedComments,
         setIsOpenedComments,
         setPost,

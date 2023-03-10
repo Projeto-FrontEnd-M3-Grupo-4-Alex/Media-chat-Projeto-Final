@@ -1,14 +1,15 @@
 import { SearchForm } from "../../components/SearchForm";
 import { useContext } from "react";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
-import { PostEditModal } from "../../components/PostEditModal";
 import { PostsList } from "../../components/PostsList";
 import { UserModal } from "../../components/UserModal";
 import { StyledUserDiv } from "./style";
+import { EditPostForm } from "../../components/Form/EditPostForm";
 import { UserContext } from "../../providers/UserContext/UserContext";
 
+
 export function Dashboard() {
-  const { profileOpenModal, setProfileOpenModal, isOpened } =
+  const { profileOpenModal, setProfileOpenModal, post } =
     useContext(PostsContext);
 
     const { user } = useContext(UserContext)
@@ -28,7 +29,7 @@ export function Dashboard() {
 
       {profileOpenModal ? <UserModal /> : null}
 
-      {isOpened && <PostEditModal />}
+      {post && <EditPostForm />}
       <PostsList />
     </>
   );

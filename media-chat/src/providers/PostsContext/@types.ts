@@ -11,6 +11,7 @@ export interface IPost {
   category: string;
   id: number;
   user: IUser;
+  likes: [];
   comments?: IComment[];
 }
 
@@ -19,6 +20,7 @@ export interface IComment {
   user: IUser;
   postId: number;
   id: number;
+  likes: [];
 }
 
 export interface IPostFormValues {
@@ -51,8 +53,6 @@ export interface IPostsContext {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   commentsRead: (postId: number) => Promise<void>;
-  isOpened: boolean;
-  setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
   isOpenedComments: boolean;
   setIsOpenedComments: React.Dispatch<React.SetStateAction<boolean>>;
   showCreateModal: boolean;
@@ -68,5 +68,5 @@ export interface IPostsContext {
   createComments: (formData: ICommentsFormValues) => Promise<void>;
   postList: IPost[];
   setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
-   searchPostList:IPost[];
+  searchPostList:IPost[];
 }

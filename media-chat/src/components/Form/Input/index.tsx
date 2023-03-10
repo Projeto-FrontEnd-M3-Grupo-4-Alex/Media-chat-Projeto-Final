@@ -1,16 +1,17 @@
-import { TextField } from "@mui/material";
-import { TextFieldProps } from "@mui/material";
-import { FieldError } from "react-hook-form";
-import { UseFormRegisterReturn } from "react-hook-form";
-import { InputStyle } from "./style";
+import { TextFieldProps } from "@mui/material"
+import { FieldError } from "react-hook-form"
+import { UseFormRegisterReturn } from "react-hook-form"
+import { CustomTextField, InputStyle } from "./style"
 
-type IInputProps = {
-  label: string;
-  errorMessage?: FieldError;
-  type: string;
-  register: UseFormRegisterReturn<string>;
-  placeholder: string;
-} & TextFieldProps;
+
+type iInputProps = {
+  label: string
+  errorMessage?: FieldError
+  type: string
+  register: UseFormRegisterReturn<string>
+  placeholder: string
+} & TextFieldProps
+
 
 export function Input({
   label,
@@ -22,14 +23,16 @@ export function Input({
 }: IInputProps) {
   return (
     <InputStyle>
-      <TextField
+      <CustomTextField
+        size="small"
         label={label}
         type={type}
         placeholder={placeholder}
+        sx={{ input: { color: "white" }, label: { color: "white" } }}
         {...register}
         {...rest}
       />
       {errorMessage ? <p>{errorMessage.message}</p> : null}
     </InputStyle>
-  );
+  )
 }
