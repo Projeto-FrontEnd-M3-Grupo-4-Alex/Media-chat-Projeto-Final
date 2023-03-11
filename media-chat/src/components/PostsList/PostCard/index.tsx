@@ -1,6 +1,5 @@
 import { IPost } from "../../../providers/PostsContext/@types";
 import { BiEdit, BiCommentDetail } from "react-icons/bi";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { BsBookmark } from "react-icons/bs";
 import { useContext } from "react";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
