@@ -19,11 +19,12 @@ export interface ILikepost {
   userId: number;
   content: string;
   postId: number;
+  id: Number;
 }
 
 export interface IComment {
   content: string;
-  user: IUser;
+  userId: number;
   postId: number;
   id: number;
   likesComment: [];
@@ -67,13 +68,13 @@ export interface IPostsContext {
   deleteComment: (commentId: number) => Promise<void>;
   comment: IComment | null;
   setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
-  createComments: (formData: ICommentsFormValues) => Promise<void>;
+  createComments: (formData: IComment[]) => Promise<void>;
   filterPosts: (category: string) => void;
   newPostList: IPost[];
   postList: IPost[];
   setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
   searchPostList: IPost[];
   updateLikePost: (formData: number) => Promise<void>;
-  updateDeslikePost: (likeArray: ILikepost) => Promise<void>;
+  updateDeslikePost: (likeArray: ILikepost[]) => Promise<JSX.Element>;
   filterPostsByInput: () => void;
 }

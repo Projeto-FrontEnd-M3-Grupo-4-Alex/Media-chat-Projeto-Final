@@ -137,7 +137,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const createComments = async (formData: ICommentsFormValues) => {
+  const createComments = async (formData: IComment[]) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -148,7 +148,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-        /*  setComments([...comments, newComment]); */
+        setComments([...comments, newComment]);
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -218,11 +218,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       }
     }
   };
-  const updateDeslikePost = async (likeArray: ILikepost) => {
+  const updateDeslikePost = async (likeArray: ILikepost[]) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       const findLikeId = likeArray.find((like) => user?.id === like.userId);
-      const likeId = findLikeId.id;
+      const likeId = findLikeId?.id;
       try {
         const response = await api.delete(`likesPost/${likeId}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -234,52 +234,53 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         toast.error(currentError.response?.data.error);
       }
     }
-  const filterPosts = (category: string) => {
-    if (category !== "Home") {
-      const filterPost = posts.filter(
-        (post) => post.category == category.toLowerCase()
-      );
-      setFilteredPost(filterPost);
-    } else {
-      setFilteredPost([]);
-    }
-  };
+    const filterPosts = (category: string) => {
+      if (category !== "Home") {
+        const filterPost = posts.filter(
+          (post) => post.category == category.toLowerCase()
+        );
+        setFilteredPost(filterPost);
+      } else {
+        setFilteredPost([]);
+      }
+    };
 
-  return (
-    <PostsContext.Provider
-      value={{
-        PostCreate,
-        PostUpdate,
-        PostDelete,
-        post,
-        posts,
-        search,
-        setSearch,
-        commentsRead,
-        isOpenedComments,
-        setIsOpenedComments,
-        setPost,
-        showCreateModal,
-        setShowCreateModal,
-        comments,
-        profileOpenModal,
-        setProfileOpenModal,
-        editComments,
-        deleteComment,
-        comment,
-        setComment,
-        createComments,
-        filterPosts,
-        newPostList,
-        postList,
-        setPostList,
-        searchPostList,
-        updateLikePost,
-        updateDeslikePost,
-        filterPostsByInput,
-      }}
-    >
-      {children}
-    </PostsContext.Provider>
-  );
+    return (
+      <PostsContext.Provider
+        value={{
+          PostCreate,
+          PostUpdate,
+          PostDelete,
+          post,
+          posts,
+          search,
+          setSearch,
+          commentsRead,
+          isOpenedComments,
+          setIsOpenedComments,
+          setPost,
+          showCreateModal,
+          setShowCreateModal,
+          comments,
+          profileOpenModal,
+          setProfileOpenModal,
+          editComments,
+          deleteComment,
+          comment,
+          setComment,
+          createComments,
+          filterPosts,
+          newPostList,
+          postList,
+          setPostList,
+          searchPostList,
+          updateLikePost,
+          updateDeslikePost,
+          filterPostsByInput,
+        }}
+      >
+        {children}
+      </PostsContext.Provider>
+    );
+  };
 };
