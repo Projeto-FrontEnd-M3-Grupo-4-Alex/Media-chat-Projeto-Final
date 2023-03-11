@@ -7,6 +7,7 @@ import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { PostComments } from "../PostComments";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledPostCard } from "./style";
+import { PostsLike } from "../PostsLike";
 
 interface IPostCardProps {
   post: IPost;
@@ -42,17 +43,12 @@ export const PostCard = ({ post }: IPostCardProps) => {
         </div>
       </div>
       <div className="ContainerButtonsPost">
-        <span>
-          {/* {post.likes.length} */}
-          <button>
-            <IoMdHeartEmpty />
-          </button>
-        </span>
+        <PostsLike post={post} />
         <button
           onClick={() => {
             console.log();
             commentsRead(post.id);
-            setIsOpenedComments(true);
+            setIsOpenedComments(post);
           }}
         >
           <BiCommentDetail />

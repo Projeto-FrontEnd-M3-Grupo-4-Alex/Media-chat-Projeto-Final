@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import logo from "../../assets/logo.svg";
+import { RegisterForm } from "../../components/Form/RegisterForm";
+import { Link } from "react-router-dom";
+import { Loading } from "../../components/Loading";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext/UserContext";
+import { FormStyle } from "../../styles/FormStyle";
+
+export function ResgisterPage() {
+  const { loading } = useContext(UserContext);
+=======
 import { Loading } from "../../components/Loading"
 import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext/UserContext"
@@ -9,6 +21,7 @@ import { FormStyle } from "../../styles/FormStyle"
 
 export function ResgisterPage() {
   const { loading } = useContext(UserContext)
+>>>>>>> 64be098fb05cbb8330a2ca7a1c67adc07e1c0385
   return (
     <div>
       {loading ? (
@@ -25,5 +38,9 @@ export function ResgisterPage() {
         </FormStyle>
       )}
     </div>
+<<<<<<< HEAD
+  );
+=======
   )
+>>>>>>> 64be098fb05cbb8330a2ca7a1c67adc07e1c0385
 }

@@ -16,7 +16,7 @@ export function PostComments({ post }: ICommentPostProps) {
     <StyledPostComments>
       <button
         onClick={() => {
-          setIsOpenedComments(false);
+          setIsOpenedComments(null);
         }}
       >
         X
@@ -31,7 +31,7 @@ export function PostComments({ post }: ICommentPostProps) {
             </div>
             <p>{comment.content}</p>
             <span>
-              {comment.likes.length}
+              {comment.likesComment.length}
               <button>
                 <IoMdHeartEmpty />
               </button>

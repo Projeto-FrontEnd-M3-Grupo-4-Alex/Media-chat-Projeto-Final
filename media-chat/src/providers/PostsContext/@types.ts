@@ -11,8 +11,14 @@ export interface IPost {
   category: string;
   id: number;
   user: IUser;
-  likes: [];
+  likesPost: ILikepost[];
   comments?: IComment[];
+}
+
+export interface ILikepost {
+  userId: number;
+  content: string;
+  postId: number;
 }
 
 export interface IComment {
@@ -20,7 +26,7 @@ export interface IComment {
   user: IUser;
   postId: number;
   id: number;
-  likes: [];
+  likesComment: [];
 }
 
 export interface IPostFormValues {
@@ -49,8 +55,8 @@ export interface IPostsContext {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   commentsRead: (postId: number) => Promise<void>;
-  isOpenedComments: boolean;
-  setIsOpenedComments: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenedComments: IPost | null;
+  setIsOpenedComments: React.Dispatch<React.SetStateAction<IPost | null>>;
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
@@ -66,5 +72,8 @@ export interface IPostsContext {
   newPostList: IPost[];
   postList: IPost[];
   setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
+  searchPostList: IPost[];
+  updateLikePost: (formData: number) => Promise<void>;
+  updateDeslikePost: (likeArray: ILikepost) => Promise<void>;
   filterPostsByInput: () => void;
 }
