@@ -11,7 +11,14 @@ export interface IPost {
   category: string;
   id: number;
   user: IUser;
+  likesPost: ILikepost[];
   comments?: IComment[];
+}
+
+export interface ILikepost {
+  userId: number;
+  content: string;
+  postId: number;
 }
 
 export interface IComment {
@@ -19,6 +26,7 @@ export interface IComment {
   user: IUser;
   postId: number;
   id: number;
+  likesComment: [];
 }
 
 export interface IPostFormValues {
@@ -51,20 +59,22 @@ export interface IPostsContext {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   commentsRead: (postId: number) => Promise<void>;
-  isOpened: boolean;
-  setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  isOpenedComments: boolean;
-  setIsOpenedComments: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenedComments: IPost | null;
+  setIsOpenedComments: React.Dispatch<React.SetStateAction<IPost | null>>;
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
   comments: IComment[];
-  profileOpenModal:boolean;
-  setProfileOpenModal:React.Dispatch<React.SetStateAction<boolean>>;
+  profileOpenModal: boolean;
+  setProfileOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   editComments: (commentId: number, formData: IComment) => Promise<void>;
   deleteComment: (commentId: number) => Promise<void>;
   comment: IComment | null;
   setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
   createComments: (formData: ICommentsFormValues) => Promise<void>;
-
+  postList: IPost[];
+  setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
+  searchPostList: IPost[];
+  updateLikePost: (formData: number) => Promise<void>;
+  updateDeslikePost: (likeArray: ILikepost) => Promise<void>;
 }

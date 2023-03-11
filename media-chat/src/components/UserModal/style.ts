@@ -22,6 +22,7 @@ export const StyledDiv = styled.div`
     .userImg {
       width: 42px;
       height: 42px;
+      border-radius:50%;
     }
   }
 
@@ -40,6 +41,10 @@ export const StyledDiv = styled.div`
       display: flex;
       align-items: center;
       gap: 20px;
+
+      p{
+        cursor:pointer;
+      }
     }
   }
 `;

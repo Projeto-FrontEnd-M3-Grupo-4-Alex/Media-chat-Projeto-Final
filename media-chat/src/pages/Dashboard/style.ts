@@ -15,6 +15,15 @@ gap:40px;
     h1{
         font-size:16px;
     }
+
+    img{
+        width:42px;
+        height:42px;
+        border-radius:50%;
+
+    }
+
+
 }
 
 `

@@ -4,20 +4,21 @@ export const FormStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 
-  padding: 0rem 2rem;
+  margin: 1rem 0;
+  padding: 0 2rem;
 
-  height: 100vh;
+  min-height: 90vh;
+  min-width: 375px;
 
   background-color: var(--color-background);
 
-  .loginContainer, .registerContainer{
+  .loginContainer,
+  .registerContainer {
     display: flex;
     flex-direction: column;
-
     gap: 2rem;
-    padding: 1rem  2rem;
+    padding: 1rem 2rem;
 
     background-color: var(--grey-transparent);
 
@@ -25,6 +26,7 @@ export const FormStyle = styled.div`
   }
 
   img {
+    margin: 0 auto;
     width: 250px;
     height: 181px;
   }
@@ -36,14 +38,14 @@ export const FormStyle = styled.div`
   }
 
   p {
-     text-align: center;
+    text-align: center;
 
     color: var(--color-white);
     font-size: var(--font-size-12);
     font-weight: var(--font-weight-400);
   }
 
-  a{
+  a {
     text-align: center;
     text-decoration: none;
 
@@ -59,21 +61,31 @@ export const FormStyle = styled.div`
 
     cursor: pointer;
 
-    &:hover{
-       background-color : var(--color-primary-2);
+    &:hover {
+      background-color: var(--color-primary-2);
     }
   }
 
-
   @media (min-width: 1200px) {
-    .loginContainer, .registerContainer{
-      padding: 4rem;
-      width: 35%;
+    .loginContainer,
+    .registerContainer {
+      padding: 0rem 5.5rem 2rem 5.5rem;
+      width: 600px;
     }
 
-    img{
-
-      width: 388px;
+    img {
+      width: 310px;
+      height: 218px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .loginContainer,
+    .registerContainer {
+      padding: 1rem 5.5rem 2rem 5.5rem;
+      width: 600px;
+    }
+    img {
+      width: 380px;
       height: 218px;
     }
   }

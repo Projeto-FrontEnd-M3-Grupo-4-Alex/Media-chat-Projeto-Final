@@ -1,7 +1,7 @@
-import { FormStyle } from "../../styles/FormStyle";
 import { LoginForm } from "../../components/Form/LoginForm";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
+import { FormStyle } from "../../styles/FormStyle";
 import { Loading } from "../../components/Loading";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext/UserContext";

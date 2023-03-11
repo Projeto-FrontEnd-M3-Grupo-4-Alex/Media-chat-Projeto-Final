@@ -8,6 +8,7 @@ import { UserContext } from "../UserContext/UserContext";
 import {
   IComment,
   ICommentsFormValues,
+  ILikepost,
   IPost,
   IPostFormValues,
   IPostsContext,
@@ -22,17 +23,25 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpened, setIsOpened] = useState(false);
-  const [isOpenedComments, setIsOpenedComments] = useState(false);
+  const [isOpenedComments, setIsOpenedComments] = useState<IPost | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
+  const [postList, setPostList] = useState<IPost[]>([]);
+
+  const searchPostList = postList.filter((post) =>
+    search === ""
+      ? true
+      : post.category.toLowerCase().includes(search.toLowerCase()) ||
+        post.title.toLowerCase().includes(search.toLowerCase()) ||
+        post.tags?.toLowerCase().includes(search.toLowerCase())
+  );
 
   useEffect(() => {
     const PostsRead = async () => {
       try {
         const response = await api.get<IPost[]>("posts", {
-          params: { _expand: "user" },
+          params: { _expand: "user", _embed: "likesPost" },
         });
         setPosts(response.data);
         navigate("/dashboard");
@@ -102,7 +111,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const commentsRead = async (postId: number) => {
     try {
       const response = await api.get<IComment[]>(`comments`, {
-        params: { postId, _expand: "user" },
+        params: { postId, _expand: "user", _embed: "likesComment" },
       });
       setComments(response.data);
     } catch (error) {
@@ -173,6 +182,43 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const updateLikePost = async (postId: number) => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      const formData = {
+        postId: postId,
+        userId: user?.id,
+      };
+      try {
+        const response = await api.post(`likesPost`, formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
+  const updateDeslikePost = async (likeArray: ILikepost) => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      const findLikeId = likeArray.find((like) => user?.id === like.userId);
+      const likeId = findLikeId.id;
+      try {
+        const response = await api.delete(`likesPost/${likeId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("delete ok");
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -184,8 +230,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         search,
         setSearch,
         commentsRead,
-        isOpened,
-        setIsOpened,
         isOpenedComments,
         setIsOpenedComments,
         setPost,
@@ -199,6 +243,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
+        postList,
+        setPostList,
+        searchPostList,
+        updateLikePost,
+        updateDeslikePost,
       }}
     >
       {children}
