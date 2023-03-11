@@ -7,7 +7,7 @@ import { UserContext } from "../../../providers/UserContext/UserContext";
 
 interface IPostsLikeProps {
   post: IPost;
-  user: IUser;
+  user?: IUser;
 }
 
 export function PostsLike({ post }: IPostsLikeProps) {
