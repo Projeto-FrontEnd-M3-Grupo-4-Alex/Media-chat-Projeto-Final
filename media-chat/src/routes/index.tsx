@@ -16,16 +16,11 @@ export function Router() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<ResgisterPage />} />
       <Route path="/dashboard" element={<ProtectedRouters />}>
-        <Route
-          index
-          element={
-            <PostsProvider>
-              <Dashboard />
-            </PostsProvider>
-          }
-        />
+        <Route index element={<Dashboard />} />
       </Route>
-      <Route path = "/profile" element = {<ProfilePage />}/>
+      <Route path="/profile" element={<ProtectedRouters />}>
+        <Route index element={<ProfilePage />} />
+      </Route>
     </Routes>
   );
 }
