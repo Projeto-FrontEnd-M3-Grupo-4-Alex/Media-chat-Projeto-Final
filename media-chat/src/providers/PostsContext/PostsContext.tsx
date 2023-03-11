@@ -19,6 +19,7 @@ export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
+  const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
   const [comments, setComments] = useState<IComment[]>([]);
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
@@ -36,6 +37,22 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         post.title.toLowerCase().includes(search.toLowerCase()) ||
         post.tags?.toLowerCase().includes(search.toLowerCase())
   );
+  const newPostList = filteredPost.length > 0 ? filteredPost : posts;
+
+  const filterPostsByInput = () => {
+    if (search !== "") {
+      const searchPosts = posts.filter(
+        (post) =>
+          post?.category.toLowerCase().includes(search.toLowerCase()) ||
+          post?.title.toLowerCase().includes(search.toLowerCase()) ||
+          post?.tags?.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredPost(searchPosts);
+      setSearch("");
+    } else {
+      setFilteredPost([]);
+    }
+  };
 
   useEffect(() => {
     const PostsRead = async () => {
@@ -131,7 +148,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-        setComments([...comments, newComment]);
+        /*  setComments([...comments, newComment]); */
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -217,6 +234,15 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         toast.error(currentError.response?.data.error);
       }
     }
+  const filterPosts = (category: string) => {
+    if (category !== "Home") {
+      const filterPost = posts.filter(
+        (post) => post.category == category.toLowerCase()
+      );
+      setFilteredPost(filterPost);
+    } else {
+      setFilteredPost([]);
+    }
   };
 
   return (
@@ -243,11 +269,14 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         comment,
         setComment,
         createComments,
+        filterPosts,
+        newPostList,
         postList,
         setPostList,
         searchPostList,
         updateLikePost,
         updateDeslikePost,
+        filterPostsByInput,
       }}
     >
       {children}

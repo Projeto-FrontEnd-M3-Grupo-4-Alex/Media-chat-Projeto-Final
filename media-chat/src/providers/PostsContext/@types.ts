@@ -46,10 +46,6 @@ export interface ICommentsFormValues {
   postId: number;
 }
 
-export interface ISubmitHandler {
-  search: string;
-}
-
 export interface IPostsContext {
   post: IPost | null;
   posts: IPost[] | null;
@@ -72,9 +68,12 @@ export interface IPostsContext {
   comment: IComment | null;
   setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
   createComments: (formData: ICommentsFormValues) => Promise<void>;
+  filterPosts: (category: string) => void;
+  newPostList: IPost[];
   postList: IPost[];
   setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
   searchPostList: IPost[];
   updateLikePost: (formData: number) => Promise<void>;
   updateDeslikePost: (likeArray: ILikepost) => Promise<void>;
+  filterPostsByInput: () => void;
 }

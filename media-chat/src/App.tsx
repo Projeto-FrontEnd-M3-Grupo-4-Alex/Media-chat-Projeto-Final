@@ -1,5 +1,4 @@
 import { ToastContainer } from "react-toastify";
-import { PostsProvider } from "./providers/PostsContext/PostsContext";
 import { UserProvider } from "./providers/UserContext/UserContext";
 import { Router } from "./routes";
 import { GlobalStyles } from "./styles/Global";

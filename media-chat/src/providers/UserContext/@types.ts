@@ -7,9 +7,8 @@ export interface IUser {
   name: string;
   bio: string;
   avatar_url: string;
-  follow: [];
-  followers: [];
-  id: string;
+  followUsers: number[];
+  id: number;
 }
 
 export interface IRegisterFormValues {
@@ -38,10 +37,6 @@ export interface IResponseUser {
   accessToken: string;
 }
 
-export interface IResponseUsers {
-  users: IUser[];
-}
-
 export interface IDefaultError {
   error: string;
 }
@@ -54,7 +49,8 @@ export interface IUserContext {
   userRegister: (formData: IRegisterFormValues) => Promise<void>;
   userLogin: (formData: ILoginFormValues) => Promise<void>;
   userLogOut: () => void;
-  readUsers: () => Promise<void>;
   userUpdate: (formData: IUpdateUserFormValues) => Promise<void>;
   userDelete: () => Promise<void>;
+  sugestionsList: IUser[];
+  followUsers: (userId: number) => Promise<void>;
 }

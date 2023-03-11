@@ -1,26 +1,21 @@
 import { MdSearch } from "react-icons/md";
 import { useContext } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
-import { ISubmitHandler } from "../../providers/PostsContext/@types";
-import { StyledForm } from "./style";
 
 export const SearchForm = () => {
-  const { setSearch } = useContext(PostsContext);
-  const { handleSubmit, register } = useForm<ISubmitHandler>();
-
-  const submit: SubmitHandler<ISubmitHandler> = (data) => {
-    setSearch(data.search);
-  };
+  const { filterPostsByInput, search, setSearch } = useContext(PostsContext);
 
   return (
-    <StyledForm onSubmit={handleSubmit(submit)}>
+    <div>
       <input
         type="text"
         placeholder="Search something"
-        {...register("search")}
+        value={search}
+        onChange={(event) => setSearch(event.currentTarget.value)}
       />
-      <button type="submit"><MdSearch /></button>
-    </StyledForm>
+      <button type="submit" onClick={filterPostsByInput}>
+        <MdSearch />
+      </button>
+    </div>
   );
 };
