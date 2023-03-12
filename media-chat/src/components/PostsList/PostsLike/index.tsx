@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { IPost } from "../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
@@ -11,35 +11,34 @@ interface IPostsLikeProps {
 }
 
 export function PostsLike({ post }: IPostsLikeProps) {
-  const { updateLikePost, updateDeslikePost } = useContext(PostsContext);
+  const { updateDeslikePost, updateLikePost, likeArray } =
+    useContext(PostsContext);
   const { user } = useContext(UserContext);
-  console.log(post.likesPost); //preciso verificar melhor like true ou false. inverter renderização condicional //
+  const [islike, setislike] = useState(
+    likeArray.some((like) => user?.id == like.userId && post.id == like.postId)
+  );
+  const [countLike, setcountlike] = useState(post.likesPost.length);
 
   return (
     <>
-      {post.likesPost.some((like) => user?.id === like.userId) ? (
-        <>
-          <span>{post.likesPost.length}</span>
-          <button
-            onClick={() => {
-              updateDeslikePost(post.likesPost);
-            }}
-          >
-            <IoMdHeart />
-          </button>
-        </>
-      ) : (
-        <>
-          <span>{post.likesPost.length}</span>
-          <button
-            onClick={() => {
-              updateLikePost(post.id);
-            }}
-          >
-            <IoMdHeartEmpty />
-          </button>
-        </>
-      )}
+      <button
+        onClick={() => {
+          if (islike) {
+            updateDeslikePost(post.likesPost);
+            setcountlike(countLike - 1);
+            setislike(false);
+          } else {
+            updateLikePost(post.id);
+            setcountlike(countLike + 1);
+            setislike(true);
+          }
+        }}
+      >
+        <span>
+          {" "}
+          {countLike} {islike ? <IoMdHeart /> : <IoMdHeartEmpty />}
+        </span>
+      </button>
     </>
   );
 }

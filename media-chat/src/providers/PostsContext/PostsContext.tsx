@@ -28,6 +28,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [postList, setPostList] = useState<IPost[]>([]);
+  const [likeArray, SetlikeArray] = useState<ILikepost[]>([]);
 
   const searchPostList = postList.filter((post) =>
     search === ""
@@ -67,6 +68,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       }
     };
     PostsRead();
+    GetLikes();
   }, []);
 
   const PostCreate = async (formData: IPostFormValues) => {
@@ -210,23 +212,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data);
-      } catch (error) {
-        console.log(error);
-        const currentError = error as AxiosError<IDefaultError>;
-        toast.error(currentError.response?.data.error);
-      }
-    }
-  };
-  const updateDeslikePost = async (likeArray: ILikepost[]) => {
-    const token = localStorage.getItem("@TOKEN");
-    if (token) {
-      const findLikeId = likeArray.find((like) => user?.id === like.userId);
-      const likeId = findLikeId?.id;
-      try {
-        const response = await api.delete(`likesPost/${likeId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log("delete ok");
+        SetlikeArray([...likeArray, response.data]);
       } catch (error) {
         console.log(error);
         const currentError = error as AxiosError<IDefaultError>;
@@ -235,6 +221,41 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const GetLikes = async () => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      try {
+        const response = await api.get("likesPost", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        SetlikeArray(response.data);
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
+  const updateDeslikePost = async () => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      const findLikeId = likeArray.find((like) => user?.id === like.userId);
+      console.log(findLikeId);
+      const likeId = findLikeId?.id;
+      try {
+        const response = await api.delete(`likesPost/${likeId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("delete ok");
+        const filteredLikes = likeArray.filter((like) => like.id !== likeId);
+        SetlikeArray(filteredLikes);
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
   const filterPosts = (category: string) => {
     if (category !== "Home") {
       const filterPost = posts.filter(
@@ -278,6 +299,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         updateLikePost,
         updateDeslikePost,
         filterPostsByInput,
+        likeArray,
       }}
     >
       {children}
