@@ -8,9 +8,6 @@ import { TextArea } from "../TextArea";
 import { Input } from "../Input";
 import { Select } from "../Select";
 import { Rating, Typography } from "@mui/material";
-import { TextAreaWithoutMUI } from "../TextAreaWIthoutMUI";
-import { InputWithoutMUI } from "../InputWithoutMUI";
-import { SelectWithoutMUI } from "../SelectWithoutMUI";
 
 interface iCreatePostFormData {
   thumbnail?: string;
@@ -63,28 +60,30 @@ export function CreateFormPost() {
       <button onClick={() => setShowCreateModal(false)}>X</button>
       <h2>Criar uma postagem</h2>
       <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-        <TextAreaWithoutMUI
+        <TextArea
           label="Conte sobre o que você está assistindo"
-          errorMessage={errors.content}
+          type="multiline"
           register={register("content")}
           placeholder={"Digite o conteúdo do seu post aqui"}
-          id="content"
         />
-        <InputWithoutMUI
+        <Input
+          type="text"
           label="Título do post"
           errorMessage={errors.title}
           register={register("title")}
           placeholder={"Digite o título do seu post"}
           id="title"
         />
-        <InputWithoutMUI
+        <Input
+          type="text"
           label="Imagem do post"
           errorMessage={errors.thumbnail}
           register={register("thumbnail")}
           placeholder={"Cole a url de uma imagem para ser adicionada no post"}
           id="thumbnail"
         />
-        <InputWithoutMUI
+        <Input
+          type="text"
           label="Está disponível em alguma plataforma ? Conte para seus amigos"
           errorMessage={errors.where}
           register={register("where")}
@@ -93,13 +92,14 @@ export function CreateFormPost() {
           }
           id="where"
         />
-        <SelectWithoutMUI
+        <Select
           label="Selecione a categoria da mídia"
           errorMessage={errors.category}
           register={register("category")}
           id="category"
         />
-        <InputWithoutMUI
+        <Input
+          type="text"
           label="Adicione tags à esse post"
           id="tags"
           errorMessage={errors.tags}

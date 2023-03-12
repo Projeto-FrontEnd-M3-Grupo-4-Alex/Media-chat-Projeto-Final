@@ -24,8 +24,8 @@ export function Input({
       <CustomTextField
         size="small"
         label={label}
+        id={register.name}
         type={type}
-        placeholder={placeholder}
         sx={{ input: { color: "white" }, label: { color: "white" } }}
         {...register}
         {...rest}

@@ -6,9 +6,6 @@ import { Input } from "../Input";
 import { Select } from "../Select";
 import { Rating, Typography } from "@mui/material";
 import { StyledEditPostForm } from "./style";
-import { InputWithoutMUI } from "../InputWithoutMUI";
-import { TextAreaWithoutMUI } from "../TextAreaWIthoutMUI";
-import { SelectWithoutMUI } from "../SelectWithoutMUI";
 
 interface iEditPostFormData {
   thumbnail?: string;
@@ -23,7 +20,7 @@ interface iEditPostFormData {
 }
 
 export function EditPostForm() {
-  const { PostUpdate, post, setPost } = useContext(PostsContext);
+  const { PostUpdate, post, setPost, PostDelete } = useContext(PostsContext);
   const [ratingValue, setRatingValue] = useState<number | null>(
     Number(post?.rating)
   );
@@ -48,32 +45,42 @@ export function EditPostForm() {
     }
   }
 
+  async function deletePost() {
+    if (post) {
+      PostDelete(post.id);
+      setPost(null);
+    }
+  }
+
   return (
     <StyledEditPostForm role={"dialog"}>
       <div>
         <button onClick={() => setPost(null)}>X</button>
         <h2>Edite a sua postagem</h2>
-        <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-          <InputWithoutMUI
+        <form onSubmit={handleSubmit(onSubmitForm)}>
+          <Input
             label="Título do post"
+            type="text"
             id="title"
             register={register("title")}
             placeholder={"Digite o título do seu post"}
           />
-          <TextAreaWithoutMUI
+          <TextArea
             label="Conte sobre o que você está assistindo"
+            type="multiline"
             register={register("content")}
             placeholder={"Digite o conteúdo do seu post aqui"}
-            id={"content"}
           />
 
-          <InputWithoutMUI
+          <Input
+            type="text"
             label="Imagem do post"
             id="thumbnail"
             register={register("thumbnail")}
             placeholder={"Cole a url de uma imagem para ser adicionada no post"}
           />
-          <InputWithoutMUI
+          <Input
+            type="text"
             label="Está disponível em alguma plataforma ? Conte para seus amigos"
             id={"where"}
             register={register("where")}
@@ -81,12 +88,13 @@ export function EditPostForm() {
               "Informe as plataformas em que essa mídia está disponível"
             }
           />
-          <SelectWithoutMUI
+          <Select
             label="Selecione a categoria da mídia"
             register={register("category")}
             id="category"
           />
-          <InputWithoutMUI
+          <Input
+            type="text"
             label="Adicione tags à esse post"
             id="tags"
             register={register("tags")}
@@ -100,6 +108,9 @@ export function EditPostForm() {
               setRatingValue(newValue);
             }}
           />
+          <button type="button" onClick={deletePost}>
+            Excluir
+          </button>
           <button type="submit">Editar</button>
         </form>
       </div>

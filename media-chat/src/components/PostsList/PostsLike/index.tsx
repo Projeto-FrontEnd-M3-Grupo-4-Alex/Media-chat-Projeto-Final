@@ -12,8 +12,7 @@ interface IPostsLikeProps {
 
 export function PostsLike({ post }: IPostsLikeProps) {
   const { updateLikePost, updateDeslikePost } = useContext(PostsContext);
-  const { user } = useContext(UserContext);
-  console.log(post.likesPost); //preciso verificar melhor like true ou false. inverter renderização condicional //
+  const { user } = useContext(UserContext); //preciso verificar melhor like true ou false. inverter renderização condicional //
 
   return (
     <>
