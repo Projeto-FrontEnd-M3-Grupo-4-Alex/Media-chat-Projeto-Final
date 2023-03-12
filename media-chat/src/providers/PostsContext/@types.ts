@@ -17,7 +17,6 @@ export interface IPost {
 
 export interface ILikepost {
   userId: number;
-  content: string;
   postId: number;
   id: Number;
 }
@@ -73,7 +72,8 @@ export interface IPostsContext {
   newPostList: IPost[];
   postList: IPost[];
   setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
-  updateLikePost: (formData: number) => Promise<void>;
+  updateLikePost: (postId: number) => Promise<void>;
   updateDeslikePost: (likeArray: ILikepost[]) => Promise<void>;
   filterPostsByInput: () => void;
+  likeArray: ILikepost[];
 }
