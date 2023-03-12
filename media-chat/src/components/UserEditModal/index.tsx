@@ -43,7 +43,7 @@ export const UserEditModal = ({setProfileEditModal}:IuserEditModalProps) => {
   return (
     <StyledUserEditDiv>
       <h2>Editar Perfil</h2>
-      <span>X</span>
+      <button onClick = {() =>{setProfileEditModal(false)}}>X</button>
       <form onSubmit = {handleSubmit(submit)}>
         <div>
         <input type="text" placeholder="Name" {...register("name")} />

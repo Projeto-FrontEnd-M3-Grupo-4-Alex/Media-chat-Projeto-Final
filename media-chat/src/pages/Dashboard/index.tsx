@@ -1,4 +1,3 @@
-import { SearchForm } from "../../components/SearchForm";
 import { useContext } from "react";
 import { Aside } from "../../components/Aside";
 import { EditPostForm } from "../../components/Form/EditPostForm";
@@ -7,6 +6,7 @@ import { PostsList } from "../../components/PostsList";
 import { UserModal } from "../../components/UserModal";
 import { StyledUserDiv } from "./style";
 import { UserContext } from "../../providers/UserContext/UserContext";
+import { SearchInput } from "../../components/SearchInput";
 
 export function Dashboard() {
   const { profileOpenModal, setProfileOpenModal, post } =
@@ -16,7 +16,7 @@ export function Dashboard() {
   return (
     <>
       <StyledUserDiv>
-        <SearchForm />
+        <SearchInput />
         <div className="profile">
           <h1>{user?.name}</h1>
           <img

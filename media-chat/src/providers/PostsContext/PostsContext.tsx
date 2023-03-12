@@ -139,7 +139,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-        /*  setComments([...comments, newComment]); */
+          setComments([...comments, newComment]); 
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);

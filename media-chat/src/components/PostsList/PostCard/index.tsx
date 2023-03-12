@@ -7,6 +7,7 @@ import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { PostComments } from "../PostComments";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledPostCard } from "./style";
+import { FavoritePostContext } from "../../../providers/FavoritePostContext/FavoritePostContex";
 
 interface IPostCardProps {
   post: IPost;
@@ -16,6 +17,8 @@ export const PostCard = ({ post }: IPostCardProps) => {
   const { setPost, isOpenedComments, setIsOpenedComments, commentsRead } =
     useContext(PostsContext);
   const { user } = useContext(UserContext);
+
+  const { addFavoritePost } = useContext(FavoritePostContext)
   return (
     <StyledPostCard>
       <div className="ContainerInfoUser">
