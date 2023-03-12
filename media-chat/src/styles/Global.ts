@@ -1,4 +1,4 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 *{
@@ -71,4 +71,24 @@ body{
   font-family: 'Inter', sans-serif;
   background-color: var(--color-background);
 }
-`
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 30px;
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary-2);
+    border-radius: 30px;
+
+    :hover {
+      background-color: var(--color-hover);
+    }
+}
+`;

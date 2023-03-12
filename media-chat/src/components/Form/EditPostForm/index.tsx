@@ -20,7 +20,7 @@ interface iEditPostFormData {
 }
 
 export function EditPostForm() {
-  const { PostUpdate, post, setPost } = useContext(PostsContext);
+  const { PostUpdate, post, setPost, PostDelete } = useContext(PostsContext);
   const [ratingValue, setRatingValue] = useState<number | null>(
     Number(post?.rating)
   );
@@ -45,32 +45,44 @@ export function EditPostForm() {
     }
   }
 
+  async function deletePost() {
+    if (post) {
+      PostDelete(post.id);
+      setPost(null);
+    }
+  }
+
   return (
     <StyledEditPostForm role={"dialog"}>
       <div>
         <button onClick={() => setPost(null)}>X</button>
         <h2>Edite a sua postagem</h2>
-        <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-          <TextArea
-            label="Conte sobre o que você está assistindo"
-            register={register("content")}
-            placeholder={"Digite o conteúdo do seu post aqui"}
-          />
+        <form onSubmit={handleSubmit(onSubmitForm)}>
           <Input
             label="Título do post"
             type="text"
+            id="title"
             register={register("title")}
             placeholder={"Digite o título do seu post"}
           />
+          <TextArea
+            label="Conte sobre o que você está assistindo"
+            type="multiline"
+            register={register("content")}
+            placeholder={"Digite o conteúdo do seu post aqui"}
+          />
+
           <Input
-            label="Imagem do post"
             type="text"
+            label="Imagem do post"
+            id="thumbnail"
             register={register("thumbnail")}
             placeholder={"Cole a url de uma imagem para ser adicionada no post"}
           />
           <Input
-            label="Está disponível em alguma plataforma ? Conte para seus amigos"
             type="text"
+            label="Está disponível em alguma plataforma ? Conte para seus amigos"
+            id={"where"}
             register={register("where")}
             placeholder={
               "Informe as plataformas em que essa mídia está disponível"
@@ -79,10 +91,12 @@ export function EditPostForm() {
           <Select
             label="Selecione a categoria da mídia"
             register={register("category")}
+            id="category"
           />
           <Input
-            label="Adicione tags à esse post"
             type="text"
+            label="Adicione tags à esse post"
+            id="tags"
             register={register("tags")}
             placeholder={"Ex: #naruto, #ninja, #drama, #comédia"}
           />
@@ -94,6 +108,9 @@ export function EditPostForm() {
               setRatingValue(newValue);
             }}
           />
+          <button type="button" onClick={deletePost}>
+            Excluir
+          </button>
           <button type="submit">Editar</button>
         </form>
       </div>

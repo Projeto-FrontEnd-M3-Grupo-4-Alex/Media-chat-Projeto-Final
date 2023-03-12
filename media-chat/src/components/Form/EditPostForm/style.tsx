@@ -11,6 +11,6 @@ export const StyledEditPostForm = styled.div`
   justify-content: center;
   align-items: center;
   div {
-    background-color: white;
+    background-color: #211d34;
   }
 `;

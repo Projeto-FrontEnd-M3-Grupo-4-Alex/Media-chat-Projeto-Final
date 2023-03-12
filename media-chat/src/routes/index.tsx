@@ -21,6 +21,9 @@ export function Router() {
       <Route path="/profile" element={<ProtectedRouters />}>
         <Route index element={<ProfilePage />} />
       </Route>
+      <Route path="/post/postId" element={<ProtectedRouters />}>
+        {/* <Route index element={<ProfilePage />} /> */}
+      </Route>
     </Routes>
   );
 }

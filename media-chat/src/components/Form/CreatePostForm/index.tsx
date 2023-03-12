@@ -62,41 +62,46 @@ export function CreateFormPost() {
       <form action="" onSubmit={handleSubmit(onSubmitForm)}>
         <TextArea
           label="Conte sobre o que você está assistindo"
-          errorMessage={errors.content}
+          type="multiline"
           register={register("content")}
           placeholder={"Digite o conteúdo do seu post aqui"}
         />
         <Input
-          label="Título do post"
           type="text"
+          label="Título do post"
           errorMessage={errors.title}
           register={register("title")}
           placeholder={"Digite o título do seu post"}
+          id="title"
         />
         <Input
-          label="Imagem do post"
           type="text"
+          label="Imagem do post"
           errorMessage={errors.thumbnail}
           register={register("thumbnail")}
           placeholder={"Cole a url de uma imagem para ser adicionada no post"}
+          id="thumbnail"
         />
         <Input
-          label="Está disponível em alguma plataforma ? Conte para seus amigos"
           type="text"
+          label="Está disponível em alguma plataforma ? Conte para seus amigos"
           errorMessage={errors.where}
           register={register("where")}
           placeholder={
             "Informe as plataformas em que essa mídia está disponível"
           }
+          id="where"
         />
         <Select
           label="Selecione a categoria da mídia"
           errorMessage={errors.category}
           register={register("category")}
+          id="category"
         />
         <Input
-          label="Adicione tags à esse post"
           type="text"
+          label="Adicione tags à esse post"
+          id="tags"
           errorMessage={errors.tags}
           register={register("tags")}
           placeholder={"Ex: #naruto, #ninja, #drama, #comédia"}

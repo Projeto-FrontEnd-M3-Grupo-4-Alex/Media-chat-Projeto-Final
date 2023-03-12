@@ -10,6 +10,7 @@ interface iEditCommentFormData {
   postId: number;
   userId: number;
   user: IUser;
+  likesComment: [];
 }
 
 export function EditCommentForm() {

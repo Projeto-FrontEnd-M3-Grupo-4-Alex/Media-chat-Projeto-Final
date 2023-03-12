@@ -72,7 +72,6 @@ export interface IPostsContext {
   newPostList: IPost[];
   postList: IPost[];
   setPostList: React.Dispatch<React.SetStateAction<IPost[]>>;
-  searchPostList: IPost[];
   updateLikePost: (postId: number) => Promise<void>;
   updateDeslikePost: (likeArray: ILikepost[]) => Promise<void>;
   filterPostsByInput: () => void;

@@ -30,13 +30,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [postList, setPostList] = useState<IPost[]>([]);
   const [likeArray, SetlikeArray] = useState<ILikepost[]>([]);
 
-  const searchPostList = postList.filter((post) =>
-    search === ""
-      ? true
-      : post.category.toLowerCase().includes(search.toLowerCase()) ||
-        post.title.toLowerCase().includes(search.toLowerCase()) ||
-        post.tags?.toLowerCase().includes(search.toLowerCase())
-  );
   const newPostList = filteredPost.length > 0 ? filteredPost : posts;
 
   const filterPostsByInput = () => {
@@ -295,7 +288,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         newPostList,
         postList,
         setPostList,
-        searchPostList,
         updateLikePost,
         updateDeslikePost,
         filterPostsByInput,
