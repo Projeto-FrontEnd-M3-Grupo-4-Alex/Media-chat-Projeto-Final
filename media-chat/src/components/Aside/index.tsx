@@ -1,23 +1,35 @@
 import { useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { IoMdClose } from "react-icons/io";
+import { StyledAside, StyledDivAside } from "./style";
 import { SuggestUsersList } from "./SuggestUsers";
 import { TopPartIcons } from "./TopPartIcons";
 
 export function Aside() {
   const [showMenu, setShowMenu] = useState(false);
   return (
-    <div className="aside__container">
+    <StyledDivAside>
       <button className="menu__button" onClick={() => setShowMenu(!showMenu)}>
         {showMenu ? <IoMdClose /> : <BiMenu />}
       </button>
+
       {showMenu ? (
-        <div>
-          <TopPartIcons />
-        </div>
+        <StyledAside className="mobile__aside">
+          <div>
+            <TopPartIcons />
+            <SuggestUsersList />
+          </div>
+        </StyledAside>
       ) : null}
-      <TopPartIcons />
-      <SuggestUsersList />
-    </div>
+
+      <div className="aside__container--desktop">
+        <StyledAside>
+          <div className="desktop__aside">
+            <TopPartIcons />
+            <SuggestUsersList />
+          </div>
+        </StyledAside>
+      </div>
+    </StyledDivAside>
   );
 }

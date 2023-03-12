@@ -9,25 +9,6 @@ type iSelectProps = {
   register: UseFormRegisterReturn<string>;
 } & TextFieldProps;
 
-const currencies = [
-  {
-    value: "",
-    label: "Selecionar Categoria",
-  },
-  {
-    value: "filme",
-    label: "Filme",
-  },
-  {
-    value: "série",
-    label: "Série",
-  },
-  {
-    value: "anime",
-    label: "Anime",
-  },
-];
-
 export function Select({
   label,
   errorMessage,
@@ -37,11 +18,9 @@ export function Select({
   return (
     <div>
       <TextField label={label} {...register} {...rest} select>
-        {currencies.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
+        <MenuItem value={"filme"}>Filme</MenuItem>
+        <MenuItem value={"séries"}>Séries</MenuItem>
+        <MenuItem value={"anime"}>Anime</MenuItem>
       </TextField>
       {errorMessage ? <p>{errorMessage.message}</p> : null}
     </div>

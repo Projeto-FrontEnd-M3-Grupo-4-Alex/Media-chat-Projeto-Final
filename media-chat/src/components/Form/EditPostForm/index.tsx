@@ -6,6 +6,9 @@ import { Input } from "../Input";
 import { Select } from "../Select";
 import { Rating, Typography } from "@mui/material";
 import { StyledEditPostForm } from "./style";
+import { InputWithoutMUI } from "../InputWithoutMUI";
+import { TextAreaWithoutMUI } from "../TextAreaWIthoutMUI";
+import { SelectWithoutMUI } from "../SelectWithoutMUI";
 
 interface iEditPostFormData {
   thumbnail?: string;
@@ -51,38 +54,41 @@ export function EditPostForm() {
         <button onClick={() => setPost(null)}>X</button>
         <h2>Edite a sua postagem</h2>
         <form action="" onSubmit={handleSubmit(onSubmitForm)}>
-          <TextArea
-            label="Conte sobre o que você está assistindo"
-            register={register("content")}
-            placeholder={"Digite o conteúdo do seu post aqui"}
-          />
-          <Input
+          <InputWithoutMUI
             label="Título do post"
-            type="text"
+            id="title"
             register={register("title")}
             placeholder={"Digite o título do seu post"}
           />
-          <Input
+          <TextAreaWithoutMUI
+            label="Conte sobre o que você está assistindo"
+            register={register("content")}
+            placeholder={"Digite o conteúdo do seu post aqui"}
+            id={"content"}
+          />
+
+          <InputWithoutMUI
             label="Imagem do post"
-            type="text"
+            id="thumbnail"
             register={register("thumbnail")}
             placeholder={"Cole a url de uma imagem para ser adicionada no post"}
           />
-          <Input
+          <InputWithoutMUI
             label="Está disponível em alguma plataforma ? Conte para seus amigos"
-            type="text"
+            id={"where"}
             register={register("where")}
             placeholder={
               "Informe as plataformas em que essa mídia está disponível"
             }
           />
-          <Select
+          <SelectWithoutMUI
             label="Selecione a categoria da mídia"
             register={register("category")}
+            id="category"
           />
-          <Input
+          <InputWithoutMUI
             label="Adicione tags à esse post"
-            type="text"
+            id="tags"
             register={register("tags")}
             placeholder={"Ex: #naruto, #ninja, #drama, #comédia"}
           />

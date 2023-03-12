@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiFillInfoCircle } from "react-icons/ai";
 import { MdLocalMovies } from "react-icons/md";
 import { BsPlayBtn } from "react-icons/bs";
 import { GiPiercingSword } from "react-icons/gi";
-import { GrCircleInformation } from "react-icons/gr";
 import logo from "../../../assets/logo.svg";
 import { StyledTopAside } from "./style";
 
@@ -31,7 +30,7 @@ export function TopPartIcons() {
         <h3>Animes</h3>
       </div>
       <Link to={"/about"}>
-        <GrCircleInformation />
+        <AiFillInfoCircle />
         <h3>Sobre nós</h3>
       </Link>
     </StyledTopAside>

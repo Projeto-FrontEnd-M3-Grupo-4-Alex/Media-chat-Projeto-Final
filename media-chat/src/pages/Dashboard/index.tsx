@@ -5,7 +5,7 @@ import { EditPostForm } from "../../components/Form/EditPostForm";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { PostsList } from "../../components/PostsList";
 import { UserModal } from "../../components/UserModal";
-import { StyledUserDiv } from "./style";
+import { StyledDashboard, StyledUserDiv } from "./style";
 import { UserContext } from "../../providers/UserContext/UserContext";
 
 export function Dashboard() {
@@ -15,24 +15,28 @@ export function Dashboard() {
   const { user } = useContext(UserContext);
 
   return (
-    <>
-      <StyledUserDiv>
-        <SearchForm />
-        <div className="profile">
-          <h1>{user?.name}</h1>
-          <img
-            src={user?.avatar_url}
-            onClick={() => setProfileOpenModal(true)}
-            alt="userImage"
-          />
-        </div>
-      </StyledUserDiv>
+    <StyledDashboard>
+      <div>
+        <Aside />
+      </div>
+      <div>
+        <StyledUserDiv>
+          <SearchForm />
+          <div className="profile">
+            <h1>{user?.name}</h1>
+            <img
+              src={user?.avatar_url}
+              onClick={() => setProfileOpenModal(true)}
+              alt="userImage"
+            />
+          </div>
+        </StyledUserDiv>
 
-      {profileOpenModal ? <UserModal /> : null}
+        {profileOpenModal ? <UserModal /> : null}
+        {post && <EditPostForm />}
 
-      {post && <EditPostForm />}
-      <PostsList />
-      <Aside />
-    </>
+        <PostsList />
+      </div>
+    </StyledDashboard>
   );
 }
