@@ -55,7 +55,13 @@ export interface IUserContext {
   userUpdate: (formData: IUpdateUserFormValues) => Promise<void>;
   userDelete: () => Promise<void>;
   sugestionsList: IUser[];
+
    followUsers: (userId: number) => Promise<void>;    
    favoritePostList:IFavoritePost[];
    setFavoritePostList:React.Dispatch<React.SetStateAction<IFavoritePost[]>>;
+
+  followUsers: (userId: number) => Promise<void>;
+  profileOpen: boolean;
+  setProfileOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
 }

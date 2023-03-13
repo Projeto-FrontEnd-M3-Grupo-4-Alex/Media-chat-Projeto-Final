@@ -7,7 +7,6 @@ import { UserContext } from "../../providers/UserContext/UserContext";
 import { TbLogout } from "react-icons/tb";
 
 export const UserModal = () => {
-  const { setProfileOpenModal } = useContext(PostsContext);
   const { user, userLogOut } = useContext(UserContext);
   return (
     <StyledDiv>
@@ -24,9 +23,13 @@ export const UserModal = () => {
           </Link>
         </div>
         <div className="logoutDiv">
+
           <TbLogout size = {18} color = "white" onClick={() => {
               userLogOut();
             }}/>
+
+          <TbLogout />
+
           <p
             onClick={() => {
               userLogOut();
