@@ -35,14 +35,14 @@ export const StyledDashboard = styled.div`
 export const StyledUserDiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 15%;
+  align-items: flex-start;
   margin-bottom: 2.3rem;
 
-  .profile {
+  .ContainerProfile {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: 20px;
 
     h1 {
@@ -56,11 +56,41 @@ export const StyledUserDiv = styled.div`
       height: 42px;
       border-radius: 50%;
     }
+    .Profile {
+      display: flex;
+      flex.direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
     @media (min-width: 768px) {
       h1 {
         display: block;
       }
     }
+  }
+`;
+
+export const StyledCreatePost = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2.3rem;
+
+  img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+  }
+
+  button {
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 16px;
+    background-color: var(--color-primary-2);
+    color: var(--grey-0);
   }
 `;
