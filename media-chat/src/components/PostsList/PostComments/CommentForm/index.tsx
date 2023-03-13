@@ -5,6 +5,7 @@ import { IComment, IPost } from "../../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../../providers/PostsContext/PostsContext";
 import { IUser } from "../../../../providers/UserContext/@types";
 import { UserContext } from "../../../../providers/UserContext/UserContext";
+import { StyleCommentForm } from "./style";
 
 interface ICreateCommentPostFormData {
   userId: number;
@@ -44,13 +45,13 @@ export function CommentForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitComment)}>
-      <fieldset>
+    <StyleCommentForm onSubmit={handleSubmit(onSubmitComment)}>
+      <div>
         <input type="text" placeholder="comentário" {...register("content")} />
         <button type="submit">
           <TbSend />
         </button>
-      </fieldset>
-    </form>
+      </div>
+    </StyleCommentForm>
   );
 }

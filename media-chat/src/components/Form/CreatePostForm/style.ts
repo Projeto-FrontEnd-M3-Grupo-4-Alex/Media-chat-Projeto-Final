@@ -10,6 +10,8 @@ export const StylePostModal = styled.div`
 
   padding: 1rem;
 
+  margin-bottom: 2REM;
+
   #bttn_close {
     position: absolute;
     right: 10px;
