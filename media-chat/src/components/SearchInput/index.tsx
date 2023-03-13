@@ -14,7 +14,7 @@ export const SearchInput = () => {
         value={search}
         onChange={(event) => setSearch(event.currentTarget.value)}
       />
-      <MdSearch onClick={() => filterPostsByInput()} />
+      <MdSearch size = {26} color = "white" onClick={() => filterPostsByInput()} />
     </StyledDiv>
   );
 };

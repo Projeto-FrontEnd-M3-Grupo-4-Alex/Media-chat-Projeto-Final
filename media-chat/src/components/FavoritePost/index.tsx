@@ -3,7 +3,7 @@ import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FavoritePostContext } from "../../providers/FavoritePostContext/FavoritePostContex";
 
-/* export const FavoritePost = () => {
+ export const FavoritePost = () => {
   const { post } = useContext(PostsContext);
   const {favoritePostList, setFavoritePostList } = useContext(FavoritePostContext)
  
@@ -21,4 +21,4 @@ import { FavoritePostContext } from "../../providers/FavoritePostContext/Favorit
     </div>
   );
 };
-   */
+   

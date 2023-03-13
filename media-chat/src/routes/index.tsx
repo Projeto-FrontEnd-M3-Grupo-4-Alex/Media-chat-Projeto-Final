@@ -22,7 +22,7 @@ export function Router() {
           element={
             <PostsProvider>
               <FavoritePostProvider>
-                <Dashboard />
+              <Dashboard />
               </FavoritePostProvider>
             </PostsProvider>
           }

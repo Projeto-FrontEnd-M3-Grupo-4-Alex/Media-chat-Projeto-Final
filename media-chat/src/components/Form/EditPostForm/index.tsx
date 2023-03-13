@@ -20,7 +20,7 @@ interface iEditPostFormData {
 }
 
 export function EditPostForm() {
-  const { PostUpdate, post, setPost } = useContext(PostsContext);
+  const { PostUpdate, post, setPost, PostDelete } = useContext(PostsContext);
   const [ratingValue, setRatingValue] = useState<number | null>(
     Number(post?.rating)
   );
@@ -50,9 +50,10 @@ export function EditPostForm() {
       <div>
         <button onClick={() => setPost(null)}>X</button>
         <h2>Edite a sua postagem</h2>
-        <form action="" onSubmit={handleSubmit(onSubmitForm)}>
+        <form onSubmit={handleSubmit(onSubmitForm)}>
           <TextArea
             label="Conte sobre o que você está assistindo"
+            type="multiline"
             register={register("content")}
             placeholder={"Digite o conteúdo do seu post aqui"}
           />
@@ -94,6 +95,9 @@ export function EditPostForm() {
               setRatingValue(newValue);
             }}
           />
+          <button type="button" onClick={() => PostDelete(post?.id)}>
+            Excluir
+          </button>
           <button type="submit">Editar</button>
         </form>
       </div>

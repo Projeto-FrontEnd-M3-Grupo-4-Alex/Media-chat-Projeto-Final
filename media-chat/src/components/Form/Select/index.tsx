@@ -11,10 +11,6 @@ type iSelectProps = {
 
 const currencies = [
   {
-    value: "",
-    label: "Selecionar Categoria",
-  },
-  {
     value: "filme",
     label: "Filme",
   },
@@ -36,7 +32,14 @@ export function Select({
 }: iSelectProps) {
   return (
     <div>
-      <TextField label={label} {...register} {...rest} select>
+      <TextField
+        label={label}
+        {...register}
+        {...rest}
+        id={register.name}
+        defaultValue=""
+        select
+      >
         {currencies.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}

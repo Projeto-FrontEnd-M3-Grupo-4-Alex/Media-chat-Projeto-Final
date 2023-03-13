@@ -1,12 +1,12 @@
 import { IPost } from "../../../providers/PostsContext/@types";
 import { BiEdit, BiCommentDetail } from "react-icons/bi";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { BsBookmark } from "react-icons/bs";
 import { useContext } from "react";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { PostComments } from "../PostComments";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledPostCard } from "./style";
+import { PostsLike } from "../PostsLike";
 import { FavoritePostContext } from "../../../providers/FavoritePostContext/FavoritePostContex";
 
 interface IPostCardProps {
@@ -18,7 +18,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
     useContext(PostsContext);
   const { user } = useContext(UserContext);
 
-  const { addFavoritePost } = useContext(FavoritePostContext)
+  const { addFavoritePost } = useContext(FavoritePostContext) 
   return (
     <StyledPostCard>
       <div className="ContainerInfoUser">
@@ -45,17 +45,12 @@ export const PostCard = ({ post }: IPostCardProps) => {
         </div>
       </div>
       <div className="ContainerButtonsPost">
-        <span>
-          {/* {post.likes.length} */}
-          <button>
-            <IoMdHeartEmpty />
-          </button>
-        </span>
+        <PostsLike post={post} />
         <button
           onClick={() => {
             console.log();
             commentsRead(post.id);
-            setIsOpenedComments(true);
+            setIsOpenedComments(post);
           }}
         >
           <BiCommentDetail />

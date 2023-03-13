@@ -13,6 +13,7 @@ export function Dashboard() {
     useContext(PostsContext);
 
   const { user } = useContext(UserContext);
+
   return (
     <>
       <StyledUserDiv>

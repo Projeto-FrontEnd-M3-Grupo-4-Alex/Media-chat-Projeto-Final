@@ -1,14 +1,13 @@
-import { Loading } from "../../components/Loading"
-import { useContext } from "react"
-import { UserContext } from "../../providers/UserContext/UserContext"
-
-import logo from "../../assets/logo.svg"
-import { RegisterForm } from "../../components/Form/RegisterForm"
-import { Link } from "react-router-dom"
-import { FormStyle } from "../../styles/FormStyle"
+import logo from "../../assets/logo.svg";
+import { RegisterForm } from "../../components/Form/RegisterForm";
+import { Link } from "react-router-dom";
+import { Loading } from "../../components/Loading";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext/UserContext";
+import { FormStyle } from "../../styles/FormStyle";
 
 export function ResgisterPage() {
-  const { loading } = useContext(UserContext)
+  const { loading } = useContext(UserContext);
   return (
     <div>
       {loading ? (
@@ -25,5 +24,5 @@ export function ResgisterPage() {
         </FormStyle>
       )}
     </div>
-  )
+  );
 }

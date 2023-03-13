@@ -21,7 +21,7 @@ export function TextArea({
     <div>
       <TextField
         label={label}
-        placeholder={placeholder}
+        id={register.name}
         {...register}
         {...rest}
         multiline

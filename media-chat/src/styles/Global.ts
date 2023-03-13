@@ -59,6 +59,7 @@ export const GlobalStyles = createGlobalStyle`
   --border-radius-4: 4px;
   --border-radius-5: 5px;
   --border-radius-8: 8px;
+  --border-radius-15: 15px;
   --border-radius-50: 50px;
 }
 

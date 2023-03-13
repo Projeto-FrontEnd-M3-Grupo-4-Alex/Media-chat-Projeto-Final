@@ -7,7 +7,7 @@ import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
 import { UserContext } from "../UserContext/UserContext";
 import {
   IComment,
-  ICommentsFormValues,
+  ILikepost,
   IPost,
   IPostFormValues,
   IPostsContext,
@@ -23,11 +23,12 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpenedComments, setIsOpenedComments] = useState(false);
+  const [isOpenedComments, setIsOpenedComments] = useState<IPost | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [postList, setPostList] = useState<IPost[]>([]);
+
   const newPostList = filteredPost.length > 0 ? filteredPost : posts;
 
   const filterPostsByInput = () => {
@@ -49,7 +50,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     const PostsRead = async () => {
       try {
         const response = await api.get<IPost[]>("posts", {
-          params: { _expand: "user" },
+          params: { _expand: "user", _embed: "likesPost" },
         });
         setPosts(response.data);
         navigate("/dashboard");
@@ -119,7 +120,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const commentsRead = async (postId: number) => {
     try {
       const response = await api.get<IComment[]>(`comments`, {
-        params: { postId, _expand: "user" },
+        params: { postId, _expand: "user", _embed: "likesComment" },
       });
       setComments(response.data);
     } catch (error) {
@@ -128,7 +129,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const createComments = async (formData: ICommentsFormValues) => {
+  const createComments = async (formData: IComment[]) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -139,7 +140,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-          setComments([...comments, newComment]); 
+
+        setComments([...comments, newComment]);
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -190,6 +192,43 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const updateLikePost = async (postId: number) => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      const formData = {
+        postId: postId,
+        userId: user?.id,
+      };
+      try {
+        const response = await api.post(`likesPost`, formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
+  const updateDeslikePost = async (likeArray: ILikepost[]) => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      const findLikeId = likeArray.find((like) => user?.id === like.userId);
+      const likeId = findLikeId?.id;
+      try {
+        const response = await api.delete(`likesPost/${likeId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("delete ok");
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
+
   const filterPosts = (category: string) => {
     if (category !== "Home") {
       const filterPost = posts.filter(
@@ -229,6 +268,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         newPostList,
         postList,
         setPostList,
+        updateLikePost,
+        updateDeslikePost,
         filterPostsByInput,
       }}
     >
