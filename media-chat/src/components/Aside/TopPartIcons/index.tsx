@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { AiFillHome, AiFillInfoCircle } from "react-icons/ai";
 import { MdLocalMovies } from "react-icons/md";
@@ -29,10 +28,6 @@ export function TopPartIcons() {
         <GiPiercingSword />
         <h3>Animes</h3>
       </div>
-      <Link to={"/about"}>
-        <AiFillInfoCircle />
-        <h3>Sobre nós</h3>
-      </Link>
     </StyledTopAside>
   );
 }

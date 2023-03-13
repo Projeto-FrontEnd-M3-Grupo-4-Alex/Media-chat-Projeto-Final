@@ -5,6 +5,7 @@ import { StyledPostList } from "./style";
 
 export function PostsList() {
   const { newPostList } = useContext(PostsContext);
+
   return (
     <StyledPostList>
       {newPostList.map((post) => (

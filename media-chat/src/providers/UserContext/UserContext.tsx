@@ -209,11 +209,9 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         user,
         users,
         sugestionsList,
-
         followUsers,
         favoritePostList,
         setFavoritePostList,
-
         profileOpen,
         setProfileOpen,
       }}
