@@ -1,9 +1,9 @@
-import { AxiosError } from "axios";
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { api } from "../../services/api";
-import { IFavoritePost } from "../FavoritePostContext/@types";
+import { AxiosError } from "axios"
+import { createContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { api } from "../../services/api"
+import { IFavoritePost } from "../FavoritePostContext/@types"
 import {
   IDefaultError,
   IDefaultProviderProps,
@@ -13,9 +13,9 @@ import {
   IUpdateUserFormValues,
   IUser,
   IUserContext,
-} from "./@types";
+} from "./@types"
 
-export const UserContext = createContext<IUserContext>({} as IUserContext);
+export const UserContext = createContext<IUserContext>({} as IUserContext)
 
 export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [favoritePostList, setFavoritePostList] = useState<IFavoritePost[]>([]);
@@ -30,24 +30,24 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users;
 
   const userRegister = async (formData: IRegisterFormValues) => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const response = await api.post<IResponseUser>("register", formData);
-      setUser(response.data.user);
-      localStorage.setItem("@TOKEN", response.data.accessToken);
-      localStorage.setItem("@USERID", String(response.data.user.id));
-      toast.success("cadastro realizado com sucesso!");
-      navigate("/dashboard");
+      const response = await api.post<IResponseUser>("register", formData)
+      setUser(response.data.user)
+      localStorage.setItem("@TOKEN", response.data.accessToken)
+      localStorage.setItem("@USERID", String(response.data.user.id))
+      toast.success("cadastro realizado com sucesso!")
+      navigate("/dashboard")
     } catch (error) {
-      const currentError = error as AxiosError<IDefaultError>;
-      toast.error(currentError.response?.data.error);
+      const currentError = error as AxiosError<IDefaultError>
+      toast.error(currentError.response?.data.error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const userLogin = async (formData: ILoginFormValues) => {
-    setLoading(true);
+    setLoading(true)
     try {
       const response = await api.post<IResponseUser>("login", formData);
       console.log(response.data.user);
@@ -57,57 +57,57 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
       toast.success("login realizado com sucesso!");
       navigate("/dashboard");
     } catch (error) {
-      const currentError = error as AxiosError<IDefaultError>;
-      toast.error(currentError.response?.data.error);
+      const currentError = error as AxiosError<IDefaultError>
+      toast.error(currentError.response?.data.error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
+    const token = localStorage.getItem("@TOKEN")
 
-    const userId = localStorage.getItem("@USERID");
+    const userId = localStorage.getItem("@USERID")
     if (token) {
       const autoLogin = async () => {
         try {
           const response = await api.get<IUser>(`users/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
-          });
-          setUser(response.data);
-          navigate("/dashboard");
+          })
+          setUser(response.data)
+          navigate("/dashboard")
         } catch (error) {
-          localStorage.removeItem("@TOKEN");
-          localStorage.removeItem("@USERID");
+          localStorage.removeItem("@TOKEN")
+          localStorage.removeItem("@USERID")
         }
-      };
-      autoLogin();
+      }
+      autoLogin()
     }
-  }, []);
+  }, [])
 
   const userLogOut = () => {
-    setUser(null);
-    localStorage.removeItem("@TOKEN");
-    localStorage.removeItem("@USERID");
-    navigate("/");
-  };
+    setUser(null)
+    localStorage.removeItem("@TOKEN")
+    localStorage.removeItem("@USERID")
+    navigate("/")
+  }
 
   useEffect(() => {
     const readUsers = async () => {
       try {
-        const response = await api.get<IUser[]>("users");
-        setUsers(response.data);
+        const response = await api.get<IUser[]>("users")
+        setUsers(response.data)
       } catch (error) {
-        const currentError = error as AxiosError<IDefaultError>;
-        toast.error(currentError.response?.data.error);
+        const currentError = error as AxiosError<IDefaultError>
+        toast.error(currentError.response?.data.error)
       }
-    };
-    readUsers();
-  }, []);
+    }
+    readUsers()
+  }, [])
 
   const userUpdate = async (formData: IUpdateUserFormValues) => {
-    const token = localStorage.getItem("@TOKEN");
-    const userId = localStorage.getItem("@USERID");
+    const token = localStorage.getItem("@TOKEN")
+    const userId = localStorage.getItem("@USERID")
     if (token) {
       try {
         const response = await api.patch<IResponseUser>(
@@ -120,34 +120,34 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         toast.success("User atualizada com sucesso", { autoClose: 2000 });
         console.log(response.data);
 
-        setUser(response.data.user);
+        setUser(response.data.user)
       } catch (error) {
-        console.log(error);
-        const currentError = error as AxiosError<IDefaultError>;
-        toast.error(currentError.response?.data.error);
+        console.log(error)
+        const currentError = error as AxiosError<IDefaultError>
+        toast.error(currentError.response?.data.error)
       }
     }
-  };
+  }
 
   const userDelete = async () => {
-    const token = localStorage.getItem("@TOKEN");
-    const userId = localStorage.getItem("@USERID");
+    const token = localStorage.getItem("@TOKEN")
+    const userId = localStorage.getItem("@USERID")
     if (token) {
       try {
         const response = await api.delete(`users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(null);
-        navigate("/");
+        })
+        setUser(null)
+        navigate("/")
       } catch (error) {
-        const currentError = error as AxiosError<IDefaultError>;
-        toast.error(currentError.response?.data.error);
+        const currentError = error as AxiosError<IDefaultError>
+        toast.error(currentError.response?.data.error)
       }
     }
-  };
+  }
 
   const updateFollowUser = async (userId: number, data: number[]) => {
-    const token = localStorage.getItem("@TOKEN");
+    const token = localStorage.getItem("@TOKEN")
     try {
       const response = await api.patch(
         `users/${userId}`,
@@ -157,26 +157,26 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
             Authorization: `Bearer ${token}`,
           },
         }
-      );
+      )
 
-      setUser(response.data);
+      setUser(response.data)
     } catch (error) {
-      const currentError = error as AxiosError<IDefaultError>;
-      toast.error(currentError.response?.data.error);
+      const currentError = error as AxiosError<IDefaultError>
+      toast.error(currentError.response?.data.error)
     }
-  };
+  }
 
   const followUsers = async (userId: number) => {
     const userFound = user?.followUsers.find((id) => id == userId);
 
     if (user && !userFound && userId !== Number(user.id)) {
-      const updateFollowUserArray = [...user.followUsers, userId];
-      await updateFollowUser(Number(user.id), updateFollowUserArray);
+      const updateFollowUserArray = [...user.followUsers, userId]
+      await updateFollowUser(Number(user.id), updateFollowUserArray)
     } else if (user) {
-      const filteredFollowers = user.followUsers.filter((id) => id !== userId);
-      await updateFollowUser(Number(user.id), filteredFollowers);
+      const filteredFollowers = user.followUsers.filter((id) => id !== userId)
+      await updateFollowUser(Number(user.id), filteredFollowers)
     }
-  };
+  }
 
   useEffect(() => {
     filterSuggestUsers();
@@ -192,10 +192,10 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           followedUser.id !== user.id &&
           !followUsersArray.includes(followedUser.id)
         ) {
-          return followedUser;
+          return followedUser
         }
-      });
-      setSuggestUsers(suggestUsersList);
+      })
+      setSuggestUsers(suggestUsersList)
     }
   };
 
@@ -221,5 +221,5 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     >
       {children}
     </UserContext.Provider>
-  );
-};
+  )
+}

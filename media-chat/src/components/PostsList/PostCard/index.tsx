@@ -37,8 +37,8 @@ export const PostCard = ({ post }: IPostCardProps) => {
         ) : null}
       </div>
       <div className="ContainerInfoPost">
-        <img src={post.thumbnail} alt={post.title} />
-        <div>
+        <img className="card_image" src={post.thumbnail} alt={post.title} />
+        <div className="info_post">
           <h2>{post.title}</h2>
           <p>{post.content}</p>
           <p>{post.where}</p>
