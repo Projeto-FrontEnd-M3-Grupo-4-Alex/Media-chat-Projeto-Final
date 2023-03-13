@@ -29,13 +29,12 @@ export function Dashboard() {
       <div className="main__dashboard">
         <StyledUserDiv>
           <SearchForm />
-          <div className="profile">
+          <div
+            className="profile"
+            onClick={() => setProfileOpenModal(!profileOpenModal)}
+          >
             <h1>{user?.name}</h1>
-            <img
-              src={user?.avatar_url}
-              onClick={() => setProfileOpenModal(!profileOpenModal)}
-              alt="userImage"
-            />
+            <img src={user?.avatar_url} alt="userImage" />
           </div>
         </StyledUserDiv>
 

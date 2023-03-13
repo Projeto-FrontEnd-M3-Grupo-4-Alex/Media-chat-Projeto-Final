@@ -36,7 +36,7 @@ export const StyledUserDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 15%;
+  justify-content: space-between;
   margin-bottom: 2.3rem;
 
   .profile {
@@ -44,6 +44,7 @@ export const StyledUserDiv = styled.div`
     align-items: center;
     justify-content: center;
     gap: 20px;
+    cursor: pointer;
 
     h1 {
       font-size: 16px;
