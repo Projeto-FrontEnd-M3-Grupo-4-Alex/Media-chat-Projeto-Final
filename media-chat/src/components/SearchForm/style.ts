@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  width: 80%;
+  width: 60%;
   align-items: center;
   position: relative;
+
   input {
     height: 46px;
-    width: 90%;
+    width: 60%;
     background-color: var(--grey-transparent);
     border: 2px solid transparent;
     padding: 0rem 1rem;
@@ -26,7 +27,7 @@ export const StyledForm = styled.form`
     background-color: transparent;
     border: none;
     top: 5%;
-    right: 11%;
+    right: 41%;
     svg {
       width: 2rem;
       height: 2rem;

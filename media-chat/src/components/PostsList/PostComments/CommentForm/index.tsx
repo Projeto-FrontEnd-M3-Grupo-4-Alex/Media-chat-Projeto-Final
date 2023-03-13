@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { TbSend } from "react-icons/tb";
-import { IPost } from "../../../../providers/PostsContext/@types";
+import { IComment, IPost } from "../../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../../providers/PostsContext/PostsContext";
 import { UserContext } from "../../../../providers/UserContext/UserContext";
 
@@ -14,9 +14,15 @@ interface ICreateCommentPostFormData {
 
 interface ICommentFormProps {
   post: IPost;
+  comments: IComment[];
+  setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
 }
 
-export function CommentForm({ post }: ICommentFormProps) {
+export function CommentForm({
+  post,
+  comments,
+  setComments,
+}: ICommentFormProps) {
   const { createComments } = useContext(PostsContext);
   const { user } = useContext(UserContext);
 
@@ -30,7 +36,7 @@ export function CommentForm({ post }: ICommentFormProps) {
         userId: Number(user.id),
         postId: Number(post.id),
       };
-      createComments(newData);
+      createComments(newData, comments, setComments);
     }
   };
 

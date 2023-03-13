@@ -1,27 +1,31 @@
-import { useContext } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { IPost } from "../../../providers/PostsContext/@types";
-import { PostsContext } from "../../../providers/PostsContext/PostsContext";
+import { IComment, IPost } from "../../../providers/PostsContext/@types";
 import { CommentForm } from "./CommentForm";
 import { StyledPostComments } from "./style";
 
 interface ICommentPostProps {
   post: IPost;
+  comments: IComment[];
+  setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
+  setIsOpenedComments: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function PostComments({ post }: ICommentPostProps) {
-  const { setIsOpenedComments, comments } = useContext(PostsContext);
-
+export function PostComments({
+  post,
+  comments,
+  setComments,
+  setIsOpenedComments,
+}: ICommentPostProps) {
   return (
     <StyledPostComments>
       <button
         onClick={() => {
-          setIsOpenedComments(null);
+          setIsOpenedComments(false);
         }}
       >
         X
       </button>
-      <CommentForm post={post} />
+      <CommentForm post={post} comments={comments} setComments={setComments} />
       <ul>
         {comments.map((comment) => (
           <li key={comment.id}>
@@ -31,7 +35,7 @@ export function PostComments({ post }: ICommentPostProps) {
             </div>
             <p>{comment.content}</p>
             <span>
-              {comment.likesComment.length}
+              {comment.likesComment ? comment.likesComment.length : 0}
               <button>
                 <IoMdHeartEmpty />
               </button>

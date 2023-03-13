@@ -36,6 +36,7 @@ export const StyledUserDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 2.3rem;
 
   .ContainerProfile {
@@ -44,6 +45,7 @@ export const StyledUserDiv = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 20px;
+    cursor: pointer;
 
     h1 {
       font-size: 16px;
