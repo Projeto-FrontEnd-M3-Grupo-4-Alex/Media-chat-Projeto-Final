@@ -18,14 +18,16 @@ import {
 export const UserContext = createContext<IUserContext>({} as IUserContext)
 
 export const UserProvider = ({ children }: IDefaultProviderProps) => {
-  const [favoritePostList, setFavoritePostList] = useState<IFavoritePost[]>([])
-  const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState<IUser | null>(null)
-  const [users, setUsers] = useState<IUser[]>([])
-  const [profileOpen, setProfileOpen] = useState(false)
-  const [suggestUsers, setSuggestUsers] = useState<IUser[]>([])
-  const navigate = useNavigate()
-  const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users
+  const [favoritePostList, setFavoritePostList] = useState<IFavoritePost[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+
+  const [suggestUsers, setSuggestUsers] = useState<IUser[]>([]);
+  const navigate = useNavigate();
+  const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users;
 
   const userRegister = async (formData: IRegisterFormValues) => {
     setLoading(true)
@@ -47,13 +49,13 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const userLogin = async (formData: ILoginFormValues) => {
     setLoading(true)
     try {
-      const response = await api.post<IResponseUser>("login", formData)
-      console.log(response.data.user)
-      setUser(response.data.user)
-      localStorage.setItem("@TOKEN", response.data.accessToken)
-      localStorage.setItem("@USERID", String(response.data.user.id))
-      toast.success("login realizado com sucesso!")
-      navigate("/dashboard")
+      const response = await api.post<IResponseUser>("login", formData);
+      console.log(response.data.user);
+      setUser(response.data.user);
+      localStorage.setItem("@TOKEN", response.data.accessToken);
+      localStorage.setItem("@USERID", String(response.data.user.id));
+      toast.success("login realizado com sucesso!");
+      navigate("/dashboard");
     } catch (error) {
       const currentError = error as AxiosError<IDefaultError>
       toast.error(currentError.response?.data.error)
@@ -114,8 +116,9 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           {
             headers: { Authorization: `Bearer ${token}` },
           }
-        )
-        toast.success("User atualizada com sucesso", { autoClose: 2000 })
+        );
+        toast.success("User atualizada com sucesso", { autoClose: 2000 });
+        console.log(response.data);
 
         setUser(response.data.user)
       } catch (error) {
@@ -164,7 +167,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   }
 
   const followUsers = async (userId: number) => {
-    const userFound = user?.followUsers.find((id) => id == userId)
+    const userFound = user?.followUsers.find((id) => id == userId);
 
     if (user && !userFound && userId !== Number(user.id)) {
       const updateFollowUserArray = [...user.followUsers, userId]
@@ -176,14 +179,14 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   }
 
   useEffect(() => {
-    filterSuggestUsers()
-  }, [user])
+    filterSuggestUsers();
+  }, [user]);
 
   const filterSuggestUsers = () => {
-    console.log(user)
-    console.log(user?.followUsers)
+    console.log(user);
+    console.log(user?.followUsers);
     if (user && user.followUsers.length > 0) {
-      const followUsersArray = user.followUsers
+      const followUsersArray = user.followUsers;
       const suggestUsersList = users.filter((followedUser) => {
         if (
           followedUser.id !== user.id &&
@@ -194,7 +197,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
       })
       setSuggestUsers(suggestUsersList)
     }
-  }
+  };
 
   return (
     <UserContext.Provider
@@ -209,11 +212,9 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         user,
         users,
         sugestionsList,
-
         followUsers,
         favoritePostList,
         setFavoritePostList,
-
         profileOpen,
         setProfileOpen,
       }}

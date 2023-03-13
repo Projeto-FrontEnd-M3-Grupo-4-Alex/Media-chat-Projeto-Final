@@ -82,7 +82,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         const response = await api.post<IPost>("posts", formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setPosts([...posts, response.data]);
+        setPosts([response.data, ...posts]);
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
@@ -161,7 +161,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           user,
         };
 
-        user && setComments([...comments, newComment]);
+       /*  user && setComments([...comments, newComment]); */
       } catch (error) {
         console.log(error);
 
@@ -324,7 +324,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   useEffect(() => {
     recommendedPosts();
-  }, [recommendPostsList]);
+  }, [recommendList]);
 
   return (
     <PostsContext.Provider

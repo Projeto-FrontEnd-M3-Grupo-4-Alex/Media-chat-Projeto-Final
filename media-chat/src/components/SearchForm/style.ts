@@ -7,7 +7,7 @@ export const StyledForm = styled.form`
 
   input {
     height: 46px;
-    width: 60%;
+    width: 100%;
     background-color: var(--grey-transparent);
     border: 2px solid transparent;
     padding: 0rem 1rem;
@@ -27,12 +27,16 @@ export const StyledForm = styled.form`
     background-color: transparent;
     border: none;
     top: 5%;
-    right: 41%;
+    right: 0;
     svg {
       width: 2rem;
       height: 2rem;
       background-color: transparent;
       fill: var(--grey-0);
     }
+  }
+
+  @media (min-width: 1024px) {
+    width: 40%;
   }
 `;
