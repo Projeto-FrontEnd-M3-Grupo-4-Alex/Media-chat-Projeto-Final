@@ -52,6 +52,7 @@ export function CreateFormPost() {
         rating: String(ratingValue),
       };
       PostCreate(newData);
+      setShowCreateModal(false);
     }
   }
 
