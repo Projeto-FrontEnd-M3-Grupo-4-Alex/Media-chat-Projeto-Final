@@ -17,7 +17,7 @@ export const StyledDashboard = styled.div`
   }
 
   .main__dashboard {
-    width: 75%;
+    width: 90%;
     margin-left: 10%;
   }
 
@@ -64,7 +64,7 @@ export const StyledDashboard = styled.div`
 
   @media (min-width: 1024px) {
     .main__dashboard {
-      max-width: 90%;
+      max-width: 80%;
       margin-left: 0;
     }
 
@@ -81,8 +81,10 @@ export const StyledUserDiv = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 2.3rem;
+  width: 100%;
 
   .ContainerProfile {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,6 +123,40 @@ export const StyledUserDiv = styled.div`
       align-items: center;
       justify-content: center;
       gap: 8px;
+    }
+
+    .userInfo {
+      background-color: var(--grey-transparent);
+      width: 130px;
+      height: fit-content;
+      position: absolute;
+      top: 120%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+
+      div {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+        color: var(--grey-0);
+
+        a {
+          text-decoration: none;
+          color: var(--grey-0);
+
+          :hover {
+            color: var(--grey-4);
+          }
+        }
+
+        :hover {
+          color: var(--grey-4);
+        }
+      }
     }
 
     @media (min-width: 768px) {

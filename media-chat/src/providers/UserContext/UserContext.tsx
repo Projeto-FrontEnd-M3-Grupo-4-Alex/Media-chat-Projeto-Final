@@ -215,8 +215,6 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         followUsers,
         favoritePostList,
         setFavoritePostList,
-        profileOpenModal,
-        setProfileOpenModal,
         profileOpen,
         setProfileOpen,
       }}
