@@ -2,6 +2,8 @@ import { MenuItem, TextField } from "@mui/material";
 import { TextFieldProps } from "@mui/material";
 import { FieldError } from "react-hook-form";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { CustomTextFieldSelect, StyleSelect } from "./style";
+
 
 type iSelectProps = {
   label: string;
@@ -31,22 +33,23 @@ export function Select({
   ...rest
 }: iSelectProps) {
   return (
-    <div>
-      <TextField
+    <StyleSelect>
+      {errorMessage ? <p>{errorMessage.message}</p> : null}
+      <CustomTextFieldSelect
         label={label}
         {...register}
         {...rest}
         id={register.name}
         defaultValue=""
         select
+        sx={{width: '100%', input: { color: "white" }, label: { color: "white" } }}
       >
         {currencies.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>
         ))}
-      </TextField>
-      {errorMessage ? <p>{errorMessage.message}</p> : null}
-    </div>
+      </CustomTextFieldSelect>
+    </StyleSelect>
   );
 }

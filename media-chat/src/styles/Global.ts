@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
   --color-hover:#A94B30;
   --color-background:#16122A;
   --grey-transparent: #211D34;
+  --grey-transparent-2: #2B273D;
   --text-inputs-color: #DEE2E6;
 
   --color-white: #ffffff;
@@ -73,6 +74,8 @@ body{
   font-family: 'Inter', sans-serif;
   background-color: var(--color-background);
 }
+
+
 
 ::-webkit-scrollbar {
     width: 5px;
