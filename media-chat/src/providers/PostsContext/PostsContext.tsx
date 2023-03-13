@@ -16,20 +16,29 @@ import {
 export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
+  const recommendListStoraged = localStorage.getItem("@RecommendList");
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
   const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
-  const [comments, setComments] = useState<IComment[]>([]);
+
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpenedComments, setIsOpenedComments] = useState<IPost | null>(null);
+
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [postList, setPostList] = useState<IPost[]>([]);
+  const [recommendPostsList, setReccomendPostsLists] = useState<string[]>(
+    recommendListStoraged ? JSON.parse(recommendListStoraged) : []
+  );
+  const [likeArray, SetlikeArray] = useState<ILikepost[]>([]);
 
   const newPostList = filteredPost.length > 0 ? filteredPost : posts;
+
+  useEffect(() => {
+    localStorage.setItem("@RecommendList", JSON.stringify(recommendPostsList));
+  }, [recommendPostsList]);
 
   const filterPostsByInput = () => {
     if (search !== "") {
@@ -40,6 +49,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           post?.tags?.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredPost(searchPosts);
+      setReccomendPostsLists([...recommendPostsList, search]);
       setSearch("");
     } else {
       setFilteredPost([]);
@@ -60,6 +70,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       }
     };
     PostsRead();
+    GetLikes();
   }, []);
 
   const PostCreate = async (formData: IPostFormValues) => {
@@ -117,7 +128,10 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const commentsRead = async (postId: number) => {
+  const commentsRead = async (
+    postId: number,
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     try {
       const response = await api.get<IComment[]>(`comments`, {
         params: { postId, _expand: "user", _embed: "likesComment" },
@@ -129,7 +143,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const createComments = async (formData: IComment[]) => {
+  const createComments = async (
+    formData: IComment,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -140,16 +158,28 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
+<<<<<<< HEAD
+=======
+        console.log(comments);
+        console.log(newComment);
+>>>>>>> a09ed926aa2c4ab5b0dc43deae459fe9b99d7d26
 
         setComments([...comments, newComment]);
       } catch (error) {
+        console.log(error);
+
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
       }
     }
   };
 
-  const editComments = async (commentId: number, formData: IComment) => {
+  const editComments = async (
+    commentId: number,
+    formData: IComment,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -173,7 +203,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const deleteComment = async (commentId: number) => {
+  const deleteComment = async (
+    commentId: number,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -204,23 +238,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data);
-      } catch (error) {
-        console.log(error);
-        const currentError = error as AxiosError<IDefaultError>;
-        toast.error(currentError.response?.data.error);
-      }
-    }
-  };
-  const updateDeslikePost = async (likeArray: ILikepost[]) => {
-    const token = localStorage.getItem("@TOKEN");
-    if (token) {
-      const findLikeId = likeArray.find((like) => user?.id === like.userId);
-      const likeId = findLikeId?.id;
-      try {
-        const response = await api.delete(`likesPost/${likeId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log("delete ok");
+        SetlikeArray([...likeArray, response.data]);
       } catch (error) {
         console.log(error);
         const currentError = error as AxiosError<IDefaultError>;
@@ -229,6 +247,41 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const GetLikes = async () => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      try {
+        const response = await api.get("likesPost", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        SetlikeArray(response.data);
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
+  const updateDeslikePost = async () => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      const findLikeId = likeArray.find((like) => user?.id === like.userId);
+      console.log(findLikeId);
+      const likeId = findLikeId?.id;
+      try {
+        const response = await api.delete(`likesPost/${likeId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("delete ok");
+        const filteredLikes = likeArray.filter((like) => like.id !== likeId);
+        SetlikeArray(filteredLikes);
+      } catch (error) {
+        console.log(error);
+        const currentError = error as AxiosError<IDefaultError>;
+        toast.error(currentError.response?.data.error);
+      }
+    }
+  };
   const filterPosts = (category: string) => {
     if (category !== "Home") {
       const filterPost = posts.filter(
@@ -237,6 +290,39 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       setFilteredPost(filterPost);
     } else {
       setFilteredPost([]);
+    }
+  };
+
+  const recommendedPosts = () => {
+    if (recommendPostsList.length > 0) {
+      const filterPosts = posts.filter((post) => post.userId !== user?.id);
+
+      const recommendPostsLowerCase = recommendPostsList.map((post) =>
+        post.toLowerCase()
+      );
+
+      const clearRecommendPosts = [...new Set(recommendPostsLowerCase)];
+
+      function includesLoop(target: string) {
+        const isIncludeList = clearRecommendPosts.map((term) =>
+          target.includes(term)
+        );
+
+        console.log(isIncludeList);
+
+        return isIncludeList.some((isInclude) => isInclude);
+      }
+
+      const filterRecommendPosts = filterPosts.filter((post) => {
+        return (
+          includesLoop(post.category) ||
+          includesLoop(post.content.toLowerCase()) ||
+          includesLoop(post.title.toLowerCase()) ||
+          (post.tags && includesLoop(post.tags.toLowerCase()))
+        );
+      });
+
+      return filterRecommendPosts;
     }
   };
 
@@ -251,12 +337,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         search,
         setSearch,
         commentsRead,
-        isOpenedComments,
-        setIsOpenedComments,
         setPost,
         showCreateModal,
         setShowCreateModal,
-        comments,
         profileOpenModal,
         setProfileOpenModal,
         editComments,
@@ -271,6 +354,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         updateLikePost,
         updateDeslikePost,
         filterPostsByInput,
+        recommendedPosts,
+        likeArray,
       }}
     >
       {children}

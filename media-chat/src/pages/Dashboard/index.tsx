@@ -1,38 +1,64 @@
-import { useContext } from "react";
+import { SearchForm } from "../../components/SearchForm";
+import { useContext, useState } from "react";
 import { Aside } from "../../components/Aside";
 import { EditPostForm } from "../../components/Form/EditPostForm";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { PostsList } from "../../components/PostsList";
 import { UserModal } from "../../components/UserModal";
-import { StyledUserDiv } from "./style";
+import { StyledDashboard, StyledUserDiv } from "./style";
 import { UserContext } from "../../providers/UserContext/UserContext";
-import { SearchInput } from "../../components/SearchInput";
+import { ModalForm } from "../../components/ModalForm";
+import { CreateFormPost } from "../../components/Form/CreatePostForm";
 
 export function Dashboard() {
-  const { profileOpenModal, setProfileOpenModal, post } =
-    useContext(PostsContext);
+  const {
+    profileOpenModal,
+    setProfileOpenModal,
+    post,
+    showCreateModal,
+    setShowCreateModal,
+  } = useContext(PostsContext);
 
   const { user } = useContext(UserContext);
 
   return (
-    <>
-      <StyledUserDiv>
-        <SearchInput />
+    <StyledDashboard>
+      <div className="aside__dashboard">
+        <Aside />
+      </div>
+      <div className="main__dashboard">
+        <StyledUserDiv>
+          <SearchForm />
+          <div
+            className="profile"
+            onClick={() => setProfileOpenModal(!profileOpenModal)}
+          >
+            <h1>{user?.name}</h1>
+            <img src={user?.avatar_url} alt="userImage" />
+          </div>
+        </StyledUserDiv>
+
+        {profileOpenModal ? <UserModal /> : null}
+        {post && (
+          <ModalForm>
+            {" "}
+            <EditPostForm />{" "}
+          </ModalForm>
+        )}
+        {showCreateModal && (
+          <ModalForm>
+            {" "}
+            <CreateFormPost />{" "}
+          </ModalForm>
+        )}
         <div className="profile">
-          <h1>{user?.name}</h1>
-          <img
-            src={user?.avatar_url}
-            onClick={() => setProfileOpenModal(true)}
-            alt="userImage"
-          />
+          <img src={user?.avatar_url} alt="userImage" />
+          <button onClick={() => setShowCreateModal(true)}>
+            Realizar uma publicação
+          </button>
         </div>
-      </StyledUserDiv>
-
-      {profileOpenModal ? <UserModal /> : null}
-
-      {post && <EditPostForm />}
-      <PostsList />
-      <Aside />
-    </>
+        <PostsList />
+      </div>
+    </StyledDashboard>
   );
 }

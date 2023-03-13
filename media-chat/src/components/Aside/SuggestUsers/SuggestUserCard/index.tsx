@@ -21,7 +21,7 @@ export function SuggestUserCard({
   }
 
   return (
-    <div>
+    <li>
       <div className="user__information">
         <img src={avatar_url} alt="Imagem de perfil dos usuários" />
         <h3>{name}</h3>
@@ -29,6 +29,6 @@ export function SuggestUserCard({
       <button id={String(id)} onClick={(event) => addUser(event)}>
         Seguir
       </button>
-    </div>
+    </li>
   );
 }

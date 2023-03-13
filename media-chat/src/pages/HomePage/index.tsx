@@ -6,9 +6,10 @@ export function HomePage() {
   return (
     <StyledHomePage>
       <div className="page_navigation">
-        <Link id="bttnAboutUs" to={"/about"}>Sobre nós</Link>
         <img id="logo" src={logo} alt="Logo da Media Chat" />
-        <Link id="bttnGetStarted" to={"/login"}>Aventure-se !</Link>
+        <Link id="bttnGetStarted" to={"/login"}>
+          Aventure-se !
+        </Link>
       </div>
       <div className="info_page">
         <h2>Compartilhe suas experiências cinematográficas</h2>

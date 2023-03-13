@@ -4,7 +4,7 @@ import { SuggestUserCard } from "./SuggestUserCard";
 import { StyledSuggestUsers } from "./SuggestUserCard/style";
 
 export function SuggestUsersList() {
-  const { sugestionsList, user } = useContext(UserContext);
+  const { sugestionsList } = useContext(UserContext);
 
   return (
     <StyledSuggestUsers>

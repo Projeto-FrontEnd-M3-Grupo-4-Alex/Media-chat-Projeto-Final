@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { FavoritePost } from "../../components/FavoritePost";
 import { UserEditModal } from "../../components/UserEditModal";
 import { FavoritePostContext } from "../../providers/FavoritePostContext/FavoritePostContex";
+import { UserFriends } from "../../components/UserFriends";
+import { UserPosts } from "../../components/UserPosts";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { StyledProfileDiv } from "./style";
@@ -13,7 +15,7 @@ export const ProfilePage = () => {
   const { user, userLogOut } = useContext(UserContext);
   const { favoritePostList } = useContext(FavoritePostContext);
 
-  const { newPostList } = useContext(PostsContext);
+  console.log(user);
 
   const [profileEditModal, setProfileEditModal] = useState(false);
 
@@ -58,6 +60,12 @@ export const ProfilePage = () => {
           {/*  {favoritePostList.length > 0 && <FavoritePost />}    */}
         </div>
       </div>
+      {profileEditModal ? (
+        <UserEditModal setProfileEditModal={setProfileEditModal} />
+      ) : null}
+
+      <UserFriends />
+      <UserPosts />
     </StyledProfileDiv>
   );
 };

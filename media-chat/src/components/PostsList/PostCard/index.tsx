@@ -1,7 +1,7 @@
-import { IPost } from "../../../providers/PostsContext/@types";
+import { IComment, IPost } from "../../../providers/PostsContext/@types";
 import { BiEdit, BiCommentDetail } from "react-icons/bi";
 import { BsBookmark } from "react-icons/bs";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { PostComments } from "../PostComments";
 import { UserContext } from "../../../providers/UserContext/UserContext";
@@ -14,11 +14,12 @@ interface IPostCardProps {
 }
 
 export const PostCard = ({ post }: IPostCardProps) => {
-  const { setPost, isOpenedComments, setIsOpenedComments, commentsRead } =
-    useContext(PostsContext);
+  const { setPost, commentsRead } = useContext(PostsContext);
   const { user } = useContext(UserContext);
 
   const { addFavoritePost } = useContext(FavoritePostContext) 
+  const [isOpenedComments, setIsOpenedComments] = useState(false);
+  const [comments, setComments] = useState<IComment[]>([]);
   return (
     <StyledPostCard>
       <div className="ContainerInfoUser">
@@ -49,8 +50,8 @@ export const PostCard = ({ post }: IPostCardProps) => {
         <button
           onClick={() => {
             console.log();
-            commentsRead(post.id);
-            setIsOpenedComments(post);
+            commentsRead(post.id, setComments);
+            setIsOpenedComments(!isOpenedComments);
           }}
         >
           <BiCommentDetail />
@@ -59,7 +60,14 @@ export const PostCard = ({ post }: IPostCardProps) => {
           <BsBookmark />
         </button>
       </div>
-      {isOpenedComments && <PostComments post={post} />}
+      {isOpenedComments && (
+        <PostComments
+          post={post}
+          comments={comments}
+          setComments={setComments}
+          setIsOpenedComments={setIsOpenedComments}
+        />
+      )}
     </StyledPostCard>
   );
 };

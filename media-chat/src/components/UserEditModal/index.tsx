@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserContext } from "../../providers/UserContext/UserContext";
@@ -11,7 +11,6 @@ const schema = yup
     name: yup.string().required("Nome é obrigatório"),
     email: yup.string().required("Email é obrigatório"),
     password: yup.string().required("Senha é obrigatório"),
-
   })
   .required();
 
@@ -52,9 +51,10 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
         X
       </button>
       <form onSubmit={handleSubmit(submit)}>
-      
-        <input type="text" placeholder="Name" {...register("name")} />
-        <p>{errors.name?.message}</p>
+        <div>
+          <input type="text" placeholder="Name" {...register("name")} />
+          <p>{errors.name?.message}</p>
+        </div>
 
         <input type="text" placeholder="E-mail" {...register("email")} />
         <p>{errors.email?.message}</p>
@@ -66,10 +66,9 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
           {...register("avatar_url")}
         />
         <p>{errors.avatar_url?.message}</p>
-        <div className = "buttons">
-        <button type="submit" className = "updateBttn">Salvar</button>
+        <button type="submit">Salvar</button>
         <button
-          type="button" className = "deleteBttn"
+          type="button"
           onClick={async () => {
             await userDelete();
             setProfileEditModal(false);
@@ -77,7 +76,6 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
         >
           Excluir perfil
         </button>
-        </div>
       </form>
     </StyledUserEditDiv>
   );
