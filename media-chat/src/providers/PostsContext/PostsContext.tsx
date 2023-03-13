@@ -27,7 +27,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
-  const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [postList, setPostList] = useState<IPost[]>([]);
   const [recommendPostsList, setReccomendPostsLists] = useState<string[]>(
     recommendListStoraged ? JSON.parse(recommendListStoraged) : []
@@ -337,8 +336,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setPost,
         showCreateModal,
         setShowCreateModal,
-        profileOpenModal,
-        setProfileOpenModal,
         editComments,
         deleteComment,
         comment,
