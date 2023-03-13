@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { IPost } from "../PostsContext/@types";
-import { PostsContext } from "../PostsContext/PostsContext";
 import { IDefaultError, IDefaultProviderProps } from "../UserContext/@types";
 import { IFavoritePost, IFavoritePostContext } from "./@types";
 import { AxiosError } from "axios";

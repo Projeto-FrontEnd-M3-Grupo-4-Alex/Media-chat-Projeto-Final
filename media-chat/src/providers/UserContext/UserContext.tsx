@@ -22,7 +22,9 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[]>([]);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
   const [suggestUsers, setSuggestUsers] = useState<IUser[]>([]);
   const navigate = useNavigate();
   const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users;
@@ -116,6 +118,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           }
         );
         toast.success("User atualizada com sucesso", { autoClose: 2000 });
+        console.log(response.data);
 
         setUser(response.data.user);
       } catch (error) {
@@ -209,11 +212,9 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         user,
         users,
         sugestionsList,
-
         followUsers,
         favoritePostList,
         setFavoritePostList,
-
         profileOpen,
         setProfileOpen,
       }}

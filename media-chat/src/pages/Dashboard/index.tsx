@@ -1,10 +1,10 @@
 import { SearchForm } from "../../components/SearchForm";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Aside } from "../../components/Aside";
 import { EditPostForm } from "../../components/Form/EditPostForm";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { PostsList } from "../../components/PostsList";
-import { StyledDashboard, StyledUserDiv } from "./style";
+import { StyledCreatePost, StyledDashboard, StyledUserDiv } from "./style";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { ModalForm } from "../../components/ModalForm";
 import { CreateFormPost } from "../../components/Form/CreatePostForm";
@@ -73,8 +73,18 @@ export function Dashboard() {
             <CreateFormPost />
           </ModalForm>
         )}
+
         <PostsList />
       </div>
     </StyledDashboard>
   );
 }
+
+
+
+
+
+
+
+
+
