@@ -170,35 +170,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const editComments = async (
-    commentId: number,
-    formData: IComment,
-    comments: IComment[],
-    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
-  ) => {
-    const token = localStorage.getItem("@TOKEN");
-    if (token) {
-      try {
-        await api.patch(`comments/${commentId}`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const udpatedComments = comments.map((comment) => {
-          if (comment.id === commentId) {
-            return { ...comment, ...formData };
-          } else {
-            return { ...comment };
-          }
-        });
-        setComments(udpatedComments);
-      } catch (error) {
-        const currentError = error as AxiosError<IDefaultError>;
-        toast.error(currentError.response?.data.error);
-      }
-    }
-  };
-
   const deleteComment = async (
     commentId: number,
     comments: IComment[],
@@ -214,6 +185,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         const filteredComments = comments.filter(
           (comment) => comment.id !== commentId
         );
+        toast.success("Comentário excluido com sucesso");
         setComments(filteredComments);
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
@@ -336,7 +308,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setPost,
         showCreateModal,
         setShowCreateModal,
-        editComments,
         deleteComment,
         comment,
         setComment,

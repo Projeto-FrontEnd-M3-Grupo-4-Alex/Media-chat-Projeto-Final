@@ -53,6 +53,4 @@ export interface IUserContext {
   userDelete: () => Promise<void>;
   sugestionsList: IUser[];
   followUsers: (userId: number) => Promise<void>;
-  profileOpen: boolean;
-  setProfileOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

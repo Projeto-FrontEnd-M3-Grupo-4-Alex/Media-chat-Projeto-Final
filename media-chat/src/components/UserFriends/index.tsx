@@ -18,6 +18,7 @@ export function UserFriends() {
         <ul>
           {followUsersComplete?.map((user) => (
             <UserFriendsCard
+              key={user.id}
               name={user.name}
               avatar_url={user.avatar_url}
               id={user.id}

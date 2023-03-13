@@ -7,7 +7,7 @@ export interface IPost {
   content: string;
   tags?: string;
   where: string;
-  rating?: string;
+  rating: number;
   category: string;
   id: number;
   user: IUser;
@@ -27,6 +27,7 @@ export interface IComment {
   postId: number;
   id: number;
   likesComment: [];
+  user: IUser;
 }
 
 export interface IPostFormValues {
@@ -61,12 +62,6 @@ export interface IPostsContext {
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
-  editComments: (
-    commentId: number,
-    formData: IComment,
-    comments: IComment[],
-    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
-  ) => Promise<void>;
   deleteComment: (
     commentId: number,
     comments: IComment[],

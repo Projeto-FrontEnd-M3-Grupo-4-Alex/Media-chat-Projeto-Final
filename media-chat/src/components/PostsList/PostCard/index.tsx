@@ -7,9 +7,12 @@ import { PostComments } from "../PostComments";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledPostCard } from "./style";
 import { PostsLike } from "../PostsLike";
+import { Rating } from "@mui/material";
+import { IUser } from "../../../providers/UserContext/@types";
 
 interface IPostCardProps {
   post: IPost;
+  user: IUser;
 }
 
 export const PostCard = ({ post }: IPostCardProps) => {
@@ -39,14 +42,13 @@ export const PostCard = ({ post }: IPostCardProps) => {
           <h2>{post.title}</h2>
           <p>{post.content}</p>
           <p>{post.where}</p>
-          <p>{post.rating}</p>
+          <Rating value={post.rating} readOnly />
         </div>
       </div>
       <div className="ContainerButtonsPost">
         <PostsLike post={post} />
         <button
           onClick={() => {
-            console.log();
             commentsRead(post.id, setComments);
             setIsOpenedComments(!isOpenedComments);
           }}
@@ -62,7 +64,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
           post={post}
           comments={comments}
           setComments={setComments}
-          setIsOpenedComments={setIsOpenedComments}
+          user={user}
         />
       )}
     </StyledPostCard>

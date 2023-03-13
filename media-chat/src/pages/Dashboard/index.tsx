@@ -13,10 +13,10 @@ import { Link } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 
 export function Dashboard() {
+  const [profileOpen, setProfileOpen] = useState(false);
   const { post, showCreateModal, setShowCreateModal } =
     useContext(PostsContext);
-  const { user, profileOpen, setProfileOpen, userLogOut } =
-    useContext(UserContext);
+  const { user, userLogOut } = useContext(UserContext);
 
   return (
     <StyledDashboard>
@@ -43,13 +43,13 @@ export function Dashboard() {
                 </div>
                 <div className="logoutDiv">
                   <TbLogout />
-                  <p
+                  <span
                     onClick={() => {
                       userLogOut();
                     }}
                   >
                     Sair
-                  </p>
+                  </span>
                 </div>
               </div>
             )}

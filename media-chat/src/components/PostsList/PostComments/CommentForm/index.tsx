@@ -26,7 +26,9 @@ export function CommentForm({
   const { createComments } = useContext(PostsContext);
   const { user } = useContext(UserContext);
 
-  const { register, handleSubmit } = useForm<ICreateCommentPostFormData>({});
+  const { register, handleSubmit, reset } = useForm<ICreateCommentPostFormData>(
+    {}
+  );
 
   const onSubmitComment = (data: ICreateCommentPostFormData) => {
     event?.preventDefault();
@@ -37,6 +39,7 @@ export function CommentForm({
         postId: Number(post.id),
       };
       createComments(newData, comments, setComments);
+      reset();
     }
   };
 
