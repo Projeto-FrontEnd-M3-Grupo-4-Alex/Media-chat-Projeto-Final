@@ -61,7 +61,7 @@ export const StyledUserDiv = styled.div`
     }
     .Profile {
       display: flex;
-      flex.direction: row;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 8px;
