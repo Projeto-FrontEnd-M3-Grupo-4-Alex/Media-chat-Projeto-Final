@@ -9,6 +9,8 @@ import { StyledUserEditDiv } from "./style";
 const schema = yup
   .object({
     name: yup.string().required("Nome é obrigatório"),
+    email: yup.string().required("Email é obrigatório"),
+    password: yup.string().required("Senha é obrigatório"),
   })
   .required();
 
@@ -40,7 +42,14 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
   return (
     <StyledUserEditDiv>
       <h2>Editar Perfil</h2>
-      <span onClick={() => setProfileEditModal(false)}>X</span>
+      <button
+        className="closeButton"
+        onClick={() => {
+          setProfileEditModal(false);
+        }}
+      >
+        X
+      </button>
       <form onSubmit={handleSubmit(submit)}>
         <div>
           <input type="text" placeholder="Name" {...register("name")} />
@@ -50,15 +59,18 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
         <input type="text" placeholder="E-mail" {...register("email")} />
         <p>{errors.email?.message}</p>
         <input type="text" placeholder="Password" {...register("password")} />
+        <p>{errors.password?.message}</p>
         <input
           type="text"
           placeholder="URL profile"
           {...register("avatar_url")}
         />
         <p>{errors.avatar_url?.message}</p>
-        <button type="submit">Salvar</button>
+        <div className = "buttons">
+
+        <button type="submit" className = "updateBttn ">Salvar</button>
         <button
-          type="button"
+          type="button" className = "deleteBttn"
           onClick={async () => {
             await userDelete();
             setProfileEditModal(false);
@@ -66,6 +78,7 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
         >
           Excluir perfil
         </button>
+        </div>
       </form>
     </StyledUserEditDiv>
   );

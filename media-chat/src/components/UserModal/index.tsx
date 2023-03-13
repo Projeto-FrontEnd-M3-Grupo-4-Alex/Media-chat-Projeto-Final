@@ -16,11 +16,20 @@ export const UserModal = () => {
       </div>
       <div className="userInfo">
         <div className="profileDiv">
-          <CgProfile />
-          <Link to="/profile">Perfil </Link>
+          <Link to="/profile">
+            {" "}
+            <CgProfile size={18} color="white" />
+            Perfil{" "}
+          </Link>
         </div>
         <div className="logoutDiv">
+
+          <TbLogout size = {18} color = "white" onClick={() => {
+              userLogOut();
+            }}/>
+
           <TbLogout />
+
           <p
             onClick={() => {
               userLogOut();

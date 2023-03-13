@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+
 export const StyledDashboard = styled.div`
   display: flex;
   flex-direction: row;
@@ -87,6 +88,20 @@ export const StyledUserDiv = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 20px;
+
+    h1 {
+      font-family: "Inter";
+      font-weight: 500;
+      font-size: var( --font-size-16);
+      color:var(--color-white);
+    }
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
     cursor: pointer;
 
     h1 {
