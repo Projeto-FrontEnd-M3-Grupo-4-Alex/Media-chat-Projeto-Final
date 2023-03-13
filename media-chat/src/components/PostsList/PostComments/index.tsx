@@ -31,7 +31,7 @@ export function PostComments({
           <li key={comment.id}>
             <div>
               <img src={comment.user.avatar_url} alt={comment.user.name} />
-              <p>{comment.user.name}</p>
+              <p className="user_name">{comment.user.name}</p>
             </div>
             <p>{comment.content}</p>
             <span>
