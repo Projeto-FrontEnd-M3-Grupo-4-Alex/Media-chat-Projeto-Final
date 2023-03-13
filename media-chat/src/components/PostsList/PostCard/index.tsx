@@ -20,6 +20,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
   const { addFavoritePost } = useContext(FavoritePostContext);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [comments, setComments] = useState<IComment[]>([]);
+
   return (
     <StyledPostCard>
       <div className="ContainerInfoUser">

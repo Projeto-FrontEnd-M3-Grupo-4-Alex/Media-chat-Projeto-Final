@@ -39,32 +39,6 @@ export const StyledTopAside = styled.div`
     }
   }
 
-  a {
-    margin-top: 1.5rem;
-    display: flex;
-    margin-bottom: 3rem;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    text-decoration: none;
-    width: 8rem;
-    height: 2.5rem;
-    border-radius: var(--border-radius-8);
-    transition: 0.5s;
-    :hover {
-      background-color: var(--color-primary-2);
-    }
-    h3 {
-      color: var(--grey-0);
-    }
-
-    svg {
-      fill: var(--grey-0);
-    }
-  }
-
   @media (min-width: 1024px) {
     display: flex;
   }
