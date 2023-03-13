@@ -1,14 +1,14 @@
-import { SearchForm } from "../../components/SearchForm";
-import { useContext, useState } from "react";
-import { Aside } from "../../components/Aside";
-import { EditPostForm } from "../../components/Form/EditPostForm";
-import { PostsContext } from "../../providers/PostsContext/PostsContext";
-import { PostsList } from "../../components/PostsList";
-import { UserModal } from "../../components/UserModal";
-import { StyledDashboard, StyledUserDiv } from "./style";
-import { UserContext } from "../../providers/UserContext/UserContext";
-import { ModalForm } from "../../components/ModalForm";
-import { CreateFormPost } from "../../components/Form/CreatePostForm";
+import { SearchForm } from "../../components/SearchForm"
+import { useContext, useState } from "react"
+import { Aside } from "../../components/Aside"
+import { EditPostForm } from "../../components/Form/EditPostForm"
+import { PostsContext } from "../../providers/PostsContext/PostsContext"
+import { PostsList } from "../../components/PostsList"
+import { UserModal } from "../../components/UserModal"
+import { StyledDashboard, StyledUserDiv } from "./style"
+import { UserContext } from "../../providers/UserContext/UserContext"
+import { ModalForm } from "../../components/ModalForm"
+import { CreateFormPost } from "../../components/Form/CreatePostForm"
 
 export function Dashboard() {
   const {
@@ -17,9 +17,9 @@ export function Dashboard() {
     post,
     showCreateModal,
     setShowCreateModal,
-  } = useContext(PostsContext);
+  } = useContext(PostsContext)
 
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext)
 
   return (
     <StyledDashboard>
@@ -39,6 +39,13 @@ export function Dashboard() {
           </div>
         </StyledUserDiv>
 
+        <div className="profile_post">
+          <img id="userImage" src={user?.avatar_url} alt="userImage" />
+          <button id="bttn_post" onClick={() => setShowCreateModal(true)}>
+            Realizar uma publicação
+          </button>
+        </div>
+
         {profileOpenModal ? <UserModal /> : null}
         {post && (
           <ModalForm>
@@ -52,14 +59,9 @@ export function Dashboard() {
             <CreateFormPost />{" "}
           </ModalForm>
         )}
-        <div className="profile">
-          <img src={user?.avatar_url} alt="userImage" />
-          <button onClick={() => setShowCreateModal(true)}>
-            Realizar uma publicação
-          </button>
-        </div>
+
         <PostsList />
       </div>
     </StyledDashboard>
-  );
+  )
 }

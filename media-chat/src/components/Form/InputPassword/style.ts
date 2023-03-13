@@ -10,7 +10,7 @@ export const InputPasswordStyle = styled.div`
     align-items: center;
   
 
-    border-radius: var(--border-radius-50);
+    border-radius: var(--border-radius-8);
     width: 100%;
     position: relative;
   }
