@@ -17,7 +17,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
   const { setPost, commentsRead } = useContext(PostsContext);
   const { user } = useContext(UserContext);
 
-  const { addFavoritePost } = useContext(FavoritePostContext) 
+  const { addFavoritePost } = useContext(FavoritePostContext);
   const [isOpenedComments, setIsOpenedComments] = useState(false);
   const [comments, setComments] = useState<IComment[]>([]);
   return (
@@ -56,7 +56,11 @@ export const PostCard = ({ post }: IPostCardProps) => {
         >
           <BiCommentDetail />
         </button>
-        <button onClick={()=>{addFavoritePost(user?.id as number, post)}}>
+        <button
+          onClick={() => {
+            addFavoritePost(user?.id as number, post);
+          }}
+        >
           <BsBookmark />
         </button>
       </div>
