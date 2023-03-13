@@ -1,24 +1,18 @@
-import { TextField } from "@mui/material"
 import styled from "styled-components"
 
-export const InputStyle = styled.div`
+import { TextField } from "@mui/material"
+export const StyleSelect = styled.div`
   div {
     border-radius: var(--border-radius-8);
-    width: 100%;
-
+    background-color: var(--grey-transparent-2);
   }
 
-  label {
-    color: var(--text-inputs-color);
-    font-size: var(--font-size-14);
-    font-weight: var(--font-weight-400);
+  p {
+    margin-bottom: 0.5rem;
   }
-
-
-
 `
 
-export const CustomTextField = styled(TextField)({
+export const CustomTextFieldSelect = styled(TextField)({
   "& label.Mui-focused": {
     color: "white",
   },

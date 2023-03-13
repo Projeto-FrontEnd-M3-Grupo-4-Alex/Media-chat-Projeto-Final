@@ -1,3 +1,5 @@
+import { IFavoritePost } from "../FavoritePostContext/@types";
+
 export interface IDefaultProviderProps {
   children: React.ReactNode;
 }
@@ -9,6 +11,7 @@ export interface IUser {
   avatar_url: string;
   followUsers: number[];
   id: number;
+  favorites:number[];
 }
 
 export interface IRegisterFormValues {
@@ -52,7 +55,13 @@ export interface IUserContext {
   userUpdate: (formData: IUpdateUserFormValues) => Promise<void>;
   userDelete: () => Promise<void>;
   sugestionsList: IUser[];
+
+   followUsers: (userId: number) => Promise<void>;    
+   favoritePostList:IFavoritePost[];
+   setFavoritePostList:React.Dispatch<React.SetStateAction<IFavoritePost[]>>;
+
   followUsers: (userId: number) => Promise<void>;
   profileOpen: boolean;
   setProfileOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
 }

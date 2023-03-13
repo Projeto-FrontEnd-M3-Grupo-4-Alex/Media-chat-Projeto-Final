@@ -26,7 +26,8 @@ export function Input({
         label={label}
         id={register.name}
         type={type}
-        sx={{ input: { color: "white" }, label: { color: "white" } }}
+        
+        sx={{ input: { color: "white" }, label: { color: "white" }  }}
         {...register}
         {...rest}
       />

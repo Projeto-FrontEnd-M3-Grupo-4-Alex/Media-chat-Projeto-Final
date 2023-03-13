@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from "styled-components"
+
 
 export const StyledDashboard = styled.div`
   display: flex;
@@ -20,6 +21,47 @@ export const StyledDashboard = styled.div`
     margin-left: 10%;
   }
 
+  .profile_post {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 1rem;
+
+    padding: 1.5rem 1.8rem;
+
+    margin-bottom: 2rem;
+
+    border-radius: var(--border-radius-8);
+    background-color: var(--grey-transparent);
+  }
+
+  #userImage {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 100%;
+  }
+
+  #bttn_post {
+    color: var(--color-white);
+    text-align: center;
+
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-600);
+
+    padding: 0.8rem 1rem;
+
+    border: none;
+    border-radius: var(--border-radius-20);
+
+    background-color: var(--color-primary-2);
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+  }
+
   @media (min-width: 1024px) {
     .main__dashboard {
       max-width: 80%;
@@ -31,7 +73,7 @@ export const StyledDashboard = styled.div`
       max-width: 400px;
     }
   }
-`;
+`
 
 export const StyledUserDiv = styled.div`
   display: flex;
@@ -48,6 +90,20 @@ export const StyledUserDiv = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 20px;
+
+    h1 {
+      font-family: "Inter";
+      font-weight: 500;
+      font-size: var( --font-size-16);
+      color:var(--color-white);
+    }
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
     cursor: pointer;
 
     h1 {
@@ -109,7 +165,7 @@ export const StyledUserDiv = styled.div`
       }
     }
   }
-`;
+`
 
 export const StyledCreatePost = styled.div`
   display: flex;
@@ -132,4 +188,4 @@ export const StyledCreatePost = styled.div`
     background-color: var(--color-primary-2);
     color: var(--grey-0);
   }
-`;
+`
