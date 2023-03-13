@@ -1,7 +1,8 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const StyledHomePage = styled.div`
   min-width: 375px;
+
   background-color: var(--color-background);
 
   height: 100vh;
@@ -140,4 +141,4 @@ export const StyledHomePage = styled.div`
       padding: 1.8rem 3rem;
     }
   }
-`
+`;

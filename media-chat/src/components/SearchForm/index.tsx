@@ -1,12 +1,13 @@
 import { MdSearch } from "react-icons/md";
 import { useContext } from "react";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
+import { StyledForm } from "./style";
 
 export const SearchForm = () => {
   const { filterPostsByInput, search, setSearch } = useContext(PostsContext);
 
   return (
-    <div>
+    <StyledForm>
       <input
         type="text"
         placeholder="Search something"
@@ -16,6 +17,6 @@ export const SearchForm = () => {
       <button type="submit" onClick={filterPostsByInput}>
         <MdSearch />
       </button>
-    </div>
+    </StyledForm>
   );
 };

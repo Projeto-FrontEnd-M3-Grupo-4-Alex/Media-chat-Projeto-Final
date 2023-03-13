@@ -16,6 +16,7 @@ import {
 export const PostsContext = createContext<IPostsContext>({} as IPostsContext);
 
 export const PostsProvider = ({ children }: IDefaultProviderProps) => {
+  const recommendListStoraged = localStorage.getItem("@RecommendList");
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
   const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
@@ -28,9 +29,16 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const { user } = useContext(UserContext);
   const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [postList, setPostList] = useState<IPost[]>([]);
+  const [recommendPostsList, setReccomendPostsLists] = useState<string[]>(
+    recommendListStoraged ? JSON.parse(recommendListStoraged) : []
+  );
   const [likeArray, SetlikeArray] = useState<ILikepost[]>([]);
 
   const newPostList = filteredPost.length > 0 ? filteredPost : posts;
+
+  useEffect(() => {
+    localStorage.setItem("@RecommendList", JSON.stringify(recommendPostsList));
+  }, [recommendPostsList]);
 
   const filterPostsByInput = () => {
     if (search !== "") {
@@ -41,6 +49,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           post?.tags?.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredPost(searchPosts);
+      setReccomendPostsLists([...recommendPostsList, search]);
       setSearch("");
     } else {
       setFilteredPost([]);
@@ -260,6 +269,31 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
+  const recommendedPosts = () => {
+    const { user } = useContext(UserContext);
+    if (recommendPostsList.length > 0) {
+      const filterPosts = posts.filter((post) => post.userId !== user?.id);
+
+      const recommendPostsLowerCase = recommendPostsList.map((post) =>
+        post.toLowerCase()
+      );
+
+      const filterRecommendPosts = filterPosts.filter((post) => {
+        if (
+          recommendPostsLowerCase.includes(post.category) ||
+          recommendPostsLowerCase.includes(post.content.toLowerCase()) ||
+          recommendPostsLowerCase.includes(post.title.toLowerCase()) ||
+          (post.tags &&
+            recommendPostsLowerCase.includes(post.tags.toLowerCase()))
+        ) {
+          return post;
+        }
+      });
+
+      return filterRecommendPosts;
+    }
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -291,6 +325,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         updateLikePost,
         updateDeslikePost,
         filterPostsByInput,
+        recommendedPosts,
         likeArray,
       }}
     >
