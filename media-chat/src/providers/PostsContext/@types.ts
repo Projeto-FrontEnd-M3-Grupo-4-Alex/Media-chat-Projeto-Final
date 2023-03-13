@@ -26,7 +26,8 @@ export interface IComment {
   userId: number;
   postId: number;
   id: number;
-  likesComment: [];
+  likesComment?: [];
+  user: IUser;
 }
 
 export interface IPostFormValues {
@@ -54,20 +55,31 @@ export interface IPostsContext {
   PostDelete: (postId: number) => Promise<void>;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
-  commentsRead: (postId: number) => Promise<void>;
-  isOpenedComments: IPost | null;
-  setIsOpenedComments: React.Dispatch<React.SetStateAction<IPost | null>>;
+  commentsRead: (
+    postId: number,
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => Promise<void>;
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
-  comments: IComment[];
-  profileOpenModal: boolean;
-  setProfileOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  editComments: (commentId: number, formData: IComment) => Promise<void>;
-  deleteComment: (commentId: number) => Promise<void>;
+  editComments: (
+    commentId: number,
+    formData: IComment,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => Promise<void>;
+  deleteComment: (
+    commentId: number,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => Promise<void>;
   comment: IComment | null;
   setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
-  createComments: (formData: IComment[]) => Promise<void>;
+  createComments: (
+    formData: IComment,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => Promise<void>;
   filterPosts: (category: string) => void;
   newPostList: IPost[];
   postList: IPost[];
@@ -75,6 +87,6 @@ export interface IPostsContext {
   updateLikePost: (postId: number) => Promise<void>;
   updateDeslikePost: (likeArray: ILikepost[]) => Promise<void>;
   filterPostsByInput: () => void;
-  recommendedPosts: () => IPost[] | undefined;
   likeArray: ILikepost[];
+  recommendList: IPost[];
 }

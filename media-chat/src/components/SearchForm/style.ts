@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  width: 80%;
+  width: 60%;
   align-items: center;
   position: relative;
+
   input {
     height: 46px;
-    width: 90%;
+    width: 60%;
     background-color: var(--grey-transparent);
     border: 2px solid transparent;
     padding: 0rem 1rem;
     box-sizing: border-box;
     outline: none;
     color: var(--grey-0);
-    border-radius: var(--border-radius-5);
+    border-radius: var(--border-radius-8);
 
     :focus {
       border: 2px solid var(--grey-0);
@@ -26,7 +27,7 @@ export const StyledForm = styled.form`
     background-color: transparent;
     border: none;
     top: 5%;
-    right: 11%;
+    right: 41%;
     svg {
       width: 2rem;
       height: 2rem;

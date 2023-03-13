@@ -20,19 +20,19 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
   const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
-  const [comments, setComments] = useState<IComment[]>([]);
+
   const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const [isOpenedComments, setIsOpenedComments] = useState<IPost | null>(null);
+
   const [showCreateModal, setShowCreateModal] = useState(false);
   const { user } = useContext(UserContext);
-  const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [postList, setPostList] = useState<IPost[]>([]);
   const [recommendPostsList, setReccomendPostsLists] = useState<string[]>(
     recommendListStoraged ? JSON.parse(recommendListStoraged) : []
   );
   const [likeArray, SetlikeArray] = useState<ILikepost[]>([]);
+  const [recommendList, setRecommendList] = useState<IPost[]>([]);
 
   const newPostList = filteredPost.length > 0 ? filteredPost : posts;
 
@@ -46,7 +46,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         (post) =>
           post?.category.toLowerCase().includes(search.toLowerCase()) ||
           post?.title.toLowerCase().includes(search.toLowerCase()) ||
-          post?.tags?.toLowerCase().includes(search.toLowerCase())
+          post?.tags?.toLowerCase().includes(search.toLowerCase()) ||
+          post?.content.toLowerCase().includes(search.toLowerCase()) ||
+          post?.where.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredPost(searchPosts);
       setReccomendPostsLists([...recommendPostsList, search]);
@@ -128,7 +130,10 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const commentsRead = async (postId: number) => {
+  const commentsRead = async (
+    postId: number,
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     try {
       const response = await api.get<IComment[]>(`comments`, {
         params: { postId, _expand: "user", _embed: "likesComment" },
@@ -140,7 +145,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const createComments = async (formData: IComment[]) => {
+  const createComments = async (
+    formData: IComment,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -151,15 +160,23 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-        setComments([...comments, newComment]);
+
+        user && setComments([...comments, newComment]);
       } catch (error) {
+        console.log(error);
+
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);
       }
     }
   };
 
-  const editComments = async (commentId: number, formData: IComment) => {
+  const editComments = async (
+    commentId: number,
+    formData: IComment,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -183,7 +200,11 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const deleteComment = async (commentId: number) => {
+  const deleteComment = async (
+    commentId: number,
+    comments: IComment[],
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>
+  ) => {
     const token = localStorage.getItem("@TOKEN");
     if (token) {
       try {
@@ -270,7 +291,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   };
 
   const recommendedPosts = () => {
-    const { user } = useContext(UserContext);
     if (recommendPostsList.length > 0) {
       const filterPosts = posts.filter((post) => post.userId !== user?.id);
 
@@ -278,21 +298,33 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         post.toLowerCase()
       );
 
+      const clearRecommendPosts = [...new Set(recommendPostsLowerCase)];
+
+      function includesLoop(target: string) {
+        const isIncludeList = clearRecommendPosts.map((term) =>
+          target.includes(term)
+        );
+
+        return isIncludeList.some((isInclude) => isInclude);
+      }
+
       const filterRecommendPosts = filterPosts.filter((post) => {
-        if (
-          recommendPostsLowerCase.includes(post.category) ||
-          recommendPostsLowerCase.includes(post.content.toLowerCase()) ||
-          recommendPostsLowerCase.includes(post.title.toLowerCase()) ||
-          (post.tags &&
-            recommendPostsLowerCase.includes(post.tags.toLowerCase()))
-        ) {
-          return post;
-        }
+        return (
+          includesLoop(post.category) ||
+          includesLoop(post.content.toLowerCase()) ||
+          includesLoop(post.title.toLowerCase()) ||
+          (post.tags && includesLoop(post.tags.toLowerCase())) ||
+          includesLoop(post.where.toLowerCase())
+        );
       });
 
-      return filterRecommendPosts;
+      setRecommendList(filterRecommendPosts);
     }
   };
+
+  useEffect(() => {
+    recommendedPosts();
+  }, [recommendPostsList]);
 
   return (
     <PostsContext.Provider
@@ -305,14 +337,9 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         search,
         setSearch,
         commentsRead,
-        isOpenedComments,
-        setIsOpenedComments,
         setPost,
         showCreateModal,
         setShowCreateModal,
-        comments,
-        profileOpenModal,
-        setProfileOpenModal,
         editComments,
         deleteComment,
         comment,
@@ -325,8 +352,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         updateLikePost,
         updateDeslikePost,
         filterPostsByInput,
-        recommendedPosts,
         likeArray,
+        recommendList,
       }}
     >
       {children}
