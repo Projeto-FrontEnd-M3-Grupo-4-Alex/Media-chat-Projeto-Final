@@ -6,8 +6,9 @@ export const StyledDashboard = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem;
-  box-sizing: border-box;
   position: relative;
+
+
 
   .aside__dashboard {
     position: absolute;
@@ -63,6 +64,8 @@ export const StyledDashboard = styled.div`
   }
 
   @media (min-width: 1024px) {
+    padding-right: 10%;
+
     .main__dashboard {
       max-width: 90%;
       margin-left: 0;

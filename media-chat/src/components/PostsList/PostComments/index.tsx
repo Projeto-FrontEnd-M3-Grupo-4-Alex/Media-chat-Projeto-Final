@@ -18,7 +18,7 @@ export function PostComments({
 }: ICommentPostProps) {
   return (
     <StyledPostComments>
-      <button
+      <button className="bttn_close"
         onClick={() => {
           setIsOpenedComments(false);
         }}
