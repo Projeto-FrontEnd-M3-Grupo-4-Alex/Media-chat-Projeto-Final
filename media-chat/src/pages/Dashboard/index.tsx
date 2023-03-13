@@ -58,22 +58,22 @@ export function Dashboard() {
 
         {post && (
           <ModalForm>
-            {" "}
-            <EditPostForm />{" "}
+            <EditPostForm />
           </ModalForm>
         )}
         {showCreateModal && (
           <ModalForm>
-            {" "}
-            <CreateFormPost />{" "}
+            <CreateFormPost />
           </ModalForm>
         )}
+
         <StyledCreatePost>
           <img src={user?.avatar_url} alt="userImage" />
           <button onClick={() => setShowCreateModal(true)}>
             Realizar uma publicação
           </button>
         </StyledCreatePost>
+
         <PostsList />
       </div>
     </StyledDashboard>

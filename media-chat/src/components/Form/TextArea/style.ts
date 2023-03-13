@@ -1,11 +1,10 @@
 import { TextField } from "@mui/material"
 import styled from "styled-components"
 
-export const InputStyle = styled.div`
+export const TextAreaStyle = styled.div`
   div {
     border-radius: var(--border-radius-8);
     width: 100%;
-
   }
 
   label {
@@ -13,12 +12,9 @@ export const InputStyle = styled.div`
     font-size: var(--font-size-14);
     font-weight: var(--font-weight-400);
   }
-
-
-
 `
 
-export const CustomTextField = styled(TextField)({
+export const CustomTextArea = styled(TextField)({
   "& label.Mui-focused": {
     color: "white",
   },

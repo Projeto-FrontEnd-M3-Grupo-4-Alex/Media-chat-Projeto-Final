@@ -3,13 +3,16 @@ import { useForm } from "react-hook-form";
 import { TbSend } from "react-icons/tb";
 import { IComment, IPost } from "../../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../../providers/PostsContext/PostsContext";
+import { IUser } from "../../../../providers/UserContext/@types";
 import { UserContext } from "../../../../providers/UserContext/UserContext";
 
 interface ICreateCommentPostFormData {
   userId: number;
   postId: number;
   content: string;
-  like?: [];
+  likesComment?: [];
+  id: number;
+  user: IUser;
 }
 
 interface ICommentFormProps {

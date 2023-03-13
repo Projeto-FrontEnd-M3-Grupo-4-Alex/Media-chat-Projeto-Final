@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
+import { IFavoritePost } from "../FavoritePostContext/@types";
 import {
   IDefaultError,
   IDefaultProviderProps,
@@ -17,6 +18,7 @@ import {
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: IDefaultProviderProps) => {
+  const [favoritePostList, setFavoritePostList] = useState<IFavoritePost[]>([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[]>([]);
@@ -45,6 +47,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     setLoading(true);
     try {
       const response = await api.post<IResponseUser>("login", formData);
+      console.log(response.data.user);
       setUser(response.data.user);
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@USERID", String(response.data.user.id));
@@ -112,6 +115,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           }
         );
         toast.success("User atualizada com sucesso", { autoClose: 2000 });
+        console.log(response.data);
 
         setUser(response.data.user);
       } catch (error) {
@@ -204,6 +208,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         users,
         sugestionsList,
         followUsers,
+        favoritePostList,
+        setFavoritePostList,
       }}
     >
       {children}

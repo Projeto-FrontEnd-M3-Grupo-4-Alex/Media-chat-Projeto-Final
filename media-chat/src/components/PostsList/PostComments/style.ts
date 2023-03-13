@@ -8,7 +8,7 @@ export const StyledPostComments = styled.div`
       gap: 16px;
       img {
         width: 32px;
-        heigth: 32px;
+        height: 32px;
       }
     }
   }
