@@ -9,5 +9,6 @@ export interface IFavoritePost {
 export interface IFavoritePostContext {
   favoritePostList: IFavoritePost[];
   setFavoritePostList: React.Dispatch<React.SetStateAction<IFavoritePost[]>>;
-  addFavoritePost: (userId: number, data: IPost[]) => Promise<void>;
+  addFavoritePost: (userId: number, data: IPost) => Promise<void>;
+  removeFavoritePostList: (currentFavoritePostList: IFavoritePost) => void;
 }

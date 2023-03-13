@@ -3,6 +3,7 @@ import { UserProvider } from "./providers/UserContext/UserContext";
 import { Router } from "./routes";
 import { GlobalStyles } from "./styles/Global";
 import "react-toastify/dist/ReactToastify.css";
+import { FavoritePostProvider } from "./providers/FavoritePostContext/FavoritePostContex";
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
           theme="dark"
         />
         <UserProvider>
+        <FavoritePostProvider>
           <Router />
+          </FavoritePostProvider>
         </UserProvider>
       </div>
     </>

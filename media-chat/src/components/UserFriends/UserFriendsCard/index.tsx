@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../../../providers/UserContext/UserContext";
+import { StyledUserFriendCardDiv } from "./style";
 
 interface iUserFriendsCardProps {
   name: string;
@@ -19,12 +20,14 @@ export function UserFriendsCard({
   }
 
   return (
-    <div>
-      <div>
-        <img src={avatar_url} alt="" />
-        <h3>{name}</h3>
+    <StyledUserFriendCardDiv>
+      <div className="userInfoDivision">
+        <img src={avatar_url} className = "followUserImage"alt="" />
+        <div className="nameDivision">
+          <h3>{name}</h3>
+          <button onClick={unfollowUser}>Deixar de seguir</button>
+        </div>
       </div>
-      <button onClick={unfollowUser}>Deixar de seguir</button>
-    </div>
+    </StyledUserFriendCardDiv>
   );
 }

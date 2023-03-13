@@ -4,16 +4,14 @@ import { TbLogout } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { FavoritePost } from "../../components/FavoritePost";
 import { UserEditModal } from "../../components/UserEditModal";
-import { FavoritePostContext } from "../../providers/FavoritePostContext/FavoritePostContex";
 import { UserFriends } from "../../components/UserFriends";
 import { UserPosts } from "../../components/UserPosts";
-import { PostsContext } from "../../providers/PostsContext/PostsContext";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { StyledProfileDiv } from "./style";
 
 export const ProfilePage = () => {
-  const { user, userLogOut } = useContext(UserContext);
-  const { favoritePostList } = useContext(FavoritePostContext);
+  const { user, userLogOut, favoritePostList } = useContext(UserContext);
+
 
   console.log(user);
 
@@ -51,21 +49,22 @@ export const ProfilePage = () => {
           </button>
           </div>
         </div>
-        {profileEditModal ? (
-          <UserEditModal setProfileEditModal={setProfileEditModal} />
-        ) : null}
 
         <div>
-           <h2>Salvos</h2> 
-          {/*  {favoritePostList.length > 0 && <FavoritePost />}    */}
+        <UserFriends />
+           <h2 className = "favoritePostTitle">Salvos</h2> 
+    {favoritePostList.length === 0 ? (
+      <p className = "emptyFavoritePost">Voce não tem um posto favorito</p>
+    ) : <FavoritePost />}  
+     <UserPosts />  
         </div>
       </div>
       {profileEditModal ? (
         <UserEditModal setProfileEditModal={setProfileEditModal} />
       ) : null}
 
-      <UserFriends />
-      <UserPosts />
+     
+     
     </StyledProfileDiv>
   );
 };

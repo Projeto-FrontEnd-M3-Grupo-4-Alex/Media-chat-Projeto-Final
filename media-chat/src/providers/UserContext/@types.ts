@@ -1,3 +1,5 @@
+import { IFavoritePost } from "../FavoritePostContext/@types";
+
 export interface IDefaultProviderProps {
   children: React.ReactNode;
 }
@@ -54,4 +56,6 @@ export interface IUserContext {
   userDelete: () => Promise<void>;
   sugestionsList: IUser[];
    followUsers: (userId: number) => Promise<void>;    
+   favoritePostList:IFavoritePost[];
+   setFavoritePostList:React.Dispatch<React.SetStateAction<IFavoritePost[]>>;
 }

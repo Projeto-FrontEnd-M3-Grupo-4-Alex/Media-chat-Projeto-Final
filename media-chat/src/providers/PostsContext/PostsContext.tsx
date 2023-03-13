@@ -158,11 +158,8 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           ...response.data,
           user,
         };
-<<<<<<< HEAD
-=======
         console.log(comments);
         console.log(newComment);
->>>>>>> a09ed926aa2c4ab5b0dc43deae459fe9b99d7d26
 
         setComments([...comments, newComment]);
       } catch (error) {

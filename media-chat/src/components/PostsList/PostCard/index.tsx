@@ -56,7 +56,7 @@ export const PostCard = ({ post }: IPostCardProps) => {
         >
           <BiCommentDetail />
         </button>
-        <button>
+        <button onClick={()=>{addFavoritePost(user?.id as number, post)}}>
           <BsBookmark />
         </button>
       </div>

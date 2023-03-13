@@ -43,7 +43,7 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
     <StyledUserEditDiv>
       <h2>Editar Perfil</h2>
       <button
-        className="closeBttn"
+        className="closeButton"
         onClick={() => {
           setProfileEditModal(false);
         }}
@@ -66,9 +66,11 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
           {...register("avatar_url")}
         />
         <p>{errors.avatar_url?.message}</p>
-        <button type="submit">Salvar</button>
+        <div className = "buttons">
+
+        <button type="submit" className = "updateBttn ">Salvar</button>
         <button
-          type="button"
+          type="button" className = "deleteBttn"
           onClick={async () => {
             await userDelete();
             setProfileEditModal(false);
@@ -76,6 +78,7 @@ export const UserEditModal = ({ setProfileEditModal }: IuserEditModalProps) => {
         >
           Excluir perfil
         </button>
+        </div>
       </form>
     </StyledUserEditDiv>
   );

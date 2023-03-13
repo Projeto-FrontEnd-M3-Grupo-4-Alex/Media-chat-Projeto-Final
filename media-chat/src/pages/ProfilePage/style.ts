@@ -77,12 +77,25 @@ export const StyledProfileDiv = styled.div`
           p {
             font-size: var(--font-size-20);
             font-family: "Inter";
-            font-style: normal;
             font-weight: 700;
             color: var(--color-white);
           }
         }
       }
+    }
+    .favoritePostTitle {
+      font-family: "Inter";
+      font-weight: 700;
+      font-size: var(--font-size-32);
+      color: var(--color-white);
+      margin-top:120px;
+    }
+    .emptyFavoritePost {
+      font-size: var(--font-size-20);
+      font-family: "Inter";
+      font-weight: 700;
+      color:var(--color-white);
+      margin-top:20px;
     }
   }
 

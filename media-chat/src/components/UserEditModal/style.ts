@@ -18,9 +18,10 @@ export const StyledUserEditDiv = styled.div`
     color: var(--color-primary-2);
     text-align: center;
   }
-  .closeBttn {
+  .closeButton {
     position: absolute;
     top: 28px;
+    right: 40px;
     font-weight: 400;
     font-size: var(--font-size-32);
     background-color: rgba(51, 42, 75, 0%);
@@ -59,7 +60,7 @@ export const StyledUserEditDiv = styled.div`
       margin-top: 15px;
 
       .updateBttn {
-        width: 35%;
+        width: 30%;
         height: 50px;
         font-family: "Inter";
         font-weight: 700;
@@ -76,12 +77,10 @@ export const StyledUserEditDiv = styled.div`
         font-weight: 700;
         font-size: var(--font-size-24);
         background-color: var(--color-primary-1);
-        border:none;
-        color:var(--color-white);
+        border: none;
+        color: var(--color-white);
         border-radius: var(--border-radius-15);
       }
     }
   }
-
- 
 `;
