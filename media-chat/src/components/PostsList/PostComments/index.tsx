@@ -1,7 +1,5 @@
-import { useContext, useState } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IComment, IPost } from "../../../providers/PostsContext/@types";
-import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { CommentForm } from "./CommentForm";
 import { StyledPostComments } from "./style";
 

@@ -1,19 +1,18 @@
 import { useContext } from "react";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
-import { UserPostsCard } from "../../UserPosts/UserPostsCard";
+import { RecommendCard } from "./RecommendCard";
+import { StyledRecommendPosts } from "./style";
 
 export function RecomendPosts() {
-  const { recommendedPosts } = useContext(PostsContext);
-
-  const recommendList = recommendedPosts();
+  const { recommendList } = useContext(PostsContext);
 
   return (
-    <div>
+    <StyledRecommendPosts>
       <h2>Recomendações</h2>
-      {recommendList ? (
+      {recommendList.length > 0 ? (
         <ul>
           {recommendList.map((post) => (
-            <UserPostsCard
+            <RecommendCard
               thumbnail={post.thumbnail}
               content={post.content}
               id={post.id}
@@ -24,6 +23,6 @@ export function RecomendPosts() {
       ) : (
         <h3>Não há nenhuma recomendação no momento</h3>
       )}
-    </div>
+    </StyledRecommendPosts>
   );
 }

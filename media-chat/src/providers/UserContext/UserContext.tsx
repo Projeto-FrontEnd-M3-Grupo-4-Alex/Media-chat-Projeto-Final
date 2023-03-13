@@ -22,6 +22,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[]>([]);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [suggestUsers, setSuggestUsers] = useState<IUser[]>([]);
   const navigate = useNavigate();
   const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users;
@@ -212,9 +213,10 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         sugestionsList,
         followUsers, 
         favoritePostList,
-        setFavoritePostList
-         
-        
+        setFavoritePostList,
+        profileOpenModal,
+        setProfileOpenModal
+
       }}
     >
       {children}

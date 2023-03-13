@@ -7,16 +7,17 @@ import { PostsList } from "../../components/PostsList";
 import { UserModal } from "../../components/UserModal";
 import { StyledDashboard, StyledUserDiv } from "./style";
 import { UserContext } from "../../providers/UserContext/UserContext";
+
 import { ModalForm } from "../../components/ModalForm";
 import { CreateFormPost } from "../../components/Form/CreatePostForm";
 
 export function Dashboard() {
   const {
-    profileOpenModal,
+    {profileOpenModal,
     setProfileOpenModal,
     post,
     showCreateModal,
-    setShowCreateModal,
+    setShowCreateModal
   } = useContext(PostsContext);
 
   const { user } = useContext(UserContext);
