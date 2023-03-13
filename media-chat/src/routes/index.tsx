@@ -6,7 +6,7 @@ import { LoginPage } from "../pages/Login";
 import { ProtectedRouters } from "../pages/ProtectedRouters";
 import { ProfilePage } from "../pages/ProfilePage";
 import { ResgisterPage } from "../pages/Register";
-import { PostsProvider } from "../providers/PostsContext/PostsContext";
+import { PostPage } from "../pages/PostPage";
 
 export function Router() {
   return (
@@ -21,8 +21,8 @@ export function Router() {
       <Route path="/profile" element={<ProtectedRouters />}>
         <Route index element={<ProfilePage />} />
       </Route>
-      <Route path="/post/postId" element={<ProtectedRouters />}>
-        {/* <Route index element={<ProfilePage />} /> */}
+      <Route path="/post/:postId" element={<ProtectedRouters />}>
+        <Route index element={<PostPage />} />
       </Route>
     </Routes>
   );

@@ -76,4 +76,5 @@ export interface IPostsContext {
   updateLikePost: (formData: number) => Promise<void>;
   updateDeslikePost: (likeArray: ILikepost[]) => Promise<void>;
   filterPostsByInput: () => void;
+  recommendedPosts: () => IPost[] | undefined;
 }

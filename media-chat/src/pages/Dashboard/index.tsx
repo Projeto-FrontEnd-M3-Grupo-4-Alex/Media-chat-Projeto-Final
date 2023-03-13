@@ -16,17 +16,17 @@ export function Dashboard() {
 
   return (
     <StyledDashboard>
-      <div>
+      <div className="aside__dashboard">
         <Aside />
       </div>
-      <div>
+      <div className="main__dashboard">
         <StyledUserDiv>
           <SearchForm />
           <div className="profile">
             <h1>{user?.name}</h1>
             <img
               src={user?.avatar_url}
-              onClick={() => setProfileOpenModal(true)}
+              onClick={() => setProfileOpenModal(!profileOpenModal)}
               alt="userImage"
             />
           </div>

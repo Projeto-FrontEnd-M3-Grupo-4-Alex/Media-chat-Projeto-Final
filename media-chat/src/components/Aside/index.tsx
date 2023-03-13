@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { IoMdClose } from "react-icons/io";
+import { RecomendPosts } from "./ReccomendPosts";
 import { StyledAside, StyledDivAside } from "./style";
 import { SuggestUsersList } from "./SuggestUsers";
 import { TopPartIcons } from "./TopPartIcons";
@@ -17,6 +18,7 @@ export function Aside() {
         <StyledAside className="mobile__aside">
           <div>
             <TopPartIcons />
+            {/* <RecomendPosts /> */}
             <SuggestUsersList />
           </div>
         </StyledAside>
@@ -26,6 +28,7 @@ export function Aside() {
         <StyledAside>
           <div className="desktop__aside">
             <TopPartIcons />
+            {/* <RecomendPosts /> */}
             <SuggestUsersList />
           </div>
         </StyledAside>
