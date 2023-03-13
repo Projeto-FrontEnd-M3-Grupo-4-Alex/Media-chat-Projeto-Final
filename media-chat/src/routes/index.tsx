@@ -21,14 +21,21 @@ export function Router() {
         <Route
           index
           element={
-            <PostsProvider>
+            <FavoritePostProvider>
               <Dashboard />
-            </PostsProvider>
+            </FavoritePostProvider>
           }
         />
       </Route>
       <Route path="/profile" element={<ProtectedRouters />}>
-        <Route index element={<ProfilePage />} />
+        <Route
+          index
+          element={
+            <FavoritePostProvider>
+              <ProfilePage />
+            </FavoritePostProvider>
+          }
+        />
       </Route>
       <Route path="/post/:postId" element={<ProtectedRouters />}>
         <Route index element={<PostPage />} />

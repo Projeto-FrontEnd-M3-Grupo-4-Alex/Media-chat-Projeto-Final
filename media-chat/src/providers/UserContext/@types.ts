@@ -11,7 +11,7 @@ export interface IUser {
   avatar_url: string;
   followUsers: number[];
   id: number;
-  favorites:number[];
+  favorites: number[];
 }
 
 export interface IRegisterFormValues {
@@ -54,10 +54,16 @@ export interface IUserContext {
   userLogOut: () => void;
   userUpdate: (formData: IUpdateUserFormValues) => Promise<void>;
   userDelete: () => Promise<void>;
-  sugestionsList: IUser[];  
-   favoritePostList:IFavoritePost[];
-   setFavoritePostList:React.Dispatch<React.SetStateAction<IFavoritePost[]>>;
-  followUsers: (userId: number) => Promise<void>;
+
+  setFavoritePostList: React.Dispatch<React.SetStateAction<IFavoritePost[]>>;
+
   profileOpenModal: boolean;
   setProfileOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  sugestionsList: IUser[];
+
+  followUsers: (userId: number) => Promise<void>;
+  favoritePostList: IFavoritePost[];
+
+  profileOpen: boolean;
+  setProfileOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

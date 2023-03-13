@@ -23,7 +23,14 @@ export const UserModal = () => {
           </Link>
         </div>
         <div className="logoutDiv">
-          <TbLogout />
+          <TbLogout
+            size={18}
+            color="white"
+            onClick={() => {
+              userLogOut();
+            }}
+          />
+
           <p
             onClick={() => {
               userLogOut();
