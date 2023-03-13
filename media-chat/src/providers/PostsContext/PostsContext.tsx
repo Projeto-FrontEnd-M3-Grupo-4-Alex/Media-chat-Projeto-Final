@@ -161,7 +161,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           user,
         };
 
-        user && setComments([...comments, newComment]);
+       /*  user && setComments([...comments, newComment]); */
       } catch (error) {
         console.log(error);
 

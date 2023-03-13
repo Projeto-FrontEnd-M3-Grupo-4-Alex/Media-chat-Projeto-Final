@@ -22,7 +22,9 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[]>([]);
+  const [profileOpenModal, setProfileOpenModal] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
   const [suggestUsers, setSuggestUsers] = useState<IUser[]>([]);
   const navigate = useNavigate();
   const sugestionsList = suggestUsers.length > 0 ? suggestUsers : users;
@@ -48,7 +50,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     setLoading(true);
     try {
       const response = await api.post<IResponseUser>("login", formData);
-      console.log(response.data.user)
+      console.log(response.data.user);
       setUser(response.data.user);
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@USERID", String(response.data.user.id));
@@ -116,6 +118,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           }
         );
         toast.success("User atualizada com sucesso", { autoClose: 2000 });
+        console.log(response.data);
 
         setUser(response.data.user);
       } catch (error) {
@@ -163,7 +166,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-    const followUsers = async (userId: number) => {
+  const followUsers = async (userId: number) => {
     const userFound = user?.followUsers.find((id) => id == userId);
 
     if (user && !userFound && userId !== Number(user.id)) {
@@ -178,13 +181,11 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   useEffect(() => {
     filterSuggestUsers();
   }, [user]);
- 
-   const filterSuggestUsers = () => {
-    console.log(user)
-    console.log(user?.followUsers)
+
+  const filterSuggestUsers = () => {
+    console.log(user);
+    console.log(user?.followUsers);
     if (user && user.followUsers.length > 0) {
-    
-   
       const followUsersArray = user.followUsers;
       const suggestUsersList = users.filter((followedUser) => {
         if (
@@ -196,8 +197,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
       });
       setSuggestUsers(suggestUsersList);
     }
-  };   
- 
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -211,17 +212,13 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         user,
         users,
         sugestionsList,
-
-        followUsers, 
-        favoritePostList,
-        setFavoritePostList
-         
-        
-
         followUsers,
+        favoritePostList,
+        setFavoritePostList,
+        profileOpenModal,
+        setProfileOpenModal,
         profileOpen,
         setProfileOpen,
-
       }}
     >
       {children}

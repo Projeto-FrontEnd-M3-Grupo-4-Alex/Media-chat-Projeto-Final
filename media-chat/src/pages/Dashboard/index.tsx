@@ -62,6 +62,7 @@ export function Dashboard() {
             Realizar uma publicação
           </button>
         </div>
+
         {profileOpen && (
           <div className="userInfo">
             <div className="profileDiv">
@@ -103,3 +104,12 @@ export function Dashboard() {
     </StyledDashboard>
   )
 }
+
+
+
+
+
+
+
+
+
