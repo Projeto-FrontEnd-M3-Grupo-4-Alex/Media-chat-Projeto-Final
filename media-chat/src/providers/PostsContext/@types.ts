@@ -62,8 +62,6 @@ export interface IPostsContext {
   showCreateModal: boolean;
   setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
   setPost: React.Dispatch<React.SetStateAction<IPost | null>>;
-  profileOpenModal: boolean;
-  setProfileOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   editComments: (
     commentId: number,
     formData: IComment,
