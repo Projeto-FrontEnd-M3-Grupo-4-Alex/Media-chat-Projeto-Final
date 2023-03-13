@@ -58,14 +58,12 @@ export function Dashboard() {
 
         {post && (
           <ModalForm>
-            {" "}
-            <EditPostForm />{" "}
+            <EditPostForm />
           </ModalForm>
         )}
         {showCreateModal && (
           <ModalForm>
-            {" "}
-            <CreateFormPost />{" "}
+            <CreateFormPost />
           </ModalForm>
         )}
         <StyledCreatePost>
