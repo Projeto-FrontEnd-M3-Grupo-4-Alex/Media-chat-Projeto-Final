@@ -16,7 +16,10 @@ export const StyledDiv = styled.div`
     gap: 20px;
 
     h2 {
-      font-size: 16px;
+      font-family: "Inter";
+      font-weight: 500;
+      font-size: var(--font-size-16);
+      color: var(--color-white);
     }
 
     .userImg {
@@ -32,15 +35,23 @@ export const StyledDiv = styled.div`
     flex-direction: column;
     gap: 20px;
     .profileDiv {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      a {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-family: "Inter";
+        font-weight: 600;
+        font-size: 11px;
+        color: var(--color-white);
+        text-decoration: none;
+      }
     }
 
     .logoutDiv {
       display: flex;
       align-items: center;
       gap: 20px;
+      cursor: pointer;
 
       p {
         cursor: pointer;

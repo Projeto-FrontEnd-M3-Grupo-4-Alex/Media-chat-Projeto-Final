@@ -7,6 +7,8 @@ import { ProtectedRouters } from "../pages/ProtectedRouters";
 import { ProfilePage } from "../pages/ProfilePage";
 import { ResgisterPage } from "../pages/Register";
 import { PostPage } from "../pages/PostPage";
+import { PostsProvider } from "../providers/PostsContext/PostsContext";
+import { FavoritePostProvider } from "../providers/FavoritePostContext/FavoritePostContex";
 
 export function Router() {
   return (
@@ -16,7 +18,14 @@ export function Router() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<ResgisterPage />} />
       <Route path="/dashboard" element={<ProtectedRouters />}>
-        <Route index element={<Dashboard />} />
+        <Route
+          index
+          element={
+            <PostsProvider>
+              <Dashboard />
+            </PostsProvider>
+          }
+        />
       </Route>
       <Route path="/profile" element={<ProtectedRouters />}>
         <Route index element={<ProfilePage />} />

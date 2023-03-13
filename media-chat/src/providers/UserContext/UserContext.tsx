@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
+import { IFavoritePost } from "../FavoritePostContext/@types";
 import {
   IDefaultError,
   IDefaultProviderProps,
@@ -17,6 +18,7 @@ import {
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: IDefaultProviderProps) => {
+  const [favoritePostList, setFavoritePostList] = useState<IFavoritePost[]>([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const [users, setUsers] = useState<IUser[]>([]);
@@ -46,6 +48,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     setLoading(true);
     try {
       const response = await api.post<IResponseUser>("login", formData);
+      console.log(response.data.user)
       setUser(response.data.user);
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@USERID", String(response.data.user.id));
@@ -160,7 +163,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
     }
   };
 
-  const followUsers = async (userId: number) => {
+    const followUsers = async (userId: number) => {
     const userFound = user?.followUsers.find((id) => id == userId);
 
     if (user && !userFound && userId !== Number(user.id)) {
@@ -175,9 +178,13 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   useEffect(() => {
     filterSuggestUsers();
   }, [user]);
-
-  const filterSuggestUsers = () => {
+ 
+   const filterSuggestUsers = () => {
+    console.log(user)
+    console.log(user?.followUsers)
     if (user && user.followUsers.length > 0) {
+    
+   
       const followUsersArray = user.followUsers;
       const suggestUsersList = users.filter((followedUser) => {
         if (
@@ -189,8 +196,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
       });
       setSuggestUsers(suggestUsersList);
     }
-  };
-
+  };   
+ 
   return (
     <UserContext.Provider
       value={{
@@ -204,9 +211,17 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
         user,
         users,
         sugestionsList,
+
+        followUsers, 
+        favoritePostList,
+        setFavoritePostList
+         
+        
+
         followUsers,
         profileOpen,
         setProfileOpen,
+
       }}
     >
       {children}

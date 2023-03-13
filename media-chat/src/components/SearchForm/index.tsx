@@ -1,7 +1,7 @@
 import { MdSearch } from "react-icons/md";
 import { FormEvent, useContext } from "react";
 import { PostsContext } from "../../providers/PostsContext/PostsContext";
-import { StyledForm } from "./style";
+import { StyledForm } from "../SearchForm/style";
 
 export const SearchForm = () => {
   const { filterPostsByInput, search, setSearch } = useContext(PostsContext);
