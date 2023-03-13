@@ -17,7 +17,9 @@ export function PostsLike({ post }: IPostsLikeProps) {
   const [islike, setislike] = useState(
     likeArray.some((like) => user?.id == like.userId && post.id == like.postId)
   );
-  const [countLike, setcountlike] = useState(post.likesPost.length);
+  const [countLike, setcountlike] = useState(
+    post.likesPost ? post.likesPost.length : 0
+  );
 
   return (
     <>
