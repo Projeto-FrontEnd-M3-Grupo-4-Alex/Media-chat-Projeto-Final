@@ -11,7 +11,8 @@ export const StyledDashboard = styled.div`
   .aside__dashboard {
     position: absolute;
     z-index: 2;
-    width: 90%;
+    width: 400px;
+    max-width: 100%;
   }
 
   .main__dashboard {

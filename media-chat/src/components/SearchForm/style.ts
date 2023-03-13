@@ -14,7 +14,7 @@ export const StyledForm = styled.form`
     box-sizing: border-box;
     outline: none;
     color: var(--grey-0);
-    border-radius: var(--border-radius-5);
+    border-radius: var(--border-radius-8);
 
     :focus {
       border: 2px solid var(--grey-0);

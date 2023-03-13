@@ -26,7 +26,8 @@ export interface IComment {
   userId: number;
   postId: number;
   id: number;
-  likesComment: [];
+  likesComment?: [];
+  user: IUser;
 }
 
 export interface IPostFormValues {
@@ -88,6 +89,6 @@ export interface IPostsContext {
   updateLikePost: (postId: number) => Promise<void>;
   updateDeslikePost: (likeArray: ILikepost[]) => Promise<void>;
   filterPostsByInput: () => void;
-  recommendedPosts: () => IPost[] | undefined;
   likeArray: ILikepost[];
+  recommendList: IPost[];
 }
