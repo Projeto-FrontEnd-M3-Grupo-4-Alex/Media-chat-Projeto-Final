@@ -18,7 +18,7 @@ export function Aside() {
         <StyledAside className="mobile__aside">
           <div>
             <TopPartIcons />
-            {/* <RecomendPosts /> */}
+            <RecomendPosts />
             <SuggestUsersList />
           </div>
         </StyledAside>
@@ -28,7 +28,7 @@ export function Aside() {
         <StyledAside>
           <div className="desktop__aside">
             <TopPartIcons />
-            {/* <RecomendPosts /> */}
+            <RecomendPosts />
             <SuggestUsersList />
           </div>
         </StyledAside>
