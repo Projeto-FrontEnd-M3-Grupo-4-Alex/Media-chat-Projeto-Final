@@ -1,14 +1,15 @@
-import { TextField } from "@mui/material";
-import { TextFieldProps } from "@mui/material";
-import { FieldError } from "react-hook-form";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { TextField } from "@mui/material"
+import { TextFieldProps } from "@mui/material"
+import { FieldError } from "react-hook-form"
+import { UseFormRegisterReturn } from "react-hook-form"
+import { CustomTextArea, TextAreaStyle } from "./style"
 
 type iTextAreaProps = {
-  label: string;
-  errorMessage?: FieldError;
-  register: UseFormRegisterReturn<string>;
-  placeholder: string;
-} & TextFieldProps;
+  label: string
+  errorMessage?: FieldError
+  register: UseFormRegisterReturn<string>
+  placeholder: string
+} & TextFieldProps
 
 export function TextArea({
   label,
@@ -18,16 +19,19 @@ export function TextArea({
   ...rest
 }: iTextAreaProps) {
   return (
-    <div>
-      <TextField
+    <TextAreaStyle>
+      <CustomTextArea
         label={label}
         id={register.name}
         {...register}
         {...rest}
-        multiline
         maxRows={4}
+        sx={{
+          input: { color: "white", height: "60px" },
+          label: { color: "white" },
+        }}
       />
       {errorMessage ? <p>{errorMessage.message}</p> : null}
-    </div>
-  );
+    </TextAreaStyle>
+  )
 }
