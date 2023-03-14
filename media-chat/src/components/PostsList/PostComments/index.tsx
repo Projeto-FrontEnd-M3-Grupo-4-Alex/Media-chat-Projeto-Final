@@ -18,14 +18,14 @@ export function PostComments({
 }: ICommentPostProps) {
   return (
     <StyledPostComments>
-      {/* <button
+      <button
         className="bttn_close"
         onClick={() => {
           setIsOpenedComments(false);
         }}
       >
         X
-      </button> */}
+      </button>
       <CommentForm post={post} comments={comments} setComments={setComments} />
       <ul>
         {comments.map((comment) => (

@@ -6,7 +6,6 @@ import { ProtectedRouters } from "../pages/ProtectedRouters";
 import { ProfilePage } from "../pages/ProfilePage";
 import { ResgisterPage } from "../pages/Register";
 import { PostPage } from "../pages/PostPage";
-import { PostsProvider } from "../providers/PostsContext/PostsContext";
 import { FavoritePostProvider } from "../providers/FavoritePostContext/FavoritePostContex";
 
 export function Router() {

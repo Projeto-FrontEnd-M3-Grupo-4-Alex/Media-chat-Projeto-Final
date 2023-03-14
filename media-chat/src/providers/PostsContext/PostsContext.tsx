@@ -20,8 +20,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [post, setPost] = useState<IPost | null>(null);
   const [filteredPost, setFilteredPost] = useState<IPost[]>([]);
-
-  const [comment, setComment] = useState<IComment | null>(null);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
@@ -342,8 +340,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
         setShowCreateModal,
         editComments,
         deleteComment,
-        comment,
-        setComment,
         createComments,
         filterPosts,
         newPostList,

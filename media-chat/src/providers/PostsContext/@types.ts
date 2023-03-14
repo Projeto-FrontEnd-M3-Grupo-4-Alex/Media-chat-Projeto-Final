@@ -73,8 +73,6 @@ export interface IPostsContext {
     comments: IComment[],
     setComments: React.Dispatch<React.SetStateAction<IComment[]>>
   ) => Promise<void>;
-  comment: IComment | null;
-  setComment: React.Dispatch<React.SetStateAction<IComment | null>>;
   createComments: (
     formData: IComment,
     comments: IComment[],
