@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const StylePostModal = styled.div`
   position: relative;
@@ -10,7 +10,7 @@ export const StylePostModal = styled.div`
 
   padding: 1rem;
 
-  margin-bottom: 2REM;
+  margin-bottom: 2rem;
 
   #bttn_close {
     position: absolute;
@@ -72,4 +72,4 @@ export const StylePostModal = styled.div`
       background-color: var(--color-hover);
     }
   }
-`
+`;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledPostCard = styled.li`
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   gap: 2rem;
 
@@ -55,19 +56,29 @@ export const StyledPostCard = styled.li`
   }
 
   .info_post {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--grey-0);
     h2 {
       color: var(--color-white);
       text-transform: capitalize;
-
-      margin-bottom: 1.5rem;
+      font-size: var(--font-size-24);
+      max-width: 90%;
     }
 
     p {
       color: var(--color-white);
-      font-size: var(--font-size-24);
+      font-size: var(--font-size-18);
       font-weight: var(--font-weight-400);
+      max-width: 90%;
+      line-height: 150%;
 
       margin-bottom: 0.5rem;
+
+      span {
+        font-weight: var(--font-weight-700);
+      }
     }
   }
 

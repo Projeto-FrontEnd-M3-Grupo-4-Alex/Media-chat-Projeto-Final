@@ -13,7 +13,7 @@ export const StyledEditPostForm = styled.div`
   align-items: center;
   z-index: 10;
   div {
-    background-color: var(--color-background);
+    background-color: var(--grey-transparent);
 
     border-radius: var(--border-radius-8);
     max-width: 90%;

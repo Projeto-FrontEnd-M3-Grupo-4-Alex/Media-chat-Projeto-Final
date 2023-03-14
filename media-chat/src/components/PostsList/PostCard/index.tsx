@@ -49,7 +49,9 @@ export const PostCard = ({ post }: IPostCardProps) => {
         <div className="info_post">
           <h2>{post.title}</h2>
           <p>{post.content}</p>
-          <p>Aonde assistir: {post.where}</p>
+          <p>
+            <span> Aonde assistir:</span> {post.where}
+          </p>
           <Rating
             name="simple-controlled"
             value={Number(post?.rating)}
