@@ -4,6 +4,7 @@ import { IPost } from "../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
 import { IUser } from "../../../providers/UserContext/@types";
 import { UserContext } from "../../../providers/UserContext/UserContext";
+import { StyledLikeButton } from "./style";
 
 interface IPostsLikeProps {
   post: IPost;
@@ -23,7 +24,7 @@ export function PostsLike({ post }: IPostsLikeProps) {
 
   return (
     <>
-      <button
+      <StyledLikeButton
         onClick={() => {
           if (islike) {
             updateDeslikePost(post.likesPost);
@@ -37,10 +38,9 @@ export function PostsLike({ post }: IPostsLikeProps) {
         }}
       >
         <span>
-          {" "}
           {countLike} {islike ? <IoMdHeart /> : <IoMdHeartEmpty />}
         </span>
-      </button>
+      </StyledLikeButton>
     </>
   );
 }
