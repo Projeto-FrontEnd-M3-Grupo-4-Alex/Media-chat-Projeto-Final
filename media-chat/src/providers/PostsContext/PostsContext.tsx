@@ -161,7 +161,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           user,
         };
 
-       /*  user && setComments([...comments, newComment]); */
+        /*  user && setComments([...comments, newComment]); */
       } catch (error) {
         console.log(error);
 
@@ -321,10 +321,6 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       setRecommendList(filterRecommendPosts);
     }
   };
-
-  useEffect(() => {
-    recommendedPosts();
-  }, [recommendList]);
 
   return (
     <PostsContext.Provider

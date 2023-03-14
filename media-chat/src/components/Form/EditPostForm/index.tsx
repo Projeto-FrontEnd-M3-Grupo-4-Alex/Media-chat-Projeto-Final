@@ -55,7 +55,12 @@ export function EditPostForm() {
   return (
     <StyledEditPostForm role={"dialog"}>
       <div>
-        <button onClick={() => setPost(null)}>X</button>
+        <button
+          onClick={() => setPost(null)}
+          className="edit-button-close_modal"
+        >
+          X
+        </button>
         <h2>Edite a sua postagem</h2>
         <form onSubmit={handleSubmit(onSubmitForm)}>
           <Input
@@ -108,10 +113,12 @@ export function EditPostForm() {
               setRatingValue(newValue);
             }}
           />
-          <button type="button" onClick={deletePost}>
-            Excluir
-          </button>
-          <button type="submit">Editar</button>
+          <div className="buttons__container">
+            <button type="button" onClick={deletePost} className="delete_post">
+              Excluir
+            </button>
+            <button type="submit">Editar</button>
+          </div>
         </form>
       </div>
     </StyledEditPostForm>

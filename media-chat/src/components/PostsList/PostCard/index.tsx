@@ -8,6 +8,7 @@ import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledPostCard } from "./style";
 import { PostsLike } from "../PostsLike";
 import { FavoritePostContext } from "../../../providers/FavoritePostContext/FavoritePostContex";
+import { Rating } from "@mui/material";
 
 interface IPostCardProps {
   post: IPost;
@@ -24,26 +25,36 @@ export const PostCard = ({ post }: IPostCardProps) => {
   return (
     <StyledPostCard>
       <div className="ContainerInfoUser">
-        <img src={post.user.avatar_url} />
-        <h2>{post.user.name}</h2>
+        <div>
+          <img src={post.user.avatar_url} />
+          <h2>{post.user.name}</h2>
+        </div>
+
         {Number(user?.id) == post.userId ? (
           <button
             type="button"
             onClick={() => {
               setPost(post);
             }}
+            className="edit_post-button"
           >
             <BiEdit />
           </button>
         ) : null}
       </div>
       <div className="ContainerInfoPost">
-        <img className="card_image" src={post.thumbnail} alt={post.title} />
+        {post.thumbnail ? (
+          <img className="card_image" src={post.thumbnail} alt={post.title} />
+        ) : null}
         <div className="info_post">
           <h2>{post.title}</h2>
           <p>{post.content}</p>
-          <p>{post.where}</p>
-          <p>{post.rating}</p>
+          <p>Aonde assistir: {post.where}</p>
+          <Rating
+            name="simple-controlled"
+            value={Number(post?.rating)}
+            readOnly
+          />
         </div>
       </div>
       <div className="ContainerButtonsPost">
