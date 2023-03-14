@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const StyledUserEditDiv = styled.div`
-  width: 45%;
+  width: 85%;
   height: 480px;
   border: 1px solid black;
   position: absolute;
-  top: 230px;
-  left: 375px;
+  top: 80%;
+  left: 41%;
+  transform: translate(-40%, -50%);
+
   background-color: rgba(51, 42, 75, 0.7);
   border: none;
   border-radius: var(--border-radius-15);
@@ -60,27 +62,32 @@ export const StyledUserEditDiv = styled.div`
       margin-top: 15px;
 
       .updateBttn {
-        width: 30%;
+        width: 40%;
         height: 50px;
         font-family: "Inter";
         font-weight: 700;
-        font-size: var(--font-size-24);
+        font-size: var(--font-size-16);
         background-color: var(--color-primary-2);
         border-radius: var(--border-radius-15);
         color: var(--color-white);
         border: none;
       }
       .deleteBttn {
-        width: 38%;
+        width: 50%;
         height: 50px;
         font-family: "Inter";
         font-weight: 700;
-        font-size: var(--font-size-24);
+        font-size: var(--font-size-16);
         background-color: var(--color-primary-1);
         border: none;
         color: var(--color-white);
         border-radius: var(--border-radius-15);
       }
     }
+  }
+
+  @media(min-width:900px){
+    max-width:500px;
+    left: 45%;
   }
 `;
