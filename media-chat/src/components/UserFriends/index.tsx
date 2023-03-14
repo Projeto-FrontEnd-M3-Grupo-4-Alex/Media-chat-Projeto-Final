@@ -22,6 +22,7 @@ export function UserFriends() {
               name={user.name}
               avatar_url={user.avatar_url}
               id={user.id}
+              key={user.id}
             />
           ))}
         </ul>

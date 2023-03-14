@@ -23,11 +23,9 @@ export function UserFriendsCard({
     <StyledUserFriendCardDiv>
       <div className="userInfoDivision">
         <img src={avatar_url} className="followUserImage" alt="" />
-        <div className="nameDivision">
-          <h3>{name}</h3>
-          <button onClick={unfollowUser}>Deixar de seguir</button>
-        </div>
+        <h3>{name}</h3>
       </div>
+      <button onClick={unfollowUser}>Deixar de seguir</button>
     </StyledUserFriendCardDiv>
   );
 }
