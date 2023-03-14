@@ -15,7 +15,7 @@ export function UserPosts() {
       {filteredPostsUser?.length === 0 ? (
         <h3>Você não realizou nenhuma postagem ainda</h3>
       ) : (
-        <ul>
+        <ul className = "userPosts">
           {filteredPostsUser?.map((post) => (
             <UserPostsCard
               thumbnail={post.thumbnail}

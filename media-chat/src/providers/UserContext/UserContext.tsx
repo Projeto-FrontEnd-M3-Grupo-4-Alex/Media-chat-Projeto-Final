@@ -118,7 +118,6 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           }
         );
         toast.success("User atualizada com sucesso", { autoClose: 2000 });
-        console.log(response.data);
 
         setUser(response.data.user);
       } catch (error) {

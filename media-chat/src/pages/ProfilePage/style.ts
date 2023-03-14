@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const StyledProfileDiv = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+
   .header {
     width: 100%;
     height: 180px;
@@ -8,25 +12,28 @@ export const StyledProfileDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     .userName {
       display: flex;
       flex-direction: column;
       align-items: center;
       img {
-        width: 100px;
-        height: 100px;
+        width: 99px;
+        height: 99px;
         border-radius: 50%;
       }
       h2 {
         color: var(--color-white);
-        font-size: 32px;
+        font-size: var(--font-size-24);
         font-weight: 700;
         font-family: "Inter";
       }
     }
 
     .logoutIcon {
+      position: absolute;
+      right: 45px;
       cursor: pointer;
     }
   }
@@ -86,20 +93,20 @@ export const StyledProfileDiv = styled.div`
     .favoritePostTitle {
       font-family: "Inter";
       font-weight: 700;
-      font-size: var(--font-size-32);
+      font-size: var(--font-size-24);
       color: var(--color-white);
-      margin-top:120px;
+      margin-top: 120px;
     }
     .emptyFavoritePost {
       font-size: var(--font-size-20);
       font-family: "Inter";
       font-weight: 700;
-      color:var(--color-white);
-      margin-top:20px;
+      color: var(--color-white);
+      margin-top: 20px;
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 500px) {
     .change {
       display: flex;
       align-items: center;

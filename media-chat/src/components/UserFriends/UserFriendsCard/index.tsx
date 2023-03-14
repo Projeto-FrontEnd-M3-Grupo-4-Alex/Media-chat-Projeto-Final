@@ -22,7 +22,7 @@ export function UserFriendsCard({
   return (
     <StyledUserFriendCardDiv>
       <div className="userInfoDivision">
-        <img src={avatar_url} className = "followUserImage"alt="" />
+        <img src={avatar_url} className="followUserImage" alt="" />
         <div className="nameDivision">
           <h3>{name}</h3>
           <button onClick={unfollowUser}>Deixar de seguir</button>
