@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { PostsContext } from "../../../providers/PostsContext/PostsContext";
+import { StyledList } from "./style";
 
 interface iUserPostsCardProps {
   thumbnail: string;
@@ -17,15 +18,15 @@ export function UserPostsCard({ thumbnail, content, id }: iUserPostsCardProps) {
   }
 
   return (
-    <li>
-      <button onClick={deletePost}>
-        <BsFillTrashFill />
-      </button>
-      <div>
-        <img src={thumbnail} alt="" />
+    <StyledList>
+      <div className="userPostDiv">
+        <img src={thumbnail} className="userAddedImage" alt="" />
         <p>{content}</p>
       </div>
+      <button className="userPostDeleteBttn" onClick={deletePost}>
+        <BsFillTrashFill size={27} />
+      </button>
       <Link to={`/post/${id}`}>Ver mais</Link>
-    </li>
+    </StyledList>
   );
 }

@@ -12,11 +12,11 @@ export function UserFriends() {
 
   return (
     <StyledUserFriendDiv>
-      <h2 className = "followerTitle">Seguindo</h2>
+      <h2 className="followerTitle">Seguindo</h2>
       {user?.followUsers.length === 0 ? (
-        <h3 className = "emptyText">Você não seguiu nenhum usuário ainda</h3>
+        <h3 className="emptyText">Você não seguiu nenhum usuário ainda</h3>
       ) : (
-        <ul>
+        <ul className="userFriendsCardList">
           {followUsersComplete?.map((user) => (
             <UserFriendsCard
               name={user.name}

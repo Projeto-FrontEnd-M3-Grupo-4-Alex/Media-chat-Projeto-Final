@@ -19,6 +19,7 @@ export const ProfilePage = () => {
 
   return (
     <StyledProfileDiv>
+      <div className = "mainContainer">
       <div className="header">
         <div className="userName">
           <img src={user?.avatar_url} alt="userImage" />
@@ -64,7 +65,7 @@ export const ProfilePage = () => {
       ) : null}
 
      
-     
+</div>
     </StyledProfileDiv>
   );
 };
