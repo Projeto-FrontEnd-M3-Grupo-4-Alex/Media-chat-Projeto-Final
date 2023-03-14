@@ -34,7 +34,7 @@ export const FavoritePostProvider = ({ children }: IDefaultProviderProps) => {
         toast.success("Salvou com sucesso um post como post favorito", {
           autoClose: 2000,
         });
-        setFavoritePostList(newFavoritePostList);
+        setFavoritePostList([...favoritePostList, response.data]);
       } catch (error) {
         const currentError = error as AxiosError<IDefaultError>;
         toast.error(currentError.response?.data.error);

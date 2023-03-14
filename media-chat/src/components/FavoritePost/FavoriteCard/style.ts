@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledList = styled.li`
+export const StyledFavoriteCard = styled.li`
   width: 400px;
   min-width: 300px;
   max-width: 90%;
@@ -15,19 +15,18 @@ export const StyledList = styled.li`
   gap: 2rem;
   overflow: hidden;
 
-  .userPostDiv {
+  .postInfo {
     display: flex;
     flex-direction: row;
     gap: 20px;
     max-width: 90%;
 
-    .userAddedImage {
+    img {
       width: 100px;
       height: 150px;
       border-radius: var(--border-radius-20);
     }
-
-    p {
+    .favoritePostContent {
       display: block;
       font-family: "Inter";
       font-weight: 400;
@@ -40,8 +39,7 @@ export const StyledList = styled.li`
       line-height: 150%;
     }
   }
-
-  .userPostDeleteBttn {
+  .postDeleteBttn {
     position: absolute;
     top: 10px;
     right: 20px;

@@ -41,7 +41,7 @@ export const StyledProfileDiv = styled.div`
   .mainPageContainer {
     width: 100%;
     margin: 0 auto;
-    padding: 55px;
+    padding: 1.5rem;
     min-height: 100vh;
 
     .change {
