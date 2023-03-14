@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const StyledPostComments = styled.div`
   position: relative;
@@ -30,26 +30,41 @@ export const StyledPostComments = styled.div`
     div {
       display: flex;
       flex-direction: row;
-
+      align-items: center;
       gap: 16px;
 
       img {
         width: 32px;
         height: 32px;
-
-        border-radius: 100%;
+        border-radius: 50%;
       }
 
       .user_name {
-        font-size: var(--font-size-14);
+        font-size: var(--font-size-16);
+        font-weight: var(--font-weight-700);
       }
     }
 
     span {
-      color:  var(--color-white);
+      color: var(--color-white);
       font-weight: var(--font-weight-800);
       display: flex;
-      gap: 1rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+
+      .comment-button-like {
+        width: 2rem;
+        height: 2rem;
+        background-color: transparent;
+        border: none;
+
+        svg {
+          height: 1.5rem;
+          width: 1.5rem;
+          fill: var(--grey-0);
+        }
+      }
     }
 
     p {
@@ -73,4 +88,4 @@ export const StyledPostComments = styled.div`
   @media (min-width: 1200px) {
     width: 80%;
   }
-`
+`;

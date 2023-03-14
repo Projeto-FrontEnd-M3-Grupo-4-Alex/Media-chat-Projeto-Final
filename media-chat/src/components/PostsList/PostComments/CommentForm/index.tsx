@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { TbSend } from "react-icons/tb";
+import { AiOutlineSend } from "react-icons/ai";
 import { IComment, IPost } from "../../../../providers/PostsContext/@types";
 import { PostsContext } from "../../../../providers/PostsContext/PostsContext";
 import { IUser } from "../../../../providers/UserContext/@types";
@@ -47,9 +47,13 @@ export function CommentForm({
   return (
     <StyleCommentForm onSubmit={handleSubmit(onSubmitComment)}>
       <div>
-        <input type="text" placeholder="comentário" {...register("content")} />
+        <input
+          type="text"
+          placeholder="Esrever um comentário"
+          {...register("content")}
+        />
         <button type="submit">
-          <TbSend />
+          <AiOutlineSend />
         </button>
       </div>
     </StyleCommentForm>
