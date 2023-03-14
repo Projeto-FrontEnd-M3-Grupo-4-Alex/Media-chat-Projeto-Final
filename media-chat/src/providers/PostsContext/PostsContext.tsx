@@ -151,7 +151,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
     setComments: React.Dispatch<React.SetStateAction<IComment[]>>
   ) => {
     const token = localStorage.getItem("@TOKEN");
-    if (token) {
+    if (token && user) {
       try {
         const response = await api.post<IComment>("comments", formData, {
           headers: { Authorization: `Bearer ${token}` },
@@ -161,7 +161,7 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
           user,
         };
 
-        /*  user && setComments([...comments, newComment]); */
+        user && setComments([...comments, newComment]);
       } catch (error) {
         console.log(error);
 
@@ -321,6 +321,10 @@ export const PostsProvider = ({ children }: IDefaultProviderProps) => {
       setRecommendList(filterRecommendPosts);
     }
   };
+
+  useEffect(() => {
+    recommendedPosts();
+  }, [posts, recommendPostsList]);
 
   return (
     <PostsContext.Provider
